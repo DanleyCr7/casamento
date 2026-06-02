@@ -88,10 +88,18 @@ function EnvelopeCard({
   onToggle: () => void;
 }) {
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
+      aria-expanded={open}
       onClick={onToggle}
-      className="group relative isolate overflow-hidden rounded-[2rem] border border-stone-200/80 bg-stone-50/90 p-4 text-left shadow-[0_30px_90px_rgba(62,51,39,0.12)] transition hover:-translate-y-1 hover:shadow-[0_35px_100px_rgba(62,51,39,0.16)]"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onToggle();
+        }
+      }}
+      className="group relative isolate cursor-pointer overflow-hidden rounded-[2rem] border border-stone-200/80 bg-stone-50/90 p-4 text-left shadow-[0_30px_90px_rgba(62,51,39,0.12)] transition hover:-translate-y-1 hover:shadow-[0_35px_100px_rgba(62,51,39,0.16)]"
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(152,170,115,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(198,161,109,0.12),transparent_26%)]" />
       <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.35em] text-stone-500">
@@ -146,11 +154,14 @@ function EnvelopeCard({
           </div>
 
           <div className="mt-5 flex flex-wrap gap-3">
-            <CopyButton value={siteConfig.pix.key} label="Copiar Pix" className="bg-emerald-900 text-white hover:bg-emerald-800" />
+            <div onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
+              <CopyButton value={siteConfig.pix.key} label="Copiar Pix" className="bg-emerald-900 text-white hover:bg-emerald-800" />
+            </div>
             <a
               href={siteConfig.whatsappUrl}
               target="_blank"
               rel="noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/85 px-4 py-2 text-sm font-semibold text-stone-800 transition hover:border-stone-400 hover:bg-white"
             >
               Confirmar presença
@@ -163,7 +174,7 @@ function EnvelopeCard({
       <div className="mt-4 flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
         <span>Toque para {open ? "encerrar" : "abrir"} o convite</span>
       </div>
-    </button>
+    </div>
   );
 }
 
