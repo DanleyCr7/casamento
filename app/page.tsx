@@ -80,101 +80,77 @@ function SectionTitle({
   );
 }
 
-function EnvelopeCard({
-  open,
-  onToggle,
-}: {
-  open: boolean;
-  onToggle: () => void;
-}) {
+function EnvelopeCard() {
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      aria-expanded={open}
-      onClick={onToggle}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onToggle();
-        }
-      }}
-      className="group relative isolate cursor-pointer overflow-hidden rounded-[2rem] border border-stone-200/80 bg-stone-50/90 p-4 text-left shadow-[0_30px_90px_rgba(62,51,39,0.12)] transition hover:-translate-y-1 hover:shadow-[0_35px_100px_rgba(62,51,39,0.16)]"
-    >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(152,170,115,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(198,161,109,0.12),transparent_26%)]" />
-      <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.35em] text-stone-500">
-        <span>Convite interativo</span>
-        <span className="rounded-full bg-white/85 px-3 py-1 text-stone-700 shadow-sm">
-          {open ? "Fechar" : "Abrir"}
-        </span>
-      </div>
+    <section className="flex min-h-[calc(100vh-3rem)] items-center justify-center py-8">
+      <div className="w-full max-w-5xl">
+        <input id="invite-open" type="checkbox" className="invite-toggle peer sr-only" />
+        <label
+          htmlFor="invite-open"
+          className="envelope-stage group relative mx-auto block w-full max-w-4xl cursor-pointer text-left"
+        >
+          <span className="sr-only">Abrir convite</span>
+          <span className="envelope-shadow" />
+          <span className="envelope-card">
+            <span className="envelope-invite">
+              <span className="relative grid h-full gap-4 overflow-hidden rounded-[1.35rem] border border-[#d9c79c] bg-[#fffdf8] p-5 shadow-[0_20px_70px_rgba(45,35,25,0.16)] sm:grid-cols-[0.85fr_1.15fr] sm:p-7">
+                <span className="absolute inset-x-8 top-5 h-px bg-[#c9ad74]" />
+                <span className="relative min-h-56 overflow-hidden rounded-[1rem]">
+                  <Image
+                    src="/images/couple-portrait.jpg"
+                    alt="Foto do casal"
+                    fill
+                    priority
+                    className="object-cover"
+                  />
+                  <span className="absolute inset-0 bg-gradient-to-t from-stone-950/35 to-transparent" />
+                  <span className="absolute bottom-4 left-4 font-script text-5xl leading-none text-white">
+                    {siteConfig.coupleNames}
+                  </span>
+                </span>
+                <span className="flex flex-col justify-center gap-5 py-2">
+                  <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#f4ead7] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#7c6337]">
+                    <Heart className="h-3.5 w-3.5" />
+                    Convite digital
+                  </span>
+                  <span className="font-script text-6xl leading-none text-[#8b6f35] sm:text-7xl">
+                    {siteConfig.coupleNames}
+                  </span>
+                  <span className="max-w-md text-base leading-7 text-stone-700">
+                    É com imensa alegria que convidamos você para celebrar conosco esse dia tão especial.
+                  </span>
+                  <span className="grid gap-3 sm:grid-cols-2">
+                    <StatChip value={siteConfig.eventDateLabel} label="Data" />
+                    <StatChip value={siteConfig.eventTimeLabel} label="Horário" />
+                  </span>
+                </span>
+              </span>
+            </span>
+            <span className="envelope-back">
+              <span className="envelope-floral envelope-floral-left" />
+              <span className="envelope-floral envelope-floral-right" />
+              <span className="envelope-flap envelope-flap-left" />
+              <span className="envelope-flap envelope-flap-right" />
+              <span className="envelope-flap envelope-flap-bottom" />
+              <span className="envelope-flap envelope-flap-top" />
+              <span className="wax-seal">
+                <span className="font-script text-4xl leading-none">G A</span>
+              </span>
+            </span>
+          </span>
+        </label>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="relative overflow-hidden rounded-[1.75rem] border border-white/80 bg-white shadow-[0_18px_60px_rgba(58,48,38,0.12)]">
-          <div className="relative aspect-[4/5]">
-            <Image
-              src="/images/couple-portrait.jpg"
-              alt="Foto do casal"
-              fill
-              priority
-              className={[
-                "object-cover transition duration-700",
-                open ? "scale-105 saturate-105" : "scale-100",
-              ].join(" ")}
-            />
-            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-emerald-50 via-white/55 to-transparent" />
-          </div>
-          <div className="absolute inset-x-0 bottom-0 p-6">
-            <p className="font-script text-5xl leading-none text-emerald-900">
-              {siteConfig.coupleNames}
-            </p>
-            <p className="mt-3 max-w-xs text-sm leading-6 text-stone-700">
-              Um convite elegante, afetivo e inspirado no estilo dos prints anexados.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-between rounded-[1.75rem] border border-white/80 bg-gradient-to-b from-[#f5efe6] via-[#ede6d8] to-[#e3d8c1] p-6 shadow-[0_20px_70px_rgba(62,51,39,0.1)]">
-          <div className="space-y-4">
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-stone-600">
-              <Heart className="h-3.5 w-3.5 text-rose-400" />
-              Convite digital
-            </p>
-            <h1 className="max-w-sm text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl">
-              {siteConfig.coupleNames}
-            </h1>
-            <p className="max-w-md text-base leading-7 text-stone-700 sm:text-lg">
-              É com imensa alegria que convidamos você para celebrar conosco esse dia tão especial.
-            </p>
-          </div>
-
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <StatChip value={siteConfig.eventDateLabel} label="Data" />
-            <StatChip value={siteConfig.eventTimeLabel} label="Horário" />
-          </div>
-
-          <div className="mt-5 flex flex-wrap gap-3">
-            <div onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
-              <CopyButton value={siteConfig.pix.key} label="Copiar Pix" className="bg-emerald-900 text-white hover:bg-emerald-800" />
-            </div>
-            <a
-              href={siteConfig.whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-stone-300 bg-white/85 px-4 py-2 text-sm font-semibold text-stone-800 transition hover:border-stone-400 hover:bg-white"
-            >
-              Confirmar presença
-              <ChevronRight className="h-4 w-4" />
-            </a>
-          </div>
+        <div className="envelope-caption mt-7 text-center">
+          <p className="font-script text-5xl leading-none text-[#8b6f35] sm:text-6xl">
+            {siteConfig.coupleNames}
+          </p>
+          <p className="mt-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
+            <span className="caption-closed">Toque no selo para abrir o convite</span>
+            <span className="caption-open">Convite aberto</span>
+          </p>
         </div>
       </div>
-
-      <div className="mt-4 flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
-        <span>Toque para {open ? "encerrar" : "abrir"} o convite</span>
-      </div>
-    </div>
+    </section>
   );
 }
 
@@ -255,7 +231,6 @@ function PixSection() {
 }
 
 export default function Home() {
-  const [open, setOpen] = useState(true);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => formatTimeLeft(siteConfig.eventDateTime));
 
   useEffect(() => {
@@ -268,13 +243,15 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 opacity-70">
-        <div className="absolute left-0 top-20 h-72 w-72 rounded-full bg-emerald-200/20 blur-3xl" />
-        <div className="absolute right-0 top-40 h-80 w-80 rounded-full bg-amber-200/20 blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 h-72 w-[32rem] -translate-x-1/2 rounded-full bg-stone-200/40 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 opacity-80">
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-white/70 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-56 w-full bg-gradient-to-t from-[#d5c5ac]/35 to-transparent" />
       </div>
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
+        <EnvelopeCard />
+
+        <div className="site-after-open animate-site-reveal">
         <header className="flex items-center justify-between rounded-full border border-white/70 bg-white/65 px-4 py-3 shadow-[0_12px_40px_rgba(62,51,39,0.08)] backdrop-blur">
           <div>
             <p className="font-script text-3xl leading-none text-emerald-900">
@@ -307,8 +284,6 @@ export default function Home() {
                 <StatChip value={timeLeft.seconds} label="Seg" />
               </div>
             </div>
-
-            <EnvelopeCard open={open} onToggle={() => setOpen((current) => !current)} />
           </div>
 
           <div className="space-y-6">
@@ -434,6 +409,7 @@ export default function Home() {
             </a>
           </div>
         </footer>
+        </div>
       </div>
     </main>
   );
