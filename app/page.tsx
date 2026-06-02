@@ -134,7 +134,7 @@ function EnvelopeCard() {
               <span className="envelope-flap envelope-flap-bottom" />
               <span className="envelope-flap envelope-flap-top" />
               <span className="wax-seal">
-                <span className="font-script text-4xl leading-none">G A</span>
+                <span className="font-script text-4xl leading-none">J F</span>
               </span>
             </span>
           </span>
