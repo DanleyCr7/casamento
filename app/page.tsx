@@ -19,6 +19,10 @@ import { CopyButton } from "@/components/copy-button";
 import { buildPixPayload } from "@/lib/pix";
 import { siteConfig } from "@/lib/site";
 
+function publicAsset(path: string) {
+  return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+}
+
 type TimeLeft = {
   days: number;
   hours: number;
@@ -97,7 +101,7 @@ function EnvelopeCard() {
                 <span className="absolute inset-x-8 top-5 h-px bg-[#c9ad74]" />
                 <span className="relative min-h-56 overflow-hidden rounded-[1rem]">
                   <Image
-                    src="/images/couple-portrait.jpg"
+                    src={publicAsset("/images/couple-portrait.jpg")}
                     alt="Foto do casal"
                     fill
                     priority
@@ -347,7 +351,7 @@ export default function Home() {
               <div className="grid gap-4 p-4 sm:grid-cols-[0.9fr_1.1fr]">
                 <div className="relative overflow-hidden rounded-[1.5rem]">
                   <Image
-                    src="/images/couple-selfie.jpg"
+                    src={publicAsset("/images/couple-selfie.jpg")}
                     alt="Foto do casal sorrindo"
                     width={900}
                     height={1100}
