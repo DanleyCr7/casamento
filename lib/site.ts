@@ -4,8 +4,8 @@ export const siteConfig = {
   eventDateLabel: "20 de setembro de 2026",
   eventTimeLabel: "19h30",
   venueName: "Local do casamento",
-  venueAddress: "Endereço do evento pode ser ajustado em lib/site.ts",
-  venueHint: "Cerimônia e recepção serão celebradas em um espaço com clima leve e romântico.",
+  venueAddress: "Um cenário preparado para uma noite inesquecível.",
+  venueHint: "Que o amor nos reúna para celebrar esse dia tão esperado.",
   whatsappUrl:
     "https://wa.me/5500000000000?text=Oi!%20Estou%20confirmando%20minha%20presen%C3%A7a%20no%20casamento.",
   pix: {
@@ -13,20 +13,20 @@ export const siteConfig = {
     name: "Jessé e Flávia",
     city: "BRASIL",
     txid: "CASAMENTO2026",
-    description: "Ajuda para Jessé e Flávia",
+    description: "Presente com carinho para Jessé e Flávia",
   },
   highlights: [
     {
-      title: "Alta resolução",
-      text: "Convite com visual refinado e pronto para celular.",
+      title: "Um dia único",
+      text: "Criado para guardar a emoção desse momento.",
     },
     {
-      title: "Envio rápido",
-      text: "A experiência fica pronta para compartilhar por WhatsApp.",
+      title: "Feito com amor",
+      text: "Cada detalhe pensado para acolher quem chega.",
     },
     {
-      title: "Personalizável",
-      text: "Nomes, data, local e Pix ficam centralizados em um só lugar.",
+      title: "Memória viva",
+      text: "Um convite para abrir, sentir e recordar.",
     },
   ],
 };

@@ -112,16 +112,16 @@ function EnvelopeCard() {
                     {siteConfig.coupleNames}
                   </span>
                 </span>
-                <span className="flex flex-col justify-center gap-5 py-2">
-                  <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#f4ead7] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#7c6337]">
-                    <Heart className="h-3.5 w-3.5" />
-                    Convite digital
-                  </span>
+                  <span className="flex flex-col justify-center gap-5 py-2">
+                    <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#f4ead7] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#7c6337]">
+                      <Heart className="h-3.5 w-3.5" />
+                    Nosso convite
+                    </span>
                   <span className="font-script text-6xl leading-none text-[#8b6f35] sm:text-7xl">
                     {siteConfig.coupleNames}
                   </span>
                   <span className="max-w-md text-base leading-7 text-stone-700">
-                    É com imensa alegria que convidamos você para celebrar conosco esse dia tão especial.
+                    É com imensa alegria que convidamos você para viver conosco esse dia tão sonhado.
                   </span>
                   <span className="grid gap-3 sm:grid-cols-2">
                     <StatChip value={siteConfig.eventDateLabel} label="Data" />
@@ -149,8 +149,8 @@ function EnvelopeCard() {
             {siteConfig.coupleNames}
           </p>
           <p className="mt-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
-            <span className="caption-closed">Toque no selo para abrir o convite</span>
-            <span className="caption-open">Convite aberto</span>
+            <span className="caption-closed">Toque no selo e descubra esse amor</span>
+            <span className="caption-open">Nosso dia começou</span>
           </p>
         </div>
       </div>
@@ -179,36 +179,36 @@ function PixSection() {
       <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div className="space-y-6">
           <SectionTitle
-            eyebrow="Ajuda ao casal"
-            title="Se quiser deixar uma ajuda, o Pix está bem visível aqui."
-            description="Essa área foi desenhada para chamar atenção logo na entrada. A chave pode ser copiada com um toque, e o QR fica pronto para facilitar o envio da contribuição."
+            eyebrow="Um carinho"
+            title="Se quiser abençoar nosso começo, o Pix está aqui com amor."
+            description="Sua presença já é o maior presente. Se desejar, um gesto de carinho ficará guardado com muito afeto."
           />
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-sm">
               <div className="flex items-center gap-2 text-sm font-semibold text-stone-800">
                 <CircleDollarSign className="h-4 w-4 text-emerald-700" />
-                Chave Pix
+                Pix
               </div>
               <p className="mt-3 break-all text-xl font-semibold tracking-wide text-stone-900">
                 {siteConfig.pix.key}
               </p>
               <div className="mt-4">
-                <CopyButton value={siteConfig.pix.key} label="Copiar chave" className="w-full bg-emerald-800 text-white hover:bg-emerald-700" />
+                <CopyButton value={siteConfig.pix.key} label="Levar carinho" className="w-full bg-emerald-800 text-white hover:bg-emerald-700" />
               </div>
             </div>
 
             <div className="rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-sm">
               <div className="flex items-center gap-2 text-sm font-semibold text-stone-800">
                 <Gift className="h-4 w-4 text-amber-700" />
-                Mensagem
+                Nosso carinho
               </div>
               <p className="mt-3 text-base leading-7 text-stone-600">
-                Sua ajuda faz diferença para esse novo começo. Obrigado por celebrar esse momento com a gente.
+                Sua presença é o presente mais bonito. Tudo o que vier com carinho será recebido com muito amor.
               </p>
               <div className="mt-4 flex items-center gap-2 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
                 <Sparkles className="h-4 w-4" />
-                Valor livre, enviado com carinho.
+                Um gesto doce para celebrar esse dia.
               </div>
             </div>
           </div>
@@ -222,9 +222,9 @@ function PixSection() {
               <QRCodeSVG value={pixPayload} size={220} level="M" includeMargin className="h-full w-full" />
             </div>
             <div className="mt-4 text-center">
-              <p className="text-sm uppercase tracking-[0.35em] text-stone-500">QR para contribuição</p>
+              <p className="text-sm uppercase tracking-[0.35em] text-stone-500">Um gesto de carinho</p>
               <p className="mt-2 text-base leading-7 text-stone-600">
-                Use o QR code ou copie a chave Pix no card ao lado.
+                Um caminho simples para deixar seu afeto.
               </p>
             </div>
           </div>
@@ -262,7 +262,7 @@ export default function Home() {
               {siteConfig.coupleNames}
             </p>
             <p className="text-[11px] uppercase tracking-[0.35em] text-stone-500">
-              Convite digital
+              Nosso convite
             </p>
           </div>
           <a
@@ -293,16 +293,16 @@ export default function Home() {
           <div className="space-y-6">
             <div className="rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_70px_rgba(62,51,39,0.1)] backdrop-blur">
               <SectionTitle
-                eyebrow="Informações"
-                title="Tudo o que o convidado precisa ver logo de cara."
-                description="A estrutura foi pensada para ficar clara no celular, com o Pix muito visível e as informações principais em blocos curtos e elegantes."
+                eyebrow="Nosso dia"
+                title="Tudo o que faz esse encontro ser inesquecível."
+                description="Uma composição leve, feita para guardar a data, o lugar e o carinho desse momento."
               />
 
               <div className="mt-8 grid gap-4">
                 <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                   <CalendarDays className="mt-0.5 h-5 w-5 text-emerald-800" />
                   <div>
-                    <p className="text-sm font-semibold text-stone-900">Data e hora</p>
+                    <p className="text-sm font-semibold text-stone-900">Quando nos encontraremos</p>
                     <p className="mt-1 text-sm leading-6 text-stone-600">
                       {siteConfig.eventDateLabel} às {siteConfig.eventTimeLabel}
                     </p>
@@ -312,7 +312,7 @@ export default function Home() {
                 <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                   <MapPinned className="mt-0.5 h-5 w-5 text-amber-800" />
                   <div>
-                    <p className="text-sm font-semibold text-stone-900">Local</p>
+                    <p className="text-sm font-semibold text-stone-900">Onde o amor espera</p>
                     <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueName}</p>
                     <p className="text-sm leading-6 text-stone-500">{siteConfig.venueAddress}</p>
                   </div>
@@ -321,7 +321,7 @@ export default function Home() {
                 <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                   <MessageCircle className="mt-0.5 h-5 w-5 text-rose-700" />
                   <div>
-                    <p className="text-sm font-semibold text-stone-900">Mensagem</p>
+                    <p className="text-sm font-semibold text-stone-900">Um abraço em palavras</p>
                     <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueHint}</p>
                   </div>
                 </div>
@@ -364,12 +364,12 @@ export default function Home() {
                       {siteConfig.coupleNames}
                     </p>
                     <p className="text-sm leading-7 text-stone-700">
-                      Criado para transmitir a mesma sensação dos prints: convite delicado, visual romântico e foco em uma experiência que impressiona ao abrir.
+                      Criado para guardar a delicadeza desse dia e a doçura de receber cada pessoa querida.
                     </p>
                   </div>
                   <div className="mt-6 flex items-center gap-2 text-sm text-stone-600">
                     <Sparkles className="h-4 w-4 text-amber-700" />
-                    Toque, role e encontre o Pix com facilidade.
+                    Abra com carinho e deixe-se envolver.
                   </div>
                 </div>
               </div>
@@ -395,13 +395,13 @@ export default function Home() {
 
         <footer className="mt-10 flex flex-col items-start justify-between gap-4 rounded-[1.75rem] border border-white/70 bg-stone-950 px-6 py-5 text-stone-100 shadow-[0_20px_70px_rgba(62,51,39,0.14)] sm:flex-row sm:items-center">
           <div>
-            <p className="text-sm font-semibold">Ajude o casal com carinho</p>
+            <p className="text-sm font-semibold">Um gesto de amor</p>
             <p className="mt-1 text-sm text-stone-300">
-              Copie o Pix ou use o QR code na seção destacada.
+              Seu carinho é recebido com gratidão e afeto.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <CopyButton value={siteConfig.pix.key} label="Copiar Pix" className="bg-white text-stone-950 hover:bg-stone-100" />
+            <CopyButton value={siteConfig.pix.key} label="Levar carinho" className="bg-white text-stone-950 hover:bg-stone-100" />
             <a
               href={siteConfig.whatsappUrl}
               target="_blank"
