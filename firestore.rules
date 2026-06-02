@@ -1,0 +1,27 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /confirmacoes/{confirmationId} {
+      allow create: if isValidConfirmation();
+      allow read, update, delete: if false;
+    }
+
+    function isValidConfirmation() {
+      return request.resource.data.keys().hasOnly([
+          'nome',
+          'convitePara',
+          'origem',
+          'criadoEm'
+        ])
+        && request.resource.data.nome is string
+        && request.resource.data.nome.size() >= 1
+        && request.resource.data.nome.size() <= 120
+        && request.resource.data.convitePara is string
+        && request.resource.data.convitePara.size() >= 1
+        && request.resource.data.convitePara.size() <= 120
+        && request.resource.data.origem == 'convite'
+        && request.resource.data.criadoEm == request.time;
+    }
+  }
+}

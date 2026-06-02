@@ -33,8 +33,8 @@ type TimeLeft = {
   seconds: number;
 };
 
-function formatTimeLeft(target: string): TimeLeft {
-  const difference = new Date(target).getTime() - Date.now();
+function formatTimeLeft(target: string, now = Date.now()): TimeLeft {
+  const difference = new Date(target).getTime() - now;
 
   if (difference <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
@@ -251,13 +251,17 @@ function PixSection() {
 
 export default function Home() {
   const searchParams = useSearchParams();
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => formatTimeLeft(siteConfig.eventDateTime));
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
+    formatTimeLeft(siteConfig.eventDateTime, new Date(siteConfig.eventDateTime).getTime()),
+  );
   const guestName = useMemo(
     () => getGuestNameFromSearchParams(searchParams),
     [searchParams],
   );
 
   useEffect(() => {
+    setTimeLeft(formatTimeLeft(siteConfig.eventDateTime));
+
     const timer = window.setInterval(() => {
       setTimeLeft(formatTimeLeft(siteConfig.eventDateTime));
     }, 1000);
