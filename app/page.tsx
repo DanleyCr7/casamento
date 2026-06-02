@@ -141,6 +141,9 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
               <span className="envelope-flap envelope-flap-right" />
               <span className="envelope-flap envelope-flap-bottom" />
               <span className="envelope-flap envelope-flap-top" />
+              <span className="absolute left-1/2 top-8 z-10 -translate-x-1/2 rounded-full border border-white/50 bg-white/35 px-4 py-1 text-[11px] uppercase tracking-[0.3em] text-white backdrop-blur-sm">
+                Para {guestName}
+              </span>
               <span className="wax-seal">
                 <span className="font-script text-4xl leading-none">J F</span>
               </span>
@@ -390,12 +393,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mt-10" id="pix">
-          <PixSection />
-        </section>
-
         <section className="mt-10">
           <ConfirmationSection guestName={guestName} />
+        </section>
+
+        <section className="mt-10" id="pix">
+          <PixSection />
         </section>
 
         <section className="mt-10 grid gap-4 sm:grid-cols-3">
