@@ -75,12 +75,12 @@
     border: 1px solid rgba(255, 255, 255, 0.72);
     border-radius: 1.35rem;
     background:
-      linear-gradient(130deg, rgba(255, 255, 255, 0.5), transparent 38%),
-      linear-gradient(180deg, rgba(217, 233, 238, 0.92), rgba(183, 207, 216, 0.86));
+      linear-gradient(130deg, rgba(255, 255, 255, 0.38), transparent 34%),
+      linear-gradient(180deg, rgba(201, 224, 232, 0.98), rgba(150, 184, 200, 0.94));
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.7),
-      inset 0 -22px 48px rgba(60, 92, 103, 0.1),
-      0 30px 90px rgba(54, 42, 30, 0.22);
+      inset 0 -22px 48px rgba(60, 92, 103, 0.16),
+      0 30px 90px rgba(54, 42, 30, 0.26);
     backdrop-filter: blur(3px);
   }
 
@@ -110,7 +110,7 @@
     position: absolute;
     inset: 0;
     display: block;
-    background: rgba(198, 220, 226, 0.84);
+    background: rgba(182, 211, 220, 0.92);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
   }
 
@@ -124,14 +124,14 @@
 
   .envelope-flap-bottom {
     clip-path: polygon(0 100%, 50% 52%, 100% 100%);
-    background: rgba(178, 204, 212, 0.86);
+    background: rgba(160, 191, 202, 0.92);
   }
 
   .envelope-flap-top {
     z-index: 6;
     clip-path: polygon(0 0, 50% 58%, 100% 0);
     background:
-      linear-gradient(180deg, rgba(232, 244, 247, 0.95), rgba(186, 211, 219, 0.9));
+      linear-gradient(180deg, rgba(240, 248, 250, 0.98), rgba(176, 205, 214, 0.95));
     transform-origin: top center;
     transition: transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 700ms ease;
   }
@@ -228,12 +228,12 @@
     display: block;
     width: 42%;
     height: 58%;
-    opacity: 0.9;
+    opacity: 0.98;
     background-image: url("data:image/svg+xml,%3Csvg width='420' height='420' viewBox='0 0 420 420' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' opacity='.95'%3E%3Cpath d='M84 328C142 248 226 182 342 112'/%3E%3Cpath d='M110 292c-28-44-6-89 42-102 31 39 13 86-42 102z'/%3E%3Cpath d='M160 240c-24-38-2-78 42-88 24 38 5 76-42 88z'/%3E%3Cpath d='M214 194c-18-35 3-68 43-75 18 35-2 66-43 75z'/%3E%3Cpath d='M248 152c30-20 66-13 86 22-30 20-65 13-86-22z'/%3E%3Cpath d='M132 332c42-17 76-4 104 36-43 18-77 4-104-36z'/%3E%3Cpath d='M96 250c-34-13-51-42-43-80 34 11 52 39 43 80z'/%3E%3Cpath d='M244 92c30-58 112-48 132 10-35 56-112 46-132-10z'/%3E%3Cpath d='M278 92c22-12 49-7 64 15'/%3E%3Cpath d='M58 352c34-18 68-12 100 18'/%3E%3Cpath d='M72 188c30-18 60-15 90 9'/%3E%3C/g%3E%3C/svg%3E");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    filter: drop-shadow(0 1px 1px rgba(70, 92, 99, 0.12));
+    filter: drop-shadow(0 1px 1px rgba(70, 92, 99, 0.18));
     pointer-events: none;
   }
 
