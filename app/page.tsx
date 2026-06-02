@@ -16,6 +16,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { CopyButton } from "@/components/copy-button";
+import { ConfirmationSection } from "@/components/confirmation-form";
 import { buildPixPayload } from "@/lib/pix";
 import { siteConfig } from "@/lib/site";
 
@@ -84,7 +85,7 @@ function SectionTitle({
   );
 }
 
-function EnvelopeCard() {
+function EnvelopeCard({ guestName }: { guestName: string }) {
   return (
     <section className="flex min-h-[calc(100vh-3rem)] items-center justify-center py-8">
       <div className="w-full max-w-5xl">
@@ -112,11 +113,14 @@ function EnvelopeCard() {
                     {siteConfig.coupleNames}
                   </span>
                 </span>
-                  <span className="flex flex-col justify-center gap-5 py-2">
-                    <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#f4ead7] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#7c6337]">
-                      <Heart className="h-3.5 w-3.5" />
+                <span className="flex flex-col justify-center gap-5 py-2">
+                  <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#f4ead7] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#7c6337]">
+                    <Heart className="h-3.5 w-3.5" />
                     Nosso convite
-                    </span>
+                  </span>
+                  <span className="inline-flex w-fit items-center rounded-full border border-[#d9c79c] bg-white/70 px-3 py-1 text-[11px] uppercase tracking-[0.3em] text-[#8b6f35]">
+                    Para {guestName}
+                  </span>
                   <span className="font-script text-6xl leading-none text-[#8b6f35] sm:text-7xl">
                     {siteConfig.coupleNames}
                   </span>
@@ -236,6 +240,17 @@ function PixSection() {
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => formatTimeLeft(siteConfig.eventDateTime));
+  const [guestName, setGuestName] = useState("Você");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const rawName = params.get("nome") ?? params.get("name") ?? params.get("para");
+    const trimmedName = rawName?.trim().replace(/\s+/g, " ") ?? "";
+
+    if (trimmedName.length > 0) {
+      setGuestName(trimmedName);
+    }
+  }, []);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -253,7 +268,7 @@ export default function Home() {
       </div>
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
-        <EnvelopeCard />
+        <EnvelopeCard guestName={guestName} />
 
         <div className="site-after-open animate-site-reveal">
         <header className="flex items-center justify-between rounded-full border border-white/70 bg-white/65 px-4 py-3 shadow-[0_12px_40px_rgba(62,51,39,0.08)] backdrop-blur">
@@ -266,11 +281,11 @@ export default function Home() {
             </p>
           </div>
           <a
-            href="#pix"
+            href="#confirmar"
             className="inline-flex items-center gap-2 rounded-full bg-emerald-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
           >
-            <CircleDollarSign className="h-4 w-4" />
-            Pix
+            <Heart className="h-4 w-4" />
+            Confirmar presença
           </a>
         </header>
 
@@ -329,13 +344,11 @@ export default function Home() {
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href={siteConfig.whatsappUrl}
-                  target="_blank"
-                  rel="noreferrer"
+                  href="#confirmar"
                   className="inline-flex items-center gap-2 rounded-full bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800"
                 >
                   <MessageCircle className="h-4 w-4" />
-                  Confirmar no WhatsApp
+                  Confirmar presença
                 </a>
                 <a
                   href="#pix"
@@ -381,6 +394,10 @@ export default function Home() {
           <PixSection />
         </section>
 
+        <section className="mt-10">
+          <ConfirmationSection guestName={guestName} />
+        </section>
+
         <section className="mt-10 grid gap-4 sm:grid-cols-3">
           {siteConfig.highlights.map((item) => (
             <article
@@ -403,9 +420,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-3">
             <CopyButton value={siteConfig.pix.key} label="Levar carinho" className="bg-white text-stone-950 hover:bg-stone-100" />
             <a
-              href={siteConfig.whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
+              href="#confirmar"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               <ChevronRight className="h-4 w-4" />
