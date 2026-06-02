@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f2ea;
+  --foreground: #2c2620;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgba(147, 160, 111, 0.22), transparent 28%),
+      radial-gradient(circle at top right, rgba(192, 151, 107, 0.18), transparent 22%),
+      linear-gradient(180deg, #f8f4ee 0%, #f3ede4 50%, #efe8dd 100%);
+    color: var(--foreground);
+    font-family: var(--font-serif), Georgia, serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .font-script {
+    font-family: var(--font-script), cursive;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
