@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 import { CopyButton } from "@/components/copy-button";
 import { ConfirmationSection } from "@/components/confirmation-form";
+import { getGuestNameFromSearchParams } from "@/lib/guest-name";
 import { buildPixPayload } from "@/lib/pix";
 import { siteConfig } from "@/lib/site";
 
@@ -118,8 +120,9 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                     <Heart className="h-3.5 w-3.5" />
                     Nosso convite
                   </span>
-                  <span className="inline-flex w-fit items-center rounded-full border border-[#d9c79c] bg-white/70 px-3 py-1 text-[11px] uppercase tracking-[0.3em] text-[#8b6f35]">
-                    Para {guestName}
+                  <span className="inline-flex w-fit items-center gap-1 rounded-full border border-[#d9c79c] bg-white/70 px-3 py-1 text-[11px] text-[#8b6f35]">
+                    <span className="uppercase tracking-[0.3em]">Para</span>
+                    <span className="font-semibold tracking-wide">{guestName}</span>
                   </span>
                   <span className="font-script text-6xl leading-none text-[#8b6f35] sm:text-7xl">
                     {siteConfig.coupleNames}
@@ -246,8 +249,13 @@ function PixSection() {
   );
 }
 
-export default function Home({ guestName }: { guestName: string }) {
+export default function Home() {
+  const searchParams = useSearchParams();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => formatTimeLeft(siteConfig.eventDateTime));
+  const guestName = useMemo(
+    () => getGuestNameFromSearchParams(searchParams),
+    [searchParams],
+  );
 
   useEffect(() => {
     const timer = window.setInterval(() => {

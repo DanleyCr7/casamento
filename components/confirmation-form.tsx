@@ -4,6 +4,7 @@ import { addDoc, collection, onSnapshot, serverTimestamp } from "firebase/firest
 import { BadgeCheck, Loader2, Send, Users } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { db } from "@/lib/firebase";
+import { DEFAULT_GUEST_NAME, formatGuestName } from "@/lib/guest-name";
 
 type ConfirmationSummary = {
   entries: number;
@@ -11,12 +12,12 @@ type ConfirmationSummary = {
 };
 
 function normalizeGuestName(value: string | null) {
-  const normalized = value?.trim().replace(/\s+/g, " ") ?? "";
-  return normalized.length > 0 ? normalized : "Você";
+  const normalized = formatGuestName(value ?? "");
+  return normalized.length > 0 ? normalized : DEFAULT_GUEST_NAME;
 }
 
 export function ConfirmationSection({ guestName }: { guestName: string }) {
-  const initialName = guestName === "Você" ? "" : guestName;
+  const initialName = guestName === DEFAULT_GUEST_NAME ? "" : guestName;
   const [name, setName] = useState(initialName);
   const [people, setPeople] = useState(1);
   const [phone, setPhone] = useState("");
@@ -48,7 +49,7 @@ export function ConfirmationSection({ guestName }: { guestName: string }) {
   const guestLabel = useMemo(() => normalizeGuestName(guestName), [guestName]);
 
   useEffect(() => {
-    setName(guestName === "Você" ? "" : guestName);
+    setName(guestName === DEFAULT_GUEST_NAME ? "" : guestName);
   }, [guestName]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
