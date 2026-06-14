@@ -113,9 +113,13 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
           <span className="envelope-shadow" />
           <span className="envelope-card">
             <span className="envelope-invite">
-              <span className="relative grid h-full gap-4 overflow-hidden rounded-[1.35rem] border border-[#d9c79c] bg-[#fffdf8] p-5 shadow-[0_20px_70px_rgba(45,35,25,0.16)] sm:grid-cols-[0.85fr_1.15fr] sm:p-7">
-                <span className="absolute inset-x-8 top-5 h-px bg-[#c9ad74]" />
-                <span className="relative min-h-56 overflow-hidden rounded-[1rem]">
+              <span className="relative grid h-full gap-4 overflow-hidden rounded-[1.35rem] border border-[#f2c8d8] bg-[#fffaf7] p-5 shadow-[0_20px_70px_rgba(45,35,25,0.12)] sm:grid-cols-[0.85fr_1.15fr] sm:p-7">
+                <span className="absolute inset-x-8 top-5 h-px bg-gradient-to-r from-transparent via-[#efb5c6] to-transparent" />
+                <span className="absolute right-5 top-5 inline-flex items-center gap-2 rounded-full border border-[#f4d5df] bg-white/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#c36d8c] shadow-sm">
+                  <Heart className="h-3.5 w-3.5 fill-current" />
+                  Convite da Melinda
+                </span>
+                <span className="relative min-h-56 overflow-hidden rounded-[1rem] border border-white/80 bg-[#fff6ef]">
                   <Image
                     src={publicAsset("/images/VID-20260612-WA0047(2).jpg.jpeg")}
                     alt="Bebê celebrando seu primeiro aniversário"
@@ -133,15 +137,15 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                   </span>
                 </span>
                 <span className="flex flex-col justify-center gap-5 py-2">
-                  <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#f4ead7] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#7c6337]">
-                    <Heart className="h-3.5 w-3.5" />
+                  <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#fdeef4] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#b35f7e]">
+                    <Sparkles className="h-3.5 w-3.5" />
                     Convite encantado
                   </span>
-                  <span className="inline-flex w-fit items-center gap-1 rounded-full border border-[#d9c79c] bg-white/70 px-3 py-1 text-[11px] text-[#8b6f35]">
+                  <span className="inline-flex w-fit items-center gap-1 rounded-full border border-[#f0d5e0] bg-white/80 px-3 py-1 text-[11px] text-[#8a6070]">
                     <span className="uppercase tracking-[0.3em]">Para</span>
                     <span className="font-semibold tracking-wide">{guestName}</span>
                   </span>
-                  <span className="font-script text-6xl leading-none text-[#8b6f35] sm:text-7xl">
+                  <span className="font-script text-6xl leading-none text-[#b35f7e] sm:text-7xl">
                     {siteConfig.coupleNames}
                   </span>
                   <span className="max-w-md text-base leading-7 text-stone-700">
@@ -157,20 +161,28 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
             <span className="envelope-back">
               <span className="envelope-floral envelope-floral-left" />
               <span className="envelope-floral envelope-floral-right" />
+              <span className="envelope-heart envelope-heart-left" aria-hidden="true" />
+              <span className="envelope-heart envelope-heart-right" aria-hidden="true" />
               <span className="envelope-flap envelope-flap-left" />
               <span className="envelope-flap envelope-flap-right" />
               <span className="envelope-flap envelope-flap-bottom" />
               <span className="envelope-flap envelope-flap-top" />
-              <span className="absolute left-1/2 top-7 z-10 -translate-x-1/2 rounded-[1.1rem] border border-[#b78a34] bg-[#fff4d7] px-4 py-2 text-center shadow-[0_14px_35px_rgba(81,57,21,0.24)] backdrop-blur-sm">
-                <span className="block text-[10px] font-semibold uppercase tracking-[0.4em] text-[#8b6923]">
+              <span className="wax-seal">
+                <Image
+                  src={publicAsset("/images/PASSARINHO.png")}
+                  alt=""
+                  fill
+                  sizes="96px"
+                  className="object-contain p-2 drop-shadow-[0_6px_10px_rgba(86,58,36,0.24)]"
+                />
+              </span>
+              <span className="envelope-recipient">
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.4em] text-[#b96b84]">
                   Para
                 </span>
                 <span className="block text-base font-semibold leading-none text-[#4f3411] sm:text-lg">
                   {guestName}
                 </span>
-              </span>
-              <span className="wax-seal">
-                <span className="font-script text-4xl leading-none">M</span>
               </span>
             </span>
           </span>
