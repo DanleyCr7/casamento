@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Parisienne } from "next/font/google";
+import { Cormorant_Garamond, Parisienne, Poppins } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
@@ -15,6 +15,12 @@ const script = Parisienne({
   variable: "--font-script",
 });
 
+const ui = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-ui",
+});
+
 export const metadata: Metadata = {
   title: "Aniversário da Melinda",
   description: "Um convite encantado para o aniversário de 1 aninho da Melinda.",
@@ -27,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${serif.variable} ${script.variable} antialiased`}>
+      <body className={`${serif.variable} ${script.variable} ${ui.variable} antialiased`}>
         {children}
       </body>
     </html>

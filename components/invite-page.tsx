@@ -190,6 +190,75 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
   );
 }
 
+function ParallaxHero() {
+  return (
+    <>
+      <header className="parallax-header">
+        <h2 className="logo">Melinda</h2>
+        <nav className="navigation" aria-label="Navegação do bosque">
+          <a href="#convite" className="active">
+            Início
+          </a>
+          <a href="#memorias">Memórias</a>
+          <a href="#confirmar">Confirmar</a>
+        </nav>
+      </header>
+
+      <section className="parallax" aria-label="Bosque encantado">
+        <img
+          src={publicAsset("/images/parallax/hill1.png")}
+          id="hill1"
+          alt="Colina principal"
+        />
+        <img
+          src={publicAsset("/images/parallax/hill2.png")}
+          id="hill2"
+          alt="Colina ao fundo"
+        />
+        <img
+          src={publicAsset("/images/parallax/hill3.png")}
+          id="hill3"
+          alt="Colina central"
+        />
+        <img
+          src={publicAsset("/images/parallax/hill4.png")}
+          id="hill4"
+          alt="Colina lateral esquerda"
+        />
+        <img
+          src={publicAsset("/images/parallax/hill5.png")}
+          id="hill5"
+          alt="Colina lateral direita"
+        />
+        <img
+          src={publicAsset("/images/parallax/tree.png")}
+          id="tree"
+          alt="Árvore do bosque"
+        />
+        <h2 id="text">Melinda</h2>
+        <img
+          src={publicAsset("/images/parallax/leaf.png")}
+          id="leaf"
+          alt="Folha em movimento"
+        />
+        <img
+          src={publicAsset("/images/parallax/plant.png")}
+          id="plant"
+          alt="Planta do bosque"
+        />
+      </section>
+
+      <section className="sec" id="convite">
+        <h2>1 aninho no Bosque Encantado</h2>
+        <p>
+          Um aniversário cheio de folhas, flores e delicadeza para celebrar a
+          Melinda. Role a página e deixe o bosque contar a história com leveza.
+        </p>
+      </section>
+    </>
+  );
+}
+
 function MemoryFilm() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isInteracting, setIsInteracting] = useState(false);
@@ -491,17 +560,71 @@ export default function Home() {
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const text = document.getElementById("text");
+    const leaf = document.getElementById("leaf");
+    const hill1 = document.getElementById("hill1");
+    const hill4 = document.getElementById("hill4");
+    const hill5 = document.getElementById("hill5");
+
+    if (!text || !leaf || !hill1 || !hill4 || !hill5) {
+      return;
+    }
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+
+    const update = () => {
+      const value = window.scrollY;
+
+      text.style.marginTop = `${value * 2.5}px`;
+      leaf.style.top = `${value * -1.5}px`;
+      leaf.style.left = `${value * 1.5}px`;
+      hill5.style.left = `${value * 1.5}px`;
+      hill4.style.left = `${value * -1.5}px`;
+      hill1.style.top = `${value}px`;
+
+      frame = 0;
+    };
+
+    const onScroll = () => {
+      if (reduceMotion.matches) {
+        return;
+      }
+
+      if (frame) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    reduceMotion.addEventListener("change", update);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      reduceMotion.removeEventListener("change", update);
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+    };
+  }, []);
+
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative overflow-x-hidden">
       <div className="pointer-events-none absolute inset-0 opacity-80">
         <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-white/70 to-transparent" />
         <div className="absolute bottom-0 left-0 h-56 w-full bg-gradient-to-t from-[#d5c5ac]/35 to-transparent" />
       </div>
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
+      <ParallaxHero />
+
+      <div className="relative mx-auto flex max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
         <EnvelopeCard guestName={guestName} />
 
-        <div className="site-after-open animate-site-reveal">
+        <div className="site-after-open animate-site-reveal" id="memorias">
         <header className="flex items-center justify-between rounded-full border border-white/70 bg-white/65 px-4 py-3 shadow-[0_12px_40px_rgba(62,51,39,0.08)] backdrop-blur">
           <div>
             <p className="font-script text-3xl leading-none text-emerald-900">
