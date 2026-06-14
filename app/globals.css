@@ -579,6 +579,53 @@
     }
   }
 
+  @keyframes location-ping {
+    0% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0;
+      transform: scale(2.2);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2.2);
+    }
+  }
+
+  @keyframes location-bounce-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-0.75rem) scale(0.92);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0.15rem) scale(1.02);
+    }
+    70% {
+      transform: translateY(-0.1rem) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .location-badge-fixed {
+    display: none;
+  }
+
+  main:has(.invite-toggle:checked) .location-badge-fixed {
+    display: flex;
+    animation: location-bounce-in 700ms cubic-bezier(0.18, 0.82, 0.24, 1) 600ms both;
+  }
+
+  .location-badge-ping {
+    animation: location-ping 2s cubic-bezier(0.18, 0.82, 0.24, 1) 1500ms infinite;
+    border-radius: 999px;
+  }
+
   @keyframes romantic-heart-rise {
     0% {
       opacity: 0;

@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { QRCodeSVG } from "qrcode.react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   CalendarDays,
   ChevronLeft,
   ChevronRight,
-  CircleDollarSign,
+  Footprints,
   Gift,
   Heart,
   Clock3,
@@ -16,12 +15,13 @@ import {
   MessageCircle,
   Pause,
   Play,
+  Shirt,
   Sparkles,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
-import { CopyButton } from "@/components/copy-button";
 import { ConfirmationSection } from "@/components/confirmation-form";
 import { getGuestNameFromSearchParams } from "@/lib/guest-name";
-import { buildPixPayload } from "@/lib/pix";
 import { siteConfig } from "@/lib/site";
 
 function publicAsset(path: string) {
@@ -407,76 +407,80 @@ function MemoryFilm() {
   );
 }
 
-function PixSection() {
-  const pixPayload = useMemo(
-    () =>
-      buildPixPayload({
-        key: siteConfig.pix.key,
-        name: siteConfig.pix.name,
-        city: siteConfig.pix.city,
-        txid: siteConfig.pix.txid,
-        description: siteConfig.pix.description,
-      }),
-    [],
-  );
+function GiftSuggestions() {
+  const suggestions = [
+    {
+      icon: Shirt,
+      title: "Roupas",
+      subtitle: "12 a 24 meses",
+      desc: "Vestidinhos, bodies, macacões — tudo que vista a Melinda com charme e conforto.",
+      color: "text-pink-700",
+      bg: "bg-pink-50",
+      border: "border-pink-200/70",
+      iconBg: "bg-pink-600",
+    },
+    {
+      icon: Footprints,
+      title: "Sapatinhos",
+      subtitle: "Tamanhos 19 e 20",
+      desc: "Uns pezinhos delicados merecem calçados cheios de fofura para seus primeiros passos.",
+      color: "text-sky-700",
+      bg: "bg-sky-50",
+      border: "border-sky-200/70",
+      iconBg: "bg-sky-600",
+    },
+    {
+      icon: Gift,
+      title: "Brinquedos",
+      subtitle: "",
+      desc: "Ela ama neném! Bonecas, carrinhos de encaixe e tudo que estimule o faz de conta com muito amor.",
+      color: "text-amber-700",
+      bg: "bg-amber-50",
+      border: "border-amber-200/70",
+      iconBg: "bg-amber-600",
+    },
+  ];
 
   return (
-    <section className="relative overflow-hidden rounded-[2.25rem] border border-emerald-900/10 bg-[#fbf7f0] p-6 shadow-[0_30px_100px_rgba(62,51,39,0.08)] sm:p-8">
-      <div className="absolute right-0 top-0 h-44 w-44 rounded-full bg-emerald-200/30 blur-3xl" />
+    <section className="relative overflow-hidden rounded-[2.25rem] border border-rose-900/10 bg-[#fbf7f0] p-6 shadow-[0_30px_100px_rgba(62,51,39,0.08)] sm:p-8">
+      <div className="absolute -right-8 -top-8 h-44 w-44 rounded-full bg-pink-200/30 blur-3xl" />
       <div className="absolute -bottom-8 left-0 h-40 w-40 rounded-full bg-amber-200/25 blur-3xl" />
 
-      <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div className="space-y-6">
-          <SectionTitle
-            eyebrow="Um mimo"
-            title="Se quiser deixar um mimo para a Melinda, o Pix está aqui com carinho."
-            description="Sua presença já é o maior presente. Se desejar, um gesto de carinho será recebido com muito amor."
-          />
+      <div className="space-y-6">
+        <SectionTitle
+          eyebrow="Sugestões de presentes"
+          title="Se quiser trazer um carinho para a Melinda"
+          description="Sua presença é o melhor presente. Mas se quiser mimá-la ainda mais, aqui vão algumas ideias que cabem no bosque encantado."
+        />
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-sm">
-              <div className="flex items-center gap-2 text-sm font-semibold text-stone-800">
-                <CircleDollarSign className="h-4 w-4 text-emerald-700" />
-                Mimo mágico
+        <div className="grid gap-4 sm:grid-cols-3">
+          {suggestions.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className={`group rounded-2xl border ${item.border} ${item.bg} p-5 shadow-sm transition hover:shadow-md`}
+              >
+                <span
+                  className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${item.iconBg} text-white shadow-inner`}
+                >
+                  <Icon className="h-5 w-5" />
+                </span>
+                <p className={`text-sm font-semibold ${item.color}`}>{item.title}</p>
+                {item.subtitle && (
+                  <p className="mt-0.5 text-xs font-medium uppercase tracking-[0.2em] text-stone-500">
+                    {item.subtitle}
+                  </p>
+                )}
+                <p className="mt-2 text-sm leading-6 text-stone-600">{item.desc}</p>
               </div>
-              <p className="mt-3 break-all text-xl font-semibold tracking-wide text-stone-900">
-                {siteConfig.pix.key}
-              </p>
-              <div className="mt-4">
-                <CopyButton value={siteConfig.pix.key} label="Guardar mimo" className="w-full bg-emerald-800 text-white hover:bg-emerald-700" />
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-sm">
-              <div className="flex items-center gap-2 text-sm font-semibold text-stone-800">
-                <Gift className="h-4 w-4 text-amber-700" />
-                Encanto compartilhado
-              </div>
-              <p className="mt-3 text-base leading-7 text-stone-600">
-                Sua presença é o presente mais bonito. Tudo o que vier com carinho será recebido como parte da floresta encantada.
-              </p>
-              <div className="mt-4 flex items-center gap-2 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
-                <Sparkles className="h-4 w-4" />
-                Um gesto doce para celebrar esse bosque.
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
-        <div className="flex justify-center">
-          <div className="relative w-full max-w-[22rem] overflow-hidden rounded-[2rem] border border-white/80 bg-gradient-to-b from-white to-stone-100 p-5 shadow-[0_30px_90px_rgba(62,51,39,0.12)]">
-            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-emerald-200/60 to-transparent" />
-            <div className="relative mx-auto flex aspect-square w-full max-w-[17rem] items-center justify-center rounded-[1.5rem] border border-stone-200 bg-white p-4">
-              <div className="absolute inset-6 rounded-[1.25rem] bg-[radial-gradient(circle_at_center,rgba(165,186,127,0.14),transparent_60%)]" />
-              <QRCodeSVG value={pixPayload} size={220} level="M" includeMargin className="h-full w-full" />
-            </div>
-            <div className="mt-4 text-center">
-              <p className="text-sm uppercase tracking-[0.35em] text-stone-500">Um mimo encantado</p>
-              <p className="mt-2 text-base leading-7 text-stone-600">
-                Um caminho simples para deixar seu carinho no bosque.
-              </p>
-            </div>
-          </div>
+        <div className="flex items-center gap-2 rounded-2xl bg-white/80 px-5 py-4 text-sm leading-6 text-stone-600 shadow-sm">
+          <Sparkles className="h-4 w-4 shrink-0 text-rose-400" />
+          Qualquer gesto de carinho será recebido com o mesmo sorriso da Melinda.
         </div>
       </div>
     </section>
@@ -492,6 +496,40 @@ export default function Home() {
     () => getGuestNameFromSearchParams(searchParams),
     [searchParams],
   );
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  const toggleMusic = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio.play().then(() => {
+        setIsMusicPlaying(true);
+        setHasInteracted(true);
+      });
+    } else {
+      audio.pause();
+      setIsMusicPlaying(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const audio = new Audio(
+      publicAsset("/images/forest-ambience-light-birdsong-distant-rooster-vincentmets-1-03-38.mp3"),
+    );
+    audio.loop = true;
+    audio.volume = 0.3;
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.src = "";
+      audioRef.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     setTimeLeft(formatTimeLeft(siteConfig.eventDateTime));
@@ -606,7 +644,6 @@ export default function Home() {
         <EnvelopeCard guestName={guestName} />
 
         <div className="site-after-open animate-site-reveal" id="memorias">
-          <BosqueCover />
           <header className="flex items-center justify-end rounded-full border border-white/70 bg-white/65 px-4 py-3 shadow-[0_12px_40px_rgba(62,51,39,0.08)] backdrop-blur">
             <a
               href="#confirmar"
@@ -652,14 +689,20 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
+                  <a
+                    href={siteConfig.venueMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4 transition hover:border-amber-300 hover:bg-amber-50/60"
+                  >
                     <MapPinned className="mt-0.5 h-5 w-5 text-amber-800" />
                     <div>
                       <p className="text-sm font-semibold text-stone-900">Onde a festa acontece</p>
                       <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueName}</p>
                       <p className="text-sm leading-6 text-stone-500">{siteConfig.venueAddress}</p>
                     </div>
-                  </div>
+                    <MapPinned className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+                  </a>
 
                   <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                     <MessageCircle className="mt-0.5 h-5 w-5 text-rose-700" />
@@ -728,8 +771,8 @@ export default function Home() {
             <ConfirmationSection guestName={guestName} />
           </section>
 
-          <section className="mt-10" id="pix">
-            <PixSection />
+          <section className="mt-10" id="presentes">
+            <GiftSuggestions />
           </section>
 
           <section className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -746,13 +789,19 @@ export default function Home() {
 
           <footer className="mt-10 flex flex-col items-start justify-between gap-4 rounded-[1.75rem] border border-white/70 bg-stone-950 px-6 py-5 text-stone-100 shadow-[0_20px_70px_rgba(62,51,39,0.14)] sm:flex-row sm:items-center">
             <div>
-              <p className="text-sm font-semibold">Um gesto de encanto</p>
+              <p className="text-sm font-semibold">Carinho e presença</p>
               <p className="mt-1 text-sm text-stone-300">
-                Seu carinho é recebido com gratidão e afeto.
+                O melhor presente é ter você no bosque encantado.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <CopyButton value={siteConfig.pix.key} label="Levar carinho" className="bg-white text-stone-950 hover:bg-stone-100" />
+              <a
+                href="#presentes"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-stone-950 transition hover:bg-stone-100"
+              >
+                <Gift className="h-4 w-4" />
+                Sugestões de presente
+              </a>
               <a
                 href="#confirmar"
                 className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
@@ -764,6 +813,36 @@ export default function Home() {
           </footer>
         </div>
       </div>
+
+      <button
+        type="button"
+        onClick={toggleMusic}
+        className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-white/70 bg-white/80 text-stone-700 shadow-[0_8px_30px_rgba(62,51,39,0.15)] backdrop-blur transition hover:bg-white hover:text-stone-900 active:scale-95"
+        aria-label={isMusicPlaying ? "Pausar música de fundo" : "Tocar música de fundo"}
+      >
+        {isMusicPlaying ? (
+          <Volume2 className="h-5 w-5" />
+        ) : (
+          <VolumeX className="h-5 w-5" />
+        )}
+      </button>
+      <a
+        href={siteConfig.venueMapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="location-badge-fixed fixed bottom-6 left-6 z-50 flex items-center gap-2.5 rounded-full border border-amber-900/15 bg-gradient-to-r from-amber-50 to-amber-100/80 px-4 py-2.5 shadow-[0_8px_30px_rgba(217,157,50,0.15)] backdrop-blur transition hover:from-amber-100 hover:to-amber-200/80 hover:shadow-[0_8px_35px_rgba(217,157,50,0.25)]"
+        aria-label="Abrir localização no Google Maps"
+      >
+        <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-amber-800 text-white shadow-inner">
+          <MapPinned className="h-3.5 w-3.5" />
+          <span className="location-badge-ping absolute inset-0 rounded-full bg-amber-800/40" />
+        </span>
+        <span className="text-left leading-tight">
+          <span className="block text-[9px] uppercase tracking-[0.3em] text-amber-800/70">Onde vai ser</span>
+          <span className="block text-xs font-semibold text-stone-800">{siteConfig.venueName}</span>
+        </span>
+        <MapPinned className="h-3 w-3 shrink-0 text-amber-600/50" />
+      </a>
     </main>
   );
 }
