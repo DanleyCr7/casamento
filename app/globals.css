@@ -34,87 +34,6 @@
     text-wrap: balance;
   }
 
-  .parallax-header {
-    position: absolute;
-    inset: 0 0 auto 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    padding: 1.75rem clamp(1rem, 5vw, 6rem);
-    font-family: var(--font-ui), "Poppins", sans-serif;
-  }
-
-  .logo {
-    margin-right: clamp(0rem, 14vw, 17rem);
-    color: #ffffff;
-    font-size: clamp(1.45rem, 2vw, 2rem);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    pointer-events: none;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-  }
-
-  .navigation {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-  }
-
-  .navigation a {
-    border-radius: 999px;
-    color: #ffffff;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0.4rem 0.95rem;
-    text-decoration: none;
-    transition:
-      background-color 180ms ease,
-      color 180ms ease;
-  }
-
-  .navigation a:hover,
-  .navigation a.active {
-    background-color: #ffffff;
-    color: #4d7a67;
-  }
-
-  .parallax {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: hidden;
-    background:
-      radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.72) 0 16%, transparent 38%),
-      linear-gradient(180deg, #b9ecf8 0%, #8dd7e8 30%, #73c8db 55%, #5db8cb 100%);
-  }
-
-  .parallax img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  #text {
-    position: absolute;
-    top: 43%;
-    left: 50%;
-    z-index: 5;
-    width: max-content;
-    color: #ffffff;
-    font-family: var(--font-ui), "Poppins", sans-serif;
-    font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.34);
-    transform: translate(-50%, -50%);
-  }
 
   .sec {
     position: relative;
@@ -384,28 +303,6 @@
     bottom: 12%;
     background: #f6e7b7;
     box-shadow: -1.9rem 2rem 0 #e5d9ef;
-  }
-
-  @media (max-width: 640px) {
-    .parallax-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-      padding: 1rem 1rem 1.25rem;
-    }
-
-    .logo {
-      margin-right: 0;
-    }
-
-    .navigation a {
-      font-size: 0.8rem;
-      padding: 0.35rem 0.75rem;
-    }
-
-    #text {
-      letter-spacing: 0;
-    }
   }
 
   .memory-film {
@@ -784,11 +681,38 @@
     .memory-slide,
     .memory-thumbnail,
     .memory-control,
-    .parallax img,
-    #text {
+    .parallax img {
       animation: none;
       transition-duration: 1ms;
       transform: none;
     }
   }
+}
+
+/* Parallax overlay - outside @layer for highest specificity */
+.parallax {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.72) 0 16%, transparent 38%),
+    linear-gradient(180deg, #b9ecf8 0%, #8dd7e8 30%, #73c8db 55%, #5db8cb 100%);
+}
+
+body:has(.invite-toggle:checked) .parallax {
+  display: block;
+}
+
+.parallax img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
 }
