@@ -702,6 +702,12 @@
     linear-gradient(180deg, #b9ecf8 0%, #8dd7e8 30%, #73c8db 55%, #5db8cb 100%);
 }
 
+@supports (height: 100dvh) {
+  .parallax {
+    height: 100dvh;
+  }
+}
+
 body:has(.invite-toggle:checked) .parallax {
   display: block;
 }
@@ -713,6 +719,7 @@ body:has(.invite-toggle:checked) .parallax {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  will-change: transform;
   pointer-events: none;
   user-select: none;
 }

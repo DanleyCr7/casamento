@@ -519,11 +519,10 @@ export default function Home() {
     const update = () => {
       const value = window.scrollY;
 
-      leaf.style.top = `${value * -0.08}px`;
-      leaf.style.left = `${value * 0.08}px`;
-      hill5.style.left = `${value * 0.08}px`;
-      hill4.style.left = `${value * -0.08}px`;
-      hill1.style.top = `${value * 0.05}px`;
+      leaf.style.transform = `translate(${value * 0.08}px, ${value * -0.08}px)`;
+      hill5.style.transform = `translateX(${value * 0.08}px)`;
+      hill4.style.transform = `translateX(${value * -0.08}px)`;
+      hill1.style.transform = `translateY(${value * 0.05}px)`;
 
       frame = 0;
     };
