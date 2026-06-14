@@ -184,6 +184,42 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
             <span className="caption-closed">Toque no selo e desperte o bosque</span>
             <span className="caption-open">O bosque encantado despertou</span>
           </p>
+          <p className="caption-closed mt-4 text-[10px] uppercase tracking-[0.25em] text-stone-400/80">
+            Desenvolvido por
+          </p>
+          <div className="caption-closed mt-1 flex items-center justify-center gap-2 text-xs text-stone-500/80">
+            <a
+              href="https://www.instagram.com/conv.idei?igsh=MXRhYTJta3lrd3h5dA=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 transition hover:text-rose-600"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-3 w-3"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              @conv.idei
+            </a>
+            <span className="text-stone-300">|</span>
+            <a
+              href="https://wa.me/5586981696937"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 transition hover:text-emerald-600"
+            >
+              <MessageCircle className="h-3 w-3" />
+              (86) 98169-6937
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -811,6 +847,45 @@ export default function Home() {
               </a>
             </div>
           </footer>
+
+          <div className="mt-6 rounded-2xl border border-white/50 bg-white/40 px-5 py-4 text-center shadow-sm backdrop-blur">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-stone-500">
+              Desenvolvido com carinho por
+            </p>
+            <div className="mt-2 flex items-center justify-center gap-3">
+              <a
+                href="https://www.instagram.com/conv.idei?igsh=MXRhYTJta3lrd3h5dA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-rose-700"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                </svg>
+                @conv.idei
+              </a>
+              <span className="text-stone-300">|</span>
+              <a
+                href="https://wa.me/5586981696937"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-emerald-700"
+              >
+                <MessageCircle className="h-4 w-4" />
+                (86) 98169-6937
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
