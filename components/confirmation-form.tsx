@@ -80,13 +80,13 @@ export function ConfirmationSection({ guestName }: { guestName: string }) {
           className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-emerald-900 px-7 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-80 sm:px-9"
         >
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <BadgeCheck className="h-4 w-4" />}
-          {loading ? "Guardando..." : confirmed ? "Presença confirmada" : "Confirmar presença"}
+          {loading ? "Guardando..." : confirmed ? "Presença guardada" : "Confirmar presença"}
         </button>
       </div>
 
       {status === "success" ? (
         <p className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-center text-sm font-semibold text-emerald-900 shadow-sm">
-          Sua presença foi guardada com carinho.
+          Sua presença foi guardada com carinho no bosque encantado.
         </p>
       ) : null}
 

@@ -3,17 +3,19 @@
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   CalendarDays,
+  ChevronLeft,
   ChevronRight,
   CircleDollarSign,
-  Copy,
   Gift,
   Heart,
   Clock3,
   MapPinned,
   MessageCircle,
+  Pause,
+  Play,
   Sparkles,
 } from "lucide-react";
 import { CopyButton } from "@/components/copy-button";
@@ -32,6 +34,17 @@ type TimeLeft = {
   minutes: number;
   seconds: number;
 };
+
+const memoryPhotos = [
+  { src: "/images/VID-20260612-WA0047.jpg.jpeg", position: "50% 42%" },
+  { src: "/images/VID-20260612-WA0047(1).jpg.jpeg", position: "50% 42%" },
+  { src: "/images/VID-20260612-WA0047(2).jpg.jpeg", position: "50% 42%" },
+  { src: "/images/VID-20260612-WA0047(3).jpg.jpeg", position: "50% 42%" },
+  { src: "/images/VID-20260612-WA0047(6).jpg.jpeg", position: "50% 42%" },
+  { src: "/images/VID-20260612-WA0047(7).jpg.jpeg", position: "50% 42%" },
+  { src: "/images/VID-20260612-WA0047(8).jpg.jpeg", position: "50% 42%" },
+  { src: "/images/VID-20260612-WA0047(12).jpg.jpeg", position: "50% 42%" },
+] as const;
 
 function formatTimeLeft(target: string, now = Date.now()): TimeLeft {
   const difference = new Date(target).getTime() - now;
@@ -104,13 +117,17 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                 <span className="absolute inset-x-8 top-5 h-px bg-[#c9ad74]" />
                 <span className="relative min-h-56 overflow-hidden rounded-[1rem]">
                   <Image
-                    src={publicAsset("/images/couple-portrait.jpg")}
-                    alt="Foto do casal"
+                    src={publicAsset("/images/VID-20260612-WA0047(2).jpg.jpeg")}
+                    alt="Bebê celebrando seu primeiro aniversário"
                     fill
                     priority
-                    className="object-cover"
+                    sizes="(max-width: 640px) 82vw, 36vw"
+                    className="object-cover object-[50%_42%]"
                   />
                   <span className="absolute inset-0 bg-gradient-to-t from-stone-950/35 to-transparent" />
+                  <span className="absolute right-3 top-3 rounded-full border border-white/80 bg-[#fff7df]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#a55f72] shadow-sm backdrop-blur">
+                    1 aninho
+                  </span>
                   <span className="absolute bottom-4 left-4 font-script text-5xl leading-none text-white">
                     {siteConfig.coupleNames}
                   </span>
@@ -118,7 +135,7 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                 <span className="flex flex-col justify-center gap-5 py-2">
                   <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#f4ead7] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#7c6337]">
                     <Heart className="h-3.5 w-3.5" />
-                    Nosso convite
+                    Convite encantado
                   </span>
                   <span className="inline-flex w-fit items-center gap-1 rounded-full border border-[#d9c79c] bg-white/70 px-3 py-1 text-[11px] text-[#8b6f35]">
                     <span className="uppercase tracking-[0.3em]">Para</span>
@@ -128,11 +145,11 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                     {siteConfig.coupleNames}
                   </span>
                   <span className="max-w-md text-base leading-7 text-stone-700">
-                    É com imensa alegria que convidamos você para viver conosco esse dia tão sonhado.
+                    É com imensa alegria que convidamos você para entrar no bosque encantado e celebrar o primeiro aninho da Melinda.
                   </span>
                   <span className="grid gap-3 sm:grid-cols-2">
-                    <StatChip value={siteConfig.eventDateLabel} label="Data" />
-                    <StatChip value={siteConfig.eventTimeLabel} label="Horário" />
+                    <StatChip value={siteConfig.eventDateLabel} label="Dia da festa" />
+                    <StatChip value={siteConfig.eventTimeLabel} label="Hora da magia" />
                   </span>
                 </span>
               </span>
@@ -153,7 +170,7 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                 </span>
               </span>
               <span className="wax-seal">
-                <span className="font-script text-4xl leading-none">J F</span>
+                <span className="font-script text-4xl leading-none">M</span>
               </span>
             </span>
           </span>
@@ -164,9 +181,214 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
             {siteConfig.coupleNames}
           </p>
           <p className="mt-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
-            <span className="caption-closed">Toque no selo e descubra esse amor</span>
-            <span className="caption-open">Nosso dia começou</span>
+            <span className="caption-closed">Toque no selo e desperte o bosque</span>
+            <span className="caption-open">O bosque encantado despertou</span>
           </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MemoryFilm() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const [isManuallyPaused, setIsManuallyPaused] = useState(false);
+  const [isUserPaused, setIsUserPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion || isInteracting || isManuallyPaused || isUserPaused) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % memoryPhotos.length);
+    }, 4000);
+
+    return () => window.clearInterval(interval);
+  }, [isInteracting, isManuallyPaused, isUserPaused, prefersReducedMotion]);
+
+  useEffect(
+    () => () => {
+      if (resumeTimer.current) {
+        clearTimeout(resumeTimer.current);
+      }
+    },
+    [],
+  );
+
+  const selectPhoto = useCallback(
+    (index: number) => {
+      setActiveIndex((index + memoryPhotos.length) % memoryPhotos.length);
+      setIsManuallyPaused(true);
+
+      if (resumeTimer.current) {
+        clearTimeout(resumeTimer.current);
+      }
+
+      if (!isUserPaused && !prefersReducedMotion) {
+        resumeTimer.current = setTimeout(() => setIsManuallyPaused(false), 7000);
+      }
+    },
+    [isUserPaused, prefersReducedMotion],
+  );
+
+  return (
+    <section
+      className="memory-film mt-10"
+      aria-labelledby="memory-film-title"
+      onMouseEnter={() => setIsInteracting(true)}
+      onMouseLeave={() => setIsInteracting(false)}
+      onFocusCapture={() => setIsInteracting(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setIsInteracting(false);
+        }
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          selectPhoto(activeIndex - 1);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          selectPhoto(activeIndex + 1);
+        }
+      }}
+    >
+      <div className="memory-balloon memory-balloon-pink" aria-hidden="true" />
+      <div className="memory-balloon memory-balloon-green" aria-hidden="true" />
+      <div className="memory-butterfly memory-butterfly-left" aria-hidden="true" />
+      <div className="memory-butterfly memory-butterfly-right" aria-hidden="true" />
+
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#e9bac8] bg-white/75 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#a75d73] backdrop-blur">
+          <Sparkles className="h-3.5 w-3.5" />
+          1 aninho
+        </span>
+        <h2
+          id="memory-film-title"
+          className="mt-4 font-script text-5xl leading-none text-[#6e8061] sm:text-6xl"
+        >
+          Bosque encantado
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-stone-600">
+          Um pedacinho de cada sorriso, guardado entre musgos, borboletas e a
+          delicadeza da floresta encantada.
+        </p>
+      </div>
+
+      <div className="relative z-10 mx-auto mt-8 max-w-5xl">
+        <div className="memory-stage">
+          <div className="memory-stage-glow" aria-hidden="true" />
+          {memoryPhotos.map((photo, index) => (
+            <Image
+              key={photo.src}
+              src={publicAsset(photo.src)}
+              alt={`Memória do primeiro aniversário, foto ${index + 1} de ${memoryPhotos.length}`}
+              fill
+              sizes="(max-width: 768px) 92vw, 800px"
+              style={{ objectPosition: photo.position }}
+              className={`memory-slide ${index === activeIndex ? "is-active" : ""}`}
+              priority={index === 0}
+            />
+          ))}
+          <div className="memory-stage-shade" aria-hidden="true" />
+
+          <div className="absolute inset-x-4 bottom-4 z-20 flex items-end justify-between gap-3 sm:inset-x-6 sm:bottom-6">
+            <div className="rounded-2xl border border-white/40 bg-stone-950/30 px-4 py-2 text-white shadow-lg backdrop-blur-md">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-white/75">
+                A magia em cena
+              </p>
+              <p className="mt-1 font-script text-3xl leading-none">
+                Memória {activeIndex + 1}
+              </p>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                type="button"
+                className="memory-control"
+                onClick={() => selectPhoto(activeIndex - 1)}
+                aria-label="Ver foto anterior"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                className="memory-control"
+                onClick={() => {
+                  if (resumeTimer.current) {
+                    clearTimeout(resumeTimer.current);
+                  }
+                  setIsUserPaused((paused) => !paused);
+                  setIsManuallyPaused(false);
+                }}
+                aria-label={isUserPaused ? "Reproduzir filme" : "Pausar filme"}
+              >
+                {isUserPaused ? (
+                  <Play className="h-4 w-4 fill-current" />
+                ) : (
+                  <Pause className="h-4 w-4 fill-current" />
+                )}
+              </button>
+              <button
+                type="button"
+                className="memory-control"
+                onClick={() => selectPhoto(activeIndex + 1)}
+                aria-label="Ver próxima foto"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-5 flex justify-center gap-2" aria-label="Escolher memória">
+          {memoryPhotos.map((photo, index) => (
+            <button
+              key={`indicator-${photo.src}`}
+              type="button"
+              className={`memory-dot ${index === activeIndex ? "is-active" : ""}`}
+              onClick={() => selectPhoto(index)}
+              aria-label={`Ir para foto ${index + 1}`}
+              aria-current={index === activeIndex ? "true" : undefined}
+            />
+          ))}
+        </div>
+
+        <div className="memory-thumbnails mt-5">
+          {memoryPhotos.map((photo, index) => (
+            <button
+              key={`thumbnail-${photo.src}`}
+              type="button"
+              className={`memory-thumbnail ${index === activeIndex ? "is-active" : ""}`}
+              onClick={() => selectPhoto(index)}
+              aria-label={`Mostrar foto ${index + 1}`}
+              aria-current={index === activeIndex ? "true" : undefined}
+            >
+              <Image
+                src={publicAsset(photo.src)}
+                alt=""
+                fill
+                sizes="80px"
+                style={{ objectPosition: photo.position }}
+                className="object-cover"
+              />
+            </button>
+          ))}
         </div>
       </div>
     </section>
@@ -194,36 +416,36 @@ function PixSection() {
       <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div className="space-y-6">
           <SectionTitle
-            eyebrow="Um carinho"
-            title="Se quiser abençoar nosso começo, o Pix está aqui com amor."
-            description="Sua presença já é o maior presente. Se desejar, um gesto de carinho ficará guardado com muito afeto."
+            eyebrow="Um mimo"
+            title="Se quiser deixar um mimo para a Melinda, o Pix está aqui com carinho."
+            description="Sua presença já é o maior presente. Se desejar, um gesto de carinho será recebido com muito amor."
           />
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-sm">
               <div className="flex items-center gap-2 text-sm font-semibold text-stone-800">
                 <CircleDollarSign className="h-4 w-4 text-emerald-700" />
-                Pix
+                Mimo mágico
               </div>
               <p className="mt-3 break-all text-xl font-semibold tracking-wide text-stone-900">
                 {siteConfig.pix.key}
               </p>
               <div className="mt-4">
-                <CopyButton value={siteConfig.pix.key} label="Levar carinho" className="w-full bg-emerald-800 text-white hover:bg-emerald-700" />
+                <CopyButton value={siteConfig.pix.key} label="Guardar mimo" className="w-full bg-emerald-800 text-white hover:bg-emerald-700" />
               </div>
             </div>
 
             <div className="rounded-3xl border border-stone-200 bg-white/80 p-5 shadow-sm">
               <div className="flex items-center gap-2 text-sm font-semibold text-stone-800">
                 <Gift className="h-4 w-4 text-amber-700" />
-                Nosso carinho
+                Encanto compartilhado
               </div>
               <p className="mt-3 text-base leading-7 text-stone-600">
-                Sua presença é o presente mais bonito. Tudo o que vier com carinho será recebido com muito amor.
+                Sua presença é o presente mais bonito. Tudo o que vier com carinho será recebido como parte da floresta encantada.
               </p>
               <div className="mt-4 flex items-center gap-2 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
                 <Sparkles className="h-4 w-4" />
-                Um gesto doce para celebrar esse dia.
+                Um gesto doce para celebrar esse bosque.
               </div>
             </div>
           </div>
@@ -237,9 +459,9 @@ function PixSection() {
               <QRCodeSVG value={pixPayload} size={220} level="M" includeMargin className="h-full w-full" />
             </div>
             <div className="mt-4 text-center">
-              <p className="text-sm uppercase tracking-[0.35em] text-stone-500">Um gesto de carinho</p>
+              <p className="text-sm uppercase tracking-[0.35em] text-stone-500">Um mimo encantado</p>
               <p className="mt-2 text-base leading-7 text-stone-600">
-                Um caminho simples para deixar seu afeto.
+                Um caminho simples para deixar seu carinho no bosque.
               </p>
             </div>
           </div>
@@ -286,7 +508,7 @@ export default function Home() {
               {siteConfig.coupleNames}
             </p>
             <p className="text-[11px] uppercase tracking-[0.35em] text-stone-500">
-              Nosso convite
+              Festa encantada
             </p>
           </div>
           <a
@@ -317,16 +539,16 @@ export default function Home() {
           <div className="space-y-6">
             <div className="rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_70px_rgba(62,51,39,0.1)] backdrop-blur">
               <SectionTitle
-                eyebrow="Nosso dia"
-                title="Tudo o que faz esse encontro ser inesquecível."
-                description="Uma composição leve, feita para guardar a data, o lugar e o carinho desse momento."
+                eyebrow="A festa"
+                title="Tudo o que faz essa tarde ser inesquecível."
+                description="Uma composição leve, feita para guardar a data, o lugar e a magia desse primeiro aninho."
               />
 
               <div className="mt-8 grid gap-4">
                 <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                   <CalendarDays className="mt-0.5 h-5 w-5 text-emerald-800" />
                   <div>
-                    <p className="text-sm font-semibold text-stone-900">Quando nos encontraremos</p>
+                    <p className="text-sm font-semibold text-stone-900">Quando a magia começa</p>
                     <p className="mt-1 text-sm leading-6 text-stone-600">
                       {siteConfig.eventDateLabel} às {siteConfig.eventTimeLabel}
                     </p>
@@ -336,7 +558,7 @@ export default function Home() {
                 <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                   <MapPinned className="mt-0.5 h-5 w-5 text-amber-800" />
                   <div>
-                    <p className="text-sm font-semibold text-stone-900">Onde o amor espera</p>
+                    <p className="text-sm font-semibold text-stone-900">Onde a festa acontece</p>
                     <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueName}</p>
                     <p className="text-sm leading-6 text-stone-500">{siteConfig.venueAddress}</p>
                   </div>
@@ -345,7 +567,7 @@ export default function Home() {
                 <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                   <MessageCircle className="mt-0.5 h-5 w-5 text-rose-700" />
                   <div>
-                    <p className="text-sm font-semibold text-stone-900">Um abraço em palavras</p>
+                    <p className="text-sm font-semibold text-stone-900">Um recado do bosque</p>
                     <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueHint}</p>
                   </div>
                 </div>
@@ -364,40 +586,46 @@ export default function Home() {
                   className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/85 px-4 py-2 text-sm font-semibold text-stone-800 transition hover:border-stone-400 hover:bg-white"
                 >
                   <Gift className="h-4 w-4" />
-                  Ver Pix
+                  Ver mimo
                 </a>
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/80 shadow-[0_20px_70px_rgba(62,51,39,0.1)]">
+            <div className="birthday-photo-card overflow-hidden rounded-[2rem] border border-[#efcad3] bg-[#fffaf1]/90 shadow-[0_20px_70px_rgba(116,86,74,0.12)]">
               <div className="grid gap-4 p-4 sm:grid-cols-[0.9fr_1.1fr]">
-                <div className="relative overflow-hidden rounded-[1.5rem]">
+                <div className="relative min-h-80 overflow-hidden rounded-[1.5rem]">
                   <Image
-                    src={publicAsset("/images/couple-selfie.jpg")}
-                    alt="Foto do casal sorrindo"
-                    width={900}
-                    height={1100}
-                    className="h-full w-full object-cover"
+                    src={publicAsset("/images/VID-20260612-WA0047(8).jpg.jpeg")}
+                    alt="Bebê sorrindo em seu ensaio de primeiro aniversário"
+                    fill
+                    sizes="(max-width: 640px) 88vw, 34vw"
+                    className="object-cover object-[50%_42%]"
                   />
+                  <div className="absolute right-3 top-3 rounded-full border border-white/80 bg-[#f8e4ea]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#9f536c] shadow-sm backdrop-blur">
+                    1 aninho
+                  </div>
                 </div>
-                <div className="flex flex-col justify-between rounded-[1.5rem] bg-gradient-to-b from-[#f7f1e7] to-[#ece2d0] p-5">
+                <div className="relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] bg-gradient-to-b from-[#fff5f7] via-[#fffaf0] to-[#edf3e8] p-5">
+                  <div className="memory-butterfly memory-butterfly-card" aria-hidden="true" />
                   <div className="space-y-4">
                     <p className="font-script text-4xl leading-none text-emerald-900">
                       {siteConfig.coupleNames}
                     </p>
                     <p className="text-sm leading-7 text-stone-700">
-                      Criado para guardar a delicadeza desse dia e a doçura de receber cada pessoa querida.
+                      Criado para guardar a delicadeza desse primeiro aninho e a doçura de receber cada pessoa querida no bosque encantado.
                     </p>
                   </div>
                   <div className="mt-6 flex items-center gap-2 text-sm text-stone-600">
                     <Sparkles className="h-4 w-4 text-amber-700" />
-                    Abra com carinho e deixe-se envolver.
+                    Abra com carinho e deixe-se envolver pela floresta.
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+        <MemoryFilm />
 
         <section className="mt-10">
           <ConfirmationSection guestName={guestName} />
@@ -421,7 +649,7 @@ export default function Home() {
 
         <footer className="mt-10 flex flex-col items-start justify-between gap-4 rounded-[1.75rem] border border-white/70 bg-stone-950 px-6 py-5 text-stone-100 shadow-[0_20px_70px_rgba(62,51,39,0.14)] sm:flex-row sm:items-center">
           <div>
-            <p className="text-sm font-semibold">Um gesto de amor</p>
+            <p className="text-sm font-semibold">Um gesto de encanto</p>
             <p className="mt-1 text-sm text-stone-300">
               Seu carinho é recebido com gratidão e afeto.
             </p>

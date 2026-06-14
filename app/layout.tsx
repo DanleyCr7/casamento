@@ -16,8 +16,8 @@ const script = Parisienne({
 });
 
 export const metadata: Metadata = {
-  title: "Convite de Casamento",
-  description: "Um convite de casamento delicado para Jessé e Flávia.",
+  title: "Aniversário da Melinda",
+  description: "Um convite encantado para o aniversário de 1 aninho da Melinda.",
 };
 
 export default function RootLayout({

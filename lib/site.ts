@@ -1,32 +1,32 @@
 export const siteConfig = {
-  coupleNames: "Jessé & Flávia",
+  coupleNames: "Melinda",
   eventDateTime: "2026-06-20T19:30:00-03:00",
   eventDateLabel: "20 de junho de 2026",
   eventTimeLabel: "19h30",
   venueName: "Rua Samuel Santos, nº 207",
-  venueAddress: "Bairro São Francisco",
-  venueHint: "Que o amor nos reúna para celebrar esse dia tão esperado.",
+  venueAddress: "Bosque Encantado",
+  venueHint: "Que a magia da floresta reúna quem ama a Melinda para celebrar esse dia tão esperado.",
   whatsappUrl:
-    "https://wa.me/5500000000000?text=Oi!%20Estou%20confirmando%20minha%20presen%C3%A7a%20no%20casamento.",
+    "https://wa.me/5500000000000?text=Oi!%20Estou%20confirmando%20minha%20presen%C3%A7a%20no%20anivers%C3%A1rio%20da%20Melinda.",
   pix: {
     key: "86995374122",
-    name: "Jessé e Flávia",
+    name: "Melinda",
     city: "BRASIL",
-    txid: "CASAMENTO2026",
-    description: "Presente com carinho para Jessé e Flávia",
+    txid: "ANIVERSARIO2026",
+    description: "Presente com carinho para Melinda",
   },
   highlights: [
     {
-      title: "Um dia único",
-      text: "Criado para guardar a emoção desse momento.",
+      title: "Um dia mágico",
+      text: "Criado para guardar a ternura desse primeiro aninho.",
     },
     {
-      title: "Feito com amor",
-      text: "Cada detalhe pensado para acolher quem chega.",
+      title: "Feito para encantar",
+      text: "Cada detalhe pensado como um pedacinho do bosque.",
     },
     {
-      title: "Memória viva",
-      text: "Um convite para abrir, sentir e recordar.",
+      title: "Memória encantada",
+      text: "Um convite para abrir, sonhar e recordar.",
     },
   ],
 };
