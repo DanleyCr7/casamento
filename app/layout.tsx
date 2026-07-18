@@ -26,13 +26,14 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ??
       (process.env.VERCEL_PROJECT_PRODUCTION_URL
         ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-        : "http://localhost:3000"),
+        : "https://festas.convidei.digital"),
   ),
   title: "Jardim das Borboletas | 1 ano da Pérola",
   description: "Um convite florido para celebrar o primeiro ano da Pérola no Jardim das Borboletas.",
   openGraph: {
     type: "website",
     locale: "pt_BR",
+    url: "/",
     title: "Jardim das Borboletas | 1 ano da Pérola",
     description:
       "Esperamos você para celebrar conosco o primeiro ano da Pérola no Jardim das Borboletas.",
