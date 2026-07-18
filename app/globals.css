@@ -1132,7 +1132,8 @@ body:has(.invite-toggle:checked) .parallax {
 @media (max-width: 760px) {
   .hero-garden-stage {
     aspect-ratio: 4 / 5;
-    background-position: 35% center;
+    background-image: url("/images/jardim-borboletas/hero-envelope-garden-mobile.png");
+    background-position: center;
   }
 
   .hero-garden-stage::before {
