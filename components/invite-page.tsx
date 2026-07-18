@@ -135,93 +135,45 @@ function SectionTitle({
 
 function EnvelopeCard({ guestName }: { guestName: string }) {
   return (
-    <section className="flex min-h-[calc(100vh-3rem)] items-center justify-center py-8">
-      <div className="w-full max-w-5xl">
+    <section className="hero-garden flex min-h-[calc(100vh-3rem)] items-center justify-center py-8">
+      <div className="w-full max-w-6xl">
         <input id="invite-open" type="checkbox" className="invite-toggle peer sr-only" />
         <label
           htmlFor="invite-open"
-          className="envelope-stage group relative mx-auto block w-full max-w-4xl cursor-pointer text-left"
+          className="hero-garden-stage group relative mx-auto block w-full cursor-pointer overflow-hidden rounded-[2.5rem] text-left shadow-[0_30px_100px_rgba(126,74,91,0.16)]"
         >
           <span className="sr-only">Abrir convite</span>
-          <span className="envelope-shadow" />
-          <span className="envelope-card">
-            <span className="envelope-invite">
-              <span className="relative grid h-full gap-4 overflow-hidden rounded-[1.35rem] border border-[#f2c8d8] bg-[#fffaf7] p-5 shadow-[0_20px_70px_rgba(45,35,25,0.12)] sm:grid-cols-[0.85fr_1.15fr] sm:p-7">
-                <span className="absolute inset-x-8 top-5 h-px bg-gradient-to-r from-transparent via-[#efb5c6] to-transparent" />
-                <span className="absolute right-5 top-5 inline-flex items-center gap-2 rounded-full border border-[#f4d5df] bg-white/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#c36d8c] shadow-sm">
-                  <Heart className="h-3.5 w-3.5 fill-current" />
-                  Convite da Pérola
-                </span>
-                <span className="relative min-h-56 overflow-hidden rounded-[1rem] border border-white/80 bg-[#fff6ef]">
-                  <Image
-                    src={publicAsset("/images/melinda-ensaio-01.png")}
-                    alt="Pérola celebrando seu primeiro aniversário"
-                    fill
-                    priority
-                    loading="eager"
-                    sizes="(max-width: 640px) 82vw, 36vw"
-                    className="object-cover object-[50%_38%]"
-                  />
-                  <span className="absolute inset-0 bg-gradient-to-t from-stone-950/35 to-transparent" />
-                  <span className="absolute right-3 top-3 rounded-full border border-white/80 bg-[#fff7df]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#a55f72] shadow-sm backdrop-blur">
-                    1 ano
-                  </span>
-                  <span className="absolute bottom-4 left-4 font-script text-5xl leading-none text-white">
-                    {siteConfig.coupleNames}
-                  </span>
-                </span>
-                <span className="flex flex-col justify-center gap-5 py-2">
-                  <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#fdeef4] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#b35f7e]">
-                    <Sparkles className="h-3.5 w-3.5" />
-                    Jardim das borboletas
-                  </span>
-                  <span className="inline-flex w-fit items-center gap-1 rounded-full border border-[#f0d5e0] bg-white/80 px-3 py-1 text-[11px] text-[#8a6070]">
-                    <span className="uppercase tracking-[0.3em]">Para</span>
-                    <span className="font-semibold tracking-wide">{guestName}</span>
-                  </span>
-                  <span className="font-script text-6xl leading-none text-[#b35f7e] sm:text-7xl">
-                    {siteConfig.coupleNames}
-                  </span>
-                  <span className="max-w-md text-base leading-7 text-stone-700">
-                    Há um ano, Deus fez florescer em nossos corações a mais preciosa das dádivas: Pérola. Venha celebrar a vida da flor mais linda do nosso jardim.
-                  </span>
-                  <span className="grid gap-3 sm:grid-cols-2">
-                    <StatChip value={siteConfig.eventDateLabel} label="Dia da festa" />
-                    <StatChip value={siteConfig.eventTimeLabel} label="Hora da magia" />
-                  </span>
-                </span>
-              </span>
+          <span className="hero-garden-photo">
+            <Image
+              src={publicAsset("/images/melinda-ensaio-01.png")}
+              alt="Pérola celebrando seu primeiro aniversário"
+              fill
+              priority
+              loading="eager"
+              sizes="(max-width: 640px) 72vw, 38vw"
+              className="object-cover object-[50%_38%]"
+            />
+          </span>
+          <span className="hero-garden-copy">
+            <span className="hero-guest">Para {guestName}</span>
+            <span className="font-script text-[clamp(4.8rem,10vw,8rem)] leading-[0.72] text-[#e83f7e]">
+              {siteConfig.coupleNames}
             </span>
-            <span className="envelope-back">
-              <span className="envelope-floral envelope-floral-left" />
-              <span className="envelope-floral envelope-floral-right" />
-              <span className="envelope-heart envelope-heart-left" aria-hidden="true" />
-              <span className="envelope-heart envelope-heart-right" aria-hidden="true" />
-              <span className="envelope-flap envelope-flap-left" />
-              <span className="envelope-flap envelope-flap-right" />
-              <span className="envelope-flap envelope-flap-bottom" />
-              <span className="envelope-flap envelope-flap-top" />
-              <span className="wax-seal">
-                <span className="wax-seal-butterfly" aria-hidden="true">🦋</span>
-              </span>
-              <span className="envelope-recipient">
-                <span className="block text-[10px] font-semibold uppercase tracking-[0.4em] text-[#b96b84]">
-                  Para
-                </span>
-                <span className="block text-base font-semibold leading-none text-[#4f3411] sm:text-lg">
-                  {guestName}
-                </span>
-              </span>
+            <span className="hero-age">1 aninho</span>
+            <span className="font-script text-[clamp(2.7rem,6vw,5.25rem)] leading-[0.9] text-[#8d6bb0]">
+              Jardim das Borboletas
             </span>
+            <span className="mt-4 grid gap-2 text-sm font-semibold text-[#c34270] sm:text-base">
+              <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4" />{siteConfig.eventDateLabel}</span>
+              <span className="inline-flex items-center gap-2"><Clock3 className="h-4 w-4" />{siteConfig.eventTimeLabel}</span>
+            </span>
+            <span className="hero-open-button">Abrir o convite</span>
           </span>
         </label>
 
         <div className="envelope-caption mt-7 text-center">
-          <p className="font-script text-5xl leading-none text-[#8b6f35] sm:text-6xl">
-            {siteConfig.coupleNames}
-          </p>
           <p className="mt-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
-            <span className="caption-closed">Toque na borboleta e abra o jardim</span>
+            <span className="caption-closed">Toque no convite e abra o jardim</span>
             <span className="caption-open">O jardim das borboletas ganhou vida</span>
           </p>
           <p className="caption-closed mt-4 text-[10px] uppercase tracking-[0.25em] text-stone-400/80">
