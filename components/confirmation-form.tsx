@@ -66,7 +66,7 @@ export function ConfirmationSection({ guestName }: { guestName: string }) {
                 } as CSSProperties
               }
             >
-              ♥
+              {index % 3 === 0 ? "✿" : "🦋"}
             </span>
           ))}
         </div>
@@ -77,7 +77,7 @@ export function ConfirmationSection({ guestName }: { guestName: string }) {
           type="button"
           disabled={loading || confirmed}
           onClick={handleConfirm}
-          className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-emerald-900 px-7 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-80 sm:px-9"
+          className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-rose-700 px-7 py-3 text-sm font-semibold text-white transition hover:bg-rose-800 disabled:cursor-not-allowed disabled:opacity-80 sm:px-9"
         >
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <BadgeCheck className="h-4 w-4" />}
           {loading ? "Guardando..." : confirmed ? "Presença guardada" : "Confirmar presença"}
@@ -85,8 +85,8 @@ export function ConfirmationSection({ guestName }: { guestName: string }) {
       </div>
 
       {status === "success" ? (
-        <p className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-center text-sm font-semibold text-emerald-900 shadow-sm">
-          Sua presença foi guardada com carinho no bosque encantado.
+        <p className="rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-center text-sm font-semibold text-rose-900 shadow-sm">
+          Sua presença floresceu com carinho no jardim das borboletas.
         </p>
       ) : null}
 

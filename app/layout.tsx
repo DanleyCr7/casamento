@@ -22,8 +22,36 @@ const ui = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Aniversário da Melinda",
-  description: "Um convite encantado para o aniversário de 1 aninho da Melinda.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : "http://localhost:3000"),
+  ),
+  title: "Jardim das Borboletas | 1 ano da Pérola",
+  description: "Um convite florido para celebrar o primeiro ano da Pérola no Jardim das Borboletas.",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    title: "Jardim das Borboletas | 1 ano da Pérola",
+    description:
+      "Esperamos você para celebrar conosco o primeiro ano da Pérola no Jardim das Borboletas.",
+    images: [
+      {
+        url: "/images/whatsapp-preview.png",
+        width: 2222,
+        height: 1366,
+        alt: "Esperamos você para celebrar conosco o primeiro ano da Pérola",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jardim das Borboletas | 1 ano da Pérola",
+    description:
+      "Esperamos você para celebrar conosco o primeiro ano da Pérola no Jardim das Borboletas.",
+    images: ["/images/whatsapp-preview.png"],
+  },
 };
 
 export default function RootLayout({

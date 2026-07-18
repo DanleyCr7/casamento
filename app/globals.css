@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f2ea;
+  --background: #fff7fa;
   --foreground: #2c2620;
 }
 
@@ -13,9 +13,10 @@
   body {
     min-height: 100vh;
     background:
-      linear-gradient(115deg, rgba(255, 255, 255, 0.55) 0 18%, transparent 18% 100%),
-      linear-gradient(245deg, rgba(198, 181, 153, 0.22) 0 16%, transparent 16% 100%),
-      linear-gradient(180deg, #f4eee5 0%, #e9ddd0 52%, #d9c7b2 100%);
+      radial-gradient(circle at 12% 18%, rgba(249, 205, 221, 0.5), transparent 24%),
+      radial-gradient(circle at 88% 24%, rgba(224, 207, 246, 0.55), transparent 26%),
+      radial-gradient(circle at 50% 76%, rgba(248, 226, 164, 0.3), transparent 30%),
+      linear-gradient(180deg, #fffafc 0%, #faedf4 52%, #eee8f8 100%);
     color: var(--foreground);
     font-family: var(--font-serif), Georgia, serif;
   }
@@ -214,6 +215,15 @@
     border-radius: inherit;
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: inset 0 0 0 1px rgba(159, 90, 122, 0.22);
+  }
+
+  .wax-seal-butterfly {
+    position: relative;
+    z-index: 2;
+    display: block;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    filter: drop-shadow(0 6px 8px rgba(103, 49, 87, 0.24));
+    transform: rotate(-8deg);
   }
 
   .invite-toggle:checked + .envelope-stage .wax-seal,
@@ -537,11 +547,11 @@
     background: linear-gradient(135deg, #f6d2dc, #d98ca4);
   }
 
-  .memory-balloon-green {
+  .memory-balloon-lilac {
     top: 9%;
     right: 3%;
-    color: #93ac81;
-    background: linear-gradient(135deg, #e3efd9, #a9c397);
+    color: #a58bc4;
+    background: linear-gradient(135deg, #eee3fa, #bda2d8);
     animation-delay: -2.1s;
   }
 
@@ -592,6 +602,112 @@
     right: 1.2rem;
     top: 1.2rem;
     opacity: 0.72;
+  }
+
+  .celebration-message {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(224, 170, 190, 0.5);
+    border-radius: 2.5rem;
+    padding: clamp(2.25rem, 7vw, 4.5rem) clamp(1.25rem, 6vw, 4rem);
+    background:
+      radial-gradient(circle at 8% 12%, rgba(249, 199, 217, 0.55), transparent 22%),
+      radial-gradient(circle at 92% 14%, rgba(222, 207, 244, 0.62), transparent 24%),
+      radial-gradient(circle at 50% 105%, rgba(245, 224, 163, 0.3), transparent 34%),
+      linear-gradient(145deg, rgba(255, 252, 248, 0.96), rgba(255, 242, 248, 0.94) 54%, rgba(246, 241, 252, 0.96));
+    box-shadow: 0 30px 100px rgba(103, 76, 90, 0.12);
+  }
+
+  .celebration-message::before,
+  .celebration-message::after {
+    content: "";
+    position: absolute;
+    bottom: -2.5rem;
+    width: 9rem;
+    height: 9rem;
+    border-radius: 50%;
+    opacity: 0.45;
+    filter: blur(1px);
+  }
+
+  .celebration-message::before {
+    left: -2.5rem;
+    background: radial-gradient(circle, #efabc3 0 14%, #f7d6a4 15% 28%, transparent 29%);
+  }
+
+  .celebration-message::after {
+    right: -2.5rem;
+    background: radial-gradient(circle, #d4bce9 0 14%, #f7c9d8 15% 28%, transparent 29%);
+  }
+
+  .celebration-detail {
+    display: flex;
+    min-height: 5.5rem;
+    align-items: flex-start;
+    gap: 0.75rem;
+    border: 1px solid rgba(231, 211, 217, 0.9);
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.68);
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(91, 61, 75, 0.07);
+  }
+
+  .celebration-detail-label {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #9b7280;
+  }
+
+  .celebration-detail-value {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #3f3638;
+  }
+
+  .celebration-butterfly {
+    position: absolute;
+    z-index: 1;
+    width: 3.5rem;
+    height: 1.9rem;
+    animation: butterfly-drift 5.5s ease-in-out infinite;
+    opacity: 0.58;
+  }
+
+  .celebration-butterfly::before,
+  .celebration-butterfly::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 1.7rem;
+    height: 1.9rem;
+    background: linear-gradient(145deg, #efa3bd, #bd83b4);
+  }
+
+  .celebration-butterfly::before {
+    left: 0;
+    border-radius: 85% 25% 70% 35%;
+    transform: rotate(24deg);
+  }
+
+  .celebration-butterfly::after {
+    right: 0;
+    border-radius: 25% 85% 35% 70%;
+    transform: rotate(-24deg);
+  }
+
+  .celebration-butterfly-left {
+    top: 12%;
+    left: 8%;
+  }
+
+  .celebration-butterfly-right {
+    right: 9%;
+    bottom: 20%;
+    animation-delay: -2.7s;
+    transform: scale(0.72);
   }
 
   .confirmation-hearts {
@@ -816,8 +932,10 @@
   overflow: hidden;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.72) 0 16%, transparent 38%),
-    linear-gradient(180deg, #b9ecf8 0%, #8dd7e8 30%, #73c8db 55%, #5db8cb 100%);
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.86) 0 16%, transparent 40%),
+    radial-gradient(circle at 15% 28%, rgba(255, 211, 229, 0.48), transparent 24%),
+    radial-gradient(circle at 86% 32%, rgba(225, 210, 248, 0.52), transparent 22%),
+    linear-gradient(180deg, #fceefa 0%, #e8dcf5 34%, #d7e9d0 72%, #b9d6a9 100%);
 }
 
 @supports (height: 100dvh) {
@@ -830,6 +948,271 @@ body:has(.invite-toggle:checked) .parallax {
   display: block;
 }
 
+/* Jardim das Borboletas — visual aprovado */
+.butterfly-garden-site {
+  min-height: 100vh;
+  background: #fff9f4;
+  font-family: var(--font-ui), "Poppins", sans-serif;
+}
+
+.hero-garden-stage {
+  aspect-ratio: 1440 / 1024;
+  border: 1px solid rgba(222, 154, 178, 0.28);
+  background: #fff8f3 url("/images/jardim-borboletas/hero-envelope-garden.png") center / cover no-repeat;
+  isolation: isolate;
+}
+
+.hero-garden-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.52);
+  pointer-events: none;
+}
+
+.hero-garden-photo {
+  position: absolute;
+  z-index: 2;
+  top: 10.5%;
+  left: 14.5%;
+  width: 31%;
+  height: 43%;
+  overflow: hidden;
+  border: clamp(0.3rem, 0.7vw, 0.65rem) solid rgba(255, 255, 255, 0.96);
+  border-radius: 0.85rem;
+  box-shadow: 0 18px 45px rgba(111, 73, 77, 0.2);
+  transform: rotate(-3.5deg);
+  transition: transform 350ms ease;
+}
+
+.hero-garden-stage:hover .hero-garden-photo {
+  transform: rotate(-2deg) translateY(-0.35rem);
+}
+
+.hero-garden-copy {
+  position: absolute;
+  z-index: 4;
+  top: 13%;
+  right: 7%;
+  display: flex;
+  width: 41%;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-guest {
+  margin-bottom: 1rem;
+  border: 1px solid rgba(231, 151, 181, 0.45);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.4rem 0.9rem;
+  color: #9d5e74;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-age {
+  margin: 0.75rem 0 0.9rem;
+  border-radius: 0.25rem;
+  background: #e95b8c;
+  padding: 0.18rem 1.2rem 0.28rem;
+  color: white;
+  font-size: clamp(1rem, 2vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.hero-open-button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  border-radius: 999px;
+  background: #e83f7e;
+  padding: 0.75rem 2rem;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 12px 28px rgba(213, 55, 113, 0.25);
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.hero-garden-stage:hover .hero-open-button {
+  background: #d72f6d;
+  transform: translateY(-2px);
+}
+
+.invite-toggle:focus-visible + .hero-garden-stage {
+  outline: 4px solid rgba(232, 63, 126, 0.32);
+  outline-offset: 4px;
+}
+
+.event-garden-section {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(217, 186, 154, 0.28);
+  border-radius: 2.5rem;
+  background: #fffaf1 url("/images/jardim-borboletas/background-event-garden.png") center / cover no-repeat;
+  padding: clamp(1rem, 4vw, 3rem);
+  box-shadow: 0 26px 80px rgba(105, 81, 62, 0.09);
+}
+
+.event-garden-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+.memory-film {
+  background: #fff1f3 url("/images/jardim-borboletas/background-memories.png") center / cover no-repeat;
+}
+
+.garden-divider {
+  width: calc(100% + 2rem);
+  margin: clamp(2.5rem, 6vw, 5rem) -1rem -2rem;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.garden-divider-meadow {
+  aspect-ratio: 1881 / 836;
+  background-image: url("/images/jardim-borboletas/divider-flowers-butterfly.png");
+}
+
+.garden-divider-garland {
+  aspect-ratio: 1774 / 887;
+  margin-top: 1rem;
+  background-image: url("/images/jardim-borboletas/divider-garland-bird.png");
+}
+
+.rsvp-gift-surface {
+  position: relative;
+  overflow: hidden;
+  margin-top: -3rem;
+  border: 1px solid rgba(223, 182, 201, 0.3);
+  border-radius: 2.5rem;
+  background: #fffaf4 url("/images/jardim-borboletas/background-rsvp-gift.png") center / cover no-repeat;
+  padding: clamp(1rem, 4vw, 3rem);
+  box-shadow: 0 26px 80px rgba(105, 81, 83, 0.09);
+}
+
+.rsvp-gift-surface > section:first-child {
+  margin-top: 0;
+}
+
+.closing-garden {
+  position: relative;
+  display: grid;
+  min-height: clamp(28rem, 57vw, 48rem);
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(218, 174, 197, 0.35);
+  border-radius: 2.5rem;
+  background: #f4eafb url("/images/jardim-borboletas/closing-garden.png") center / cover no-repeat;
+  box-shadow: 0 26px 90px rgba(100, 72, 99, 0.12);
+}
+
+.closing-garden-copy {
+  width: min(62%, 46rem);
+  padding: 2rem;
+  text-align: center;
+  transform: translateY(-3%);
+}
+
+.confirmation-hearts {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .hero-garden-stage {
+    aspect-ratio: 4 / 5;
+    background-position: 35% center;
+  }
+
+  .hero-garden-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: linear-gradient(180deg, transparent 44%, rgba(255, 250, 246, 0.95) 61%, rgba(255, 250, 246, 0.98));
+  }
+
+  .hero-garden-photo {
+    top: 8%;
+    left: 18%;
+    width: 50%;
+    height: 37%;
+  }
+
+  .hero-garden-copy {
+    top: auto;
+    right: 8%;
+    bottom: 5%;
+    left: 8%;
+    width: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-garden-copy > span:first-child {
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-garden-copy > span:nth-child(2) {
+    font-size: clamp(4.25rem, 20vw, 6rem);
+  }
+
+  .hero-garden-copy > span:nth-child(4) {
+    font-size: clamp(2.4rem, 12vw, 3.5rem);
+  }
+
+  .hero-garden-copy > span:nth-child(5) {
+    display: none;
+  }
+
+  .hero-age {
+    margin: 0.4rem 0;
+  }
+
+  .hero-open-button {
+    min-height: 2.75rem;
+    margin-top: 0.75rem;
+    padding: 0.65rem 1.6rem;
+  }
+
+  .event-garden-section,
+  .rsvp-gift-surface,
+  .closing-garden {
+    border-radius: 1.75rem;
+  }
+
+  .event-garden-section {
+    background-position: 65% center;
+  }
+
+  .garden-divider {
+    width: calc(100% + 1rem);
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+  }
+
+  .closing-garden {
+    min-height: 34rem;
+    background-position: 58% center;
+  }
+
+  .closing-garden-copy {
+    width: 88%;
+    transform: translateY(-8%);
+  }
+}
+
 .parallax img {
   position: absolute;
   top: 0;
@@ -840,4 +1223,173 @@ body:has(.invite-toggle:checked) .parallax {
   will-change: transform;
   pointer-events: none;
   user-select: none;
+}
+
+.garden-meadow {
+  position: absolute;
+  z-index: 2;
+  right: -8%;
+  bottom: 0;
+  left: -8%;
+  height: 58%;
+  border-radius: 48% 52% 0 0 / 28% 30% 0 0;
+  background:
+    radial-gradient(ellipse at 22% 12%, rgba(255, 255, 255, 0.48), transparent 28%),
+    linear-gradient(155deg, #d9e9c8 0%, #bcd8ab 48%, #91bd83 100%);
+  box-shadow:
+    0 -3rem 7rem rgba(255, 225, 239, 0.34),
+    inset 0 3rem 5rem rgba(255, 255, 255, 0.2);
+}
+
+.garden-meadow::before {
+  content: "";
+  position: absolute;
+  right: -6%;
+  bottom: 22%;
+  left: 36%;
+  height: 58%;
+  border-radius: 54% 46% 0 0 / 42% 38% 0 0;
+  background: linear-gradient(145deg, rgba(226, 238, 210, 0.95), rgba(161, 199, 142, 0.92));
+}
+
+.garden-meadow::after {
+  content: "";
+  position: absolute;
+  right: 44%;
+  bottom: 8%;
+  left: -4%;
+  height: 56%;
+  border-radius: 48% 52% 0 0 / 38% 48% 0 0;
+  background: linear-gradient(160deg, rgba(237, 243, 218, 0.94), rgba(178, 208, 157, 0.92));
+}
+
+.garden-blooms {
+  position: absolute;
+  z-index: 8;
+  right: -3%;
+  bottom: -5%;
+  left: -3%;
+  height: 34%;
+  opacity: 0.94;
+  background:
+    radial-gradient(circle at 4% 72%, #f7adc8 0 1.7rem, transparent 1.8rem),
+    radial-gradient(circle at 9% 86%, #fff1a8 0 1.35rem, transparent 1.45rem),
+    radial-gradient(circle at 16% 68%, #cdb6e8 0 1.8rem, transparent 1.9rem),
+    radial-gradient(circle at 25% 88%, #f9c0d1 0 1.4rem, transparent 1.5rem),
+    radial-gradient(circle at 38% 76%, #fff0ab 0 1.8rem, transparent 1.9rem),
+    radial-gradient(circle at 52% 90%, #d8c2ed 0 1.55rem, transparent 1.65rem),
+    radial-gradient(circle at 65% 70%, #f4a8c4 0 1.7rem, transparent 1.8rem),
+    radial-gradient(circle at 77% 88%, #ffe99b 0 1.5rem, transparent 1.6rem),
+    radial-gradient(circle at 88% 68%, #c9b0e5 0 1.85rem, transparent 1.95rem),
+    radial-gradient(circle at 97% 84%, #f8bad0 0 1.65rem, transparent 1.75rem),
+    linear-gradient(180deg, transparent 30%, rgba(113, 158, 91, 0.18) 31%, rgba(91, 137, 74, 0.72) 100%);
+  filter: drop-shadow(0 -8px 24px rgba(103, 72, 102, 0.12));
+}
+
+.garden-butterflies {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+}
+
+.garden-butterfly {
+  position: absolute;
+  display: block;
+  font-size: var(--butterfly-size, 2.4rem);
+  line-height: 1;
+  filter: var(--butterfly-filter, drop-shadow(0 5px 7px rgba(92, 53, 91, 0.2)));
+  transform-origin: 50% 58%;
+  animation: garden-butterfly-flight var(--butterfly-duration, 6s) ease-in-out infinite;
+}
+
+.garden-butterfly-1 {
+  --butterfly-size: 2.65rem;
+  --butterfly-filter: hue-rotate(306deg) saturate(1.35) brightness(1.08) drop-shadow(0 7px 10px rgba(164, 80, 126, 0.22));
+  --butterfly-duration: 6.8s;
+  top: 16%;
+  left: 8%;
+  animation-delay: -1s;
+}
+
+.garden-butterfly-2 {
+  --butterfly-size: 1.9rem;
+  --butterfly-filter: hue-rotate(250deg) saturate(1.2) brightness(1.12) drop-shadow(0 6px 8px rgba(115, 86, 158, 0.2));
+  --butterfly-duration: 7.4s;
+  top: 28%;
+  left: 26%;
+  animation-delay: -4s;
+}
+
+.garden-butterfly-3 {
+  --butterfly-size: 2.25rem;
+  --butterfly-filter: hue-rotate(180deg) saturate(1.1) brightness(1.18) drop-shadow(0 7px 9px rgba(80, 123, 154, 0.18));
+  --butterfly-duration: 6.2s;
+  top: 12%;
+  right: 18%;
+  animation-delay: -2.5s;
+}
+
+.garden-butterfly-4 {
+  --butterfly-size: 3rem;
+  --butterfly-filter: hue-rotate(330deg) saturate(1.28) brightness(1.12) drop-shadow(0 8px 11px rgba(151, 73, 109, 0.24));
+  --butterfly-duration: 7.8s;
+  top: 42%;
+  right: 8%;
+  animation-delay: -5s;
+}
+
+.garden-butterfly-5 {
+  --butterfly-size: 1.7rem;
+  --butterfly-filter: hue-rotate(42deg) saturate(1.2) brightness(1.18) drop-shadow(0 5px 7px rgba(153, 117, 59, 0.18));
+  --butterfly-duration: 6.6s;
+  top: 56%;
+  left: 14%;
+  animation-delay: -3.2s;
+}
+
+.garden-butterfly-6 {
+  --butterfly-size: 2rem;
+  --butterfly-filter: hue-rotate(218deg) saturate(1.16) brightness(1.13) drop-shadow(0 6px 8px rgba(88, 97, 161, 0.2));
+  --butterfly-duration: 7.1s;
+  top: 62%;
+  right: 30%;
+  animation-delay: -0.5s;
+}
+
+.garden-butterfly-7 {
+  --butterfly-size: 1.45rem;
+  --butterfly-filter: hue-rotate(285deg) saturate(1.26) brightness(1.1) drop-shadow(0 5px 7px rgba(127, 75, 145, 0.18));
+  --butterfly-duration: 6.9s;
+  top: 34%;
+  left: 48%;
+  animation-delay: -4.8s;
+}
+
+@keyframes garden-butterfly-flight {
+  0%, 100% {
+    translate: 0 0;
+    rotate: -7deg;
+    scale: 1;
+  }
+  25% {
+    translate: 0.85rem -1rem;
+    rotate: 8deg;
+    scale: 1.08;
+  }
+  55% {
+    translate: -0.45rem -1.9rem;
+    rotate: -3deg;
+    scale: 0.96;
+  }
+  78% {
+    translate: 1.2rem -0.75rem;
+    rotate: 11deg;
+    scale: 1.04;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .garden-butterfly {
+    animation: none;
+  }
 }

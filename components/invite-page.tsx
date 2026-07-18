@@ -10,6 +10,7 @@ import {
   Footprints,
   Gift,
   Heart,
+  AtSign,
   Clock3,
   MapPinned,
   MessageCircle,
@@ -36,14 +37,46 @@ type TimeLeft = {
 };
 
 const memoryPhotos = [
-  { src: "/images/VID-20260612-WA0047.jpg.jpeg", position: "50% 42%" },
-  { src: "/images/VID-20260612-WA0047(1).jpg.jpeg", position: "50% 42%" },
-  { src: "/images/VID-20260612-WA0047(2).jpg.jpeg", position: "50% 42%" },
-  { src: "/images/VID-20260612-WA0047(3).jpg.jpeg", position: "50% 42%" },
-  { src: "/images/VID-20260612-WA0047(6).jpg.jpeg", position: "50% 42%" },
-  { src: "/images/VID-20260612-WA0047(7).jpg.jpeg", position: "50% 42%" },
-  { src: "/images/VID-20260612-WA0047(8).jpg.jpeg", position: "50% 42%" },
-  { src: "/images/VID-20260612-WA0047(12).jpg.jpeg", position: "50% 42%" },
+  {
+    src: "/images/melinda-newborn-01.png",
+    position: "50% 48%",
+    alt: "Pérola recém-nascida dormindo em um cenário delicado",
+  },
+  {
+    src: "/images/melinda-newborn-02.png",
+    position: "50% 35%",
+    alt: "Retrato de Pérola recém-nascida dormindo",
+  },
+  {
+    src: "/images/melinda-natal-01.png",
+    position: "50% 45%",
+    alt: "Pérola em seu ensaio de Natal com vestido vermelho",
+  },
+  {
+    src: "/images/melinda-natal-02.png",
+    position: "50% 46%",
+    alt: "Pérola em frente à árvore de Natal",
+  },
+  {
+    src: "/images/melinda-ensaio-01.png",
+    position: "50% 38%",
+    alt: "Pérola em seu ensaio de um ano",
+  },
+  {
+    src: "/images/melinda-ensaio-02.png",
+    position: "50% 38%",
+    alt: "Pérola em pé durante seu ensaio de um ano",
+  },
+  {
+    src: "/images/melinda-ensaio-03.png",
+    position: "50% 42%",
+    alt: "Pérola sentada durante seu ensaio de um ano",
+  },
+  {
+    src: "/images/melinda-familia-01.png",
+    position: "50% 35%",
+    alt: "Pérola com seus pais na comemoração de um ano",
+  },
 ] as const;
 
 function formatTimeLeft(target: string, now = Date.now()): TimeLeft {
@@ -88,7 +121,7 @@ function SectionTitle({
 }) {
   return (
     <div className="max-w-2xl space-y-3">
-      <div className="inline-flex items-center gap-2 rounded-full border border-emerald-900/10 bg-white/70 px-4 py-1 text-[11px] uppercase tracking-[0.35em] text-emerald-900/70 backdrop-blur">
+      <div className="inline-flex items-center gap-2 rounded-full border border-rose-900/10 bg-white/70 px-4 py-1 text-[11px] uppercase tracking-[0.35em] text-rose-800/70 backdrop-blur">
         <Sparkles className="h-3.5 w-3.5" />
         {eyebrow}
       </div>
@@ -117,20 +150,21 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                 <span className="absolute inset-x-8 top-5 h-px bg-gradient-to-r from-transparent via-[#efb5c6] to-transparent" />
                 <span className="absolute right-5 top-5 inline-flex items-center gap-2 rounded-full border border-[#f4d5df] bg-white/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#c36d8c] shadow-sm">
                   <Heart className="h-3.5 w-3.5 fill-current" />
-                  Convite da Melinda
+                  Convite da Pérola
                 </span>
                 <span className="relative min-h-56 overflow-hidden rounded-[1rem] border border-white/80 bg-[#fff6ef]">
                   <Image
-                    src={publicAsset("/images/VID-20260612-WA0047(2).jpg.jpeg")}
-                    alt="Bebê celebrando seu primeiro aniversário"
+                    src={publicAsset("/images/melinda-ensaio-01.png")}
+                    alt="Pérola celebrando seu primeiro aniversário"
                     fill
                     priority
+                    loading="eager"
                     sizes="(max-width: 640px) 82vw, 36vw"
-                    className="object-cover object-[50%_42%]"
+                    className="object-cover object-[50%_38%]"
                   />
                   <span className="absolute inset-0 bg-gradient-to-t from-stone-950/35 to-transparent" />
                   <span className="absolute right-3 top-3 rounded-full border border-white/80 bg-[#fff7df]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#a55f72] shadow-sm backdrop-blur">
-                    1 aninho
+                    1 ano
                   </span>
                   <span className="absolute bottom-4 left-4 font-script text-5xl leading-none text-white">
                     {siteConfig.coupleNames}
@@ -139,7 +173,7 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                 <span className="flex flex-col justify-center gap-5 py-2">
                   <span className="inline-flex w-fit items-center gap-2 rounded-full bg-[#fdeef4] px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-[#b35f7e]">
                     <Sparkles className="h-3.5 w-3.5" />
-                    Convite encantado
+                    Jardim das borboletas
                   </span>
                   <span className="inline-flex w-fit items-center gap-1 rounded-full border border-[#f0d5e0] bg-white/80 px-3 py-1 text-[11px] text-[#8a6070]">
                     <span className="uppercase tracking-[0.3em]">Para</span>
@@ -149,7 +183,7 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
                     {siteConfig.coupleNames}
                   </span>
                   <span className="max-w-md text-base leading-7 text-stone-700">
-                    É com imensa alegria que convidamos você para entrar no bosque encantado e celebrar o primeiro aninho da Melinda.
+                    Há um ano, Deus fez florescer em nossos corações a mais preciosa das dádivas: Pérola. Venha celebrar a vida da flor mais linda do nosso jardim.
                   </span>
                   <span className="grid gap-3 sm:grid-cols-2">
                     <StatChip value={siteConfig.eventDateLabel} label="Dia da festa" />
@@ -168,13 +202,7 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
               <span className="envelope-flap envelope-flap-bottom" />
               <span className="envelope-flap envelope-flap-top" />
               <span className="wax-seal">
-                <Image
-                  src={publicAsset("/images/PASSARINHO.png")}
-                  alt=""
-                  fill
-                  sizes="96px"
-                  className="object-contain p-2 drop-shadow-[0_6px_10px_rgba(86,58,36,0.24)]"
-                />
+                <span className="wax-seal-butterfly" aria-hidden="true">🦋</span>
               </span>
               <span className="envelope-recipient">
                 <span className="block text-[10px] font-semibold uppercase tracking-[0.4em] text-[#b96b84]">
@@ -193,8 +221,8 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
             {siteConfig.coupleNames}
           </p>
           <p className="mt-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
-            <span className="caption-closed">Toque no selo e desperte o bosque</span>
-            <span className="caption-open">O bosque encantado despertou</span>
+            <span className="caption-closed">Toque na borboleta e abra o jardim</span>
+            <span className="caption-open">O jardim das borboletas ganhou vida</span>
           </p>
           <p className="caption-closed mt-4 text-[10px] uppercase tracking-[0.25em] text-stone-400/80">
             Desenvolvido por
@@ -226,7 +254,7 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
               href="https://wa.me/5586981696937"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 transition hover:text-emerald-600"
+              className="inline-flex items-center gap-1 transition hover:text-rose-600"
             >
               <MessageCircle className="h-3 w-3" />
               (86) 98169-6937
@@ -238,13 +266,13 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
   );
 }
 
-function BosqueCover() {
+function GardenCover() {
   return (
     <section className="sec" id="convite">
-      <h2>1 aninho no Bosque Encantado</h2>
+      <h2>1 ano no Jardim das Borboletas</h2>
       <p>
-        Um aniversário cheio de folhas, flores e delicadeza para celebrar a
-        Melinda. Role a página e deixe o bosque contar a história com leveza.
+        Um aniversário cheio de flores, cores e delicadeza para celebrar a
+        Pérola. Role a página e deixe as borboletas contarem essa história.
       </p>
     </section>
   );
@@ -329,24 +357,24 @@ function MemoryFilm() {
       }}
     >
       <div className="memory-balloon memory-balloon-pink" aria-hidden="true" />
-      <div className="memory-balloon memory-balloon-green" aria-hidden="true" />
+      <div className="memory-balloon memory-balloon-lilac" aria-hidden="true" />
       <div className="memory-butterfly memory-butterfly-left" aria-hidden="true" />
       <div className="memory-butterfly memory-butterfly-right" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-[#e9bac8] bg-white/75 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#a75d73] backdrop-blur">
           <Sparkles className="h-3.5 w-3.5" />
-          1 aninho
+          1 ano
         </span>
         <h2
           id="memory-film-title"
           className="mt-4 font-script text-5xl leading-none text-[#6e8061] sm:text-6xl"
         >
-          Bosque encantado
+          Jardim das borboletas
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-stone-600">
-          Um pedacinho de cada sorriso, guardado entre musgos, borboletas e a
-          delicadeza da floresta encantada.
+          Um pedacinho de cada sorriso, guardado entre flores, cores suaves e o
+          delicado voo das borboletas.
         </p>
       </div>
 
@@ -357,7 +385,7 @@ function MemoryFilm() {
             <Image
               key={photo.src}
               src={publicAsset(photo.src)}
-              alt={`Memória do primeiro aniversário, foto ${index + 1} de ${memoryPhotos.length}`}
+              alt={`${photo.alt}, foto ${index + 1} de ${memoryPhotos.length}`}
               fill
               sizes="(max-width: 768px) 92vw, 800px"
               style={{ objectPosition: photo.position }}
@@ -455,13 +483,85 @@ function MemoryFilm() {
   );
 }
 
+function CelebrationMessage() {
+  return (
+    <section className="celebration-message mt-10" aria-labelledby="celebration-message-title">
+      <div className="celebration-butterfly celebration-butterfly-left" aria-hidden="true" />
+      <div className="celebration-butterfly celebration-butterfly-right" aria-hidden="true" />
+
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.38em] text-rose-700/75">
+          Uma flor preciosa desabrochou
+        </p>
+        <h2
+          id="celebration-message-title"
+          className="mt-4 font-script text-6xl leading-none text-rose-800 sm:text-7xl"
+        >
+          Pérolaaaa
+        </h2>
+
+        <div className="mx-auto mt-7 max-w-2xl space-y-5 text-base leading-8 text-stone-700 sm:text-lg">
+          <p>
+            Há um ano, Deus fez florescer em nossos corações a mais preciosa das dádivas: Pérola.
+          </p>
+          <p>
+            Com delicadeza, amor e a beleza de uma flor em seu primeiro desabrochar, ela ilumina nossos dias e transforma cada instante em um jardim de felicidade.
+          </p>
+          <p className="font-script text-4xl leading-tight text-[#a85f7b] sm:text-5xl">
+            Venha celebrar a vida da flor mais linda do nosso jardim.
+          </p>
+          <p>
+            Será uma alegria compartilhar esse momento tão especial ao lado de pessoas queridas, que fazem parte da nossa história.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-8 h-px max-w-xs bg-gradient-to-r from-transparent via-rose-300 to-transparent" />
+        <p className="mt-6 text-sm font-semibold uppercase tracking-[0.32em] text-stone-700">
+          Pérola <span className="px-1 text-rose-400">•</span> 1 ano
+        </p>
+
+        <div className="mt-7 grid gap-3 text-left sm:grid-cols-3">
+          <div className="celebration-detail">
+            <CalendarDays className="h-5 w-5 text-rose-700" />
+            <div>
+              <p className="celebration-detail-label">Data</p>
+              <p className="celebration-detail-value">07/08/2026</p>
+            </div>
+          </div>
+          <div className="celebration-detail">
+            <Clock3 className="h-5 w-5 text-violet-700" />
+            <div>
+              <p className="celebration-detail-label">Horário</p>
+              <p className="celebration-detail-value">19 horas</p>
+            </div>
+          </div>
+          <a
+            href={siteConfig.venueMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="celebration-detail transition hover:border-rose-300 hover:bg-white"
+          >
+            <MapPinned className="h-5 w-5 text-amber-700" />
+            <div>
+              <p className="celebration-detail-label">Local</p>
+              <p className="celebration-detail-value leading-5">
+                Rua Argentina, Quadra 18 e Casa 09. Conjunto Jardim América. Bairro Rodoviária.
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function GiftSuggestions() {
   const suggestions = [
     {
       icon: Shirt,
       title: "Roupas",
       subtitle: "12 a 24 meses",
-      desc: "Vestidinhos, bodies, macacões — tudo que vista a Melinda com charme e conforto.",
+      desc: "Vestidinhos, bodies, macacões — tudo que vista a Pérola com charme e conforto.",
       color: "text-pink-700",
       bg: "bg-pink-50",
       border: "border-pink-200/70",
@@ -497,8 +597,8 @@ function GiftSuggestions() {
       <div className="space-y-6">
         <SectionTitle
           eyebrow="Sugestões de presentes"
-          title="Se quiser trazer um carinho para a Melinda"
-          description="Sua presença é o melhor presente. Mas se quiser mimá-la ainda mais, aqui vão algumas ideias que cabem no bosque encantado."
+          title="Se quiser trazer um carinho para a Pérola"
+          description="Sua presença é o melhor presente. Mas se quiser mimá-la ainda mais, aqui vão algumas ideias escolhidas para o jardim das borboletas."
         />
 
         <div className="grid gap-4 sm:grid-cols-3">
@@ -528,7 +628,7 @@ function GiftSuggestions() {
 
         <div className="flex items-center gap-2 rounded-2xl bg-white/80 px-5 py-4 text-sm leading-6 text-stone-600 shadow-sm">
           <Sparkles className="h-4 w-4 shrink-0 text-rose-400" />
-          Qualquer gesto de carinho será recebido com o mesmo sorriso da Melinda.
+          Qualquer gesto de carinho será recebido com o mesmo sorriso da Pérola.
         </div>
       </div>
     </section>
@@ -589,120 +689,28 @@ export default function Home() {
     return () => window.clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const leaf = document.getElementById("leaf");
-    const hill1 = document.getElementById("hill1");
-    const hill4 = document.getElementById("hill4");
-    const hill5 = document.getElementById("hill5");
-
-    if (!leaf || !hill1 || !hill4 || !hill5) {
-      return;
-    }
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
-
-    const update = () => {
-      const value = window.scrollY;
-
-      leaf.style.transform = `translate(${value * 0.08}px, ${value * -0.08}px)`;
-      hill5.style.transform = `translateX(${value * 0.08}px)`;
-      hill4.style.transform = `translateX(${value * -0.08}px)`;
-      hill1.style.transform = `translateY(${value * 0.05}px)`;
-
-      frame = 0;
-    };
-
-    const onScroll = () => {
-      if (reduceMotion.matches) {
-        return;
-      }
-
-      if (frame) {
-        return;
-      }
-
-      frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    reduceMotion.addEventListener("change", update);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      reduceMotion.removeEventListener("change", update);
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-    };
-  }, []);
-
   return (
-    <main className="relative overflow-x-hidden">
-      <section className="parallax" aria-label="Bosque encantado">
-        <img
-          src={publicAsset("/images/parallax/hill1.png")}
-          id="hill1"
-          alt="Colina principal"
-        />
-        <img
-          src={publicAsset("/images/parallax/hill2.png")}
-          id="hill2"
-          alt="Colina ao fundo"
-        />
-        <img
-          src={publicAsset("/images/parallax/hill3.png")}
-          id="hill3"
-          alt="Colina central"
-        />
-        <img
-          src={publicAsset("/images/parallax/hill4.png")}
-          id="hill4"
-          alt="Colina lateral esquerda"
-        />
-        <img
-          src={publicAsset("/images/parallax/hill5.png")}
-          id="hill5"
-          alt="Colina lateral direita"
-        />
-        <img
-          src={publicAsset("/images/parallax/tree.png")}
-          id="tree"
-          alt="Árvore do bosque"
-        />
-        <img
-          src={publicAsset("/images/parallax/leaf.png")}
-          id="leaf"
-          alt="Folha em movimento"
-        />
-        <img
-          src={publicAsset("/images/parallax/plant.png")}
-          id="plant"
-          alt="Planta do bosque"
-        />
-      </section>
-
+    <main className="butterfly-garden-site relative overflow-x-hidden">
       <div className="pointer-events-none absolute inset-0 opacity-80">
         <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-white/70 to-transparent" />
         <div className="absolute bottom-0 left-0 h-56 w-full bg-gradient-to-t from-[#d5c5ac]/35 to-transparent" />
       </div>
 
-      <div className="relative mx-auto flex max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex max-w-[1440px] flex-col px-4 py-6 sm:px-6 lg:px-8">
         <EnvelopeCard guestName={guestName} />
 
         <div className="site-after-open animate-site-reveal" id="memorias">
           <header className="flex items-center justify-end rounded-full border border-white/70 bg-white/65 px-4 py-3 shadow-[0_12px_40px_rgba(62,51,39,0.08)] backdrop-blur">
             <a
               href="#confirmar"
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-800"
+              className="inline-flex items-center gap-2 rounded-full bg-rose-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-800"
             >
               <Heart className="h-4 w-4" />
               Confirmar presença
             </a>
           </header>
 
-          <section className="mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+          <section className="event-garden-section mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
             <div className="space-y-6">
               <div className="rounded-[2rem] border border-amber-900/10 bg-amber-50/65 px-5 py-4 shadow-[0_16px_60px_rgba(62,51,39,0.08)] backdrop-blur">
                 <p className="flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
@@ -722,13 +730,13 @@ export default function Home() {
               <div className="rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_70px_rgba(62,51,39,0.1)] backdrop-blur">
                 <SectionTitle
                   eyebrow="A festa"
-                  title="Tudo o que faz essa noite ser inesquecível."
-                  description="Uma composição leve, feita para guardar a data, o lugar e a magia desse primeiro aninho."
+                  title="Tudo o que faz essa tarde ser inesquecível."
+                  description="Uma composição leve, feita para guardar a data, o lugar e a magia do primeiro ano da Pérola."
                 />
 
                 <div className="mt-8 grid gap-4">
                   <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
-                    <CalendarDays className="mt-0.5 h-5 w-5 text-emerald-800" />
+                    <CalendarDays className="mt-0.5 h-5 w-5 text-rose-700" />
                     <div>
                       <p className="text-sm font-semibold text-stone-900">Quando a magia começa</p>
                       <p className="mt-1 text-sm leading-6 text-stone-600">
@@ -755,7 +763,7 @@ export default function Home() {
                   <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                     <MessageCircle className="mt-0.5 h-5 w-5 text-rose-700" />
                     <div>
-                      <p className="text-sm font-semibold text-stone-900">Um recado do bosque</p>
+                      <p className="text-sm font-semibold text-stone-900">Um recado do jardim</p>
                       <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueHint}</p>
                     </div>
                   </div>
@@ -783,29 +791,29 @@ export default function Home() {
                 <div className="grid gap-4 p-4 sm:grid-cols-[0.9fr_1.1fr]">
                   <div className="relative min-h-80 overflow-hidden rounded-[1.5rem]">
                     <Image
-                      src={publicAsset("/images/VID-20260612-WA0047(8).jpg.jpeg")}
-                      alt="Bebê sorrindo em seu ensaio de primeiro aniversário"
+                      src={publicAsset("/images/melinda-familia-01.png")}
+                      alt="Pérola com seus pais na comemoração de seu primeiro aniversário"
                       fill
                       sizes="(max-width: 640px) 88vw, 34vw"
-                      className="object-cover object-[50%_42%]"
+                      className="object-cover object-[50%_35%]"
                     />
                     <div className="absolute right-3 top-3 rounded-full border border-white/80 bg-[#f8e4ea]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#9f536c] shadow-sm backdrop-blur">
-                      1 aninho
+                      1 ano
                     </div>
                   </div>
                   <div className="relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] bg-gradient-to-b from-[#fff5f7] via-[#fffaf0] to-[#edf3e8] p-5">
                     <div className="memory-butterfly memory-butterfly-card" aria-hidden="true" />
                     <div className="space-y-4">
-                      <p className="font-script text-4xl leading-none text-emerald-900">
+                      <p className="font-script text-4xl leading-none text-rose-800">
                         {siteConfig.coupleNames}
                       </p>
                       <p className="text-sm leading-7 text-stone-700">
-                        Criado para guardar a delicadeza desse primeiro aninho e a doçura de receber cada pessoa querida no bosque encantado.
+                        Com delicadeza, amor e a beleza de uma flor em seu primeiro desabrochar, Pérola ilumina nossos dias e transforma cada instante em um jardim de felicidade.
                       </p>
                     </div>
                     <div className="mt-6 flex items-center gap-2 text-sm text-stone-600">
                       <Sparkles className="h-4 w-4 text-amber-700" />
-                      Abra com carinho e deixe-se envolver pela floresta.
+                      Abra com carinho e deixe-se envolver por este jardim.
                     </div>
                   </div>
                 </div>
@@ -813,8 +821,13 @@ export default function Home() {
             </div>
           </section>
 
+          <div className="garden-divider garden-divider-meadow" aria-hidden="true" />
           <MemoryFilm />
 
+          <CelebrationMessage />
+
+          <div className="garden-divider garden-divider-garland" aria-hidden="true" />
+          <div className="rsvp-gift-surface">
           <section className="mt-10">
             <ConfirmationSection guestName={guestName} />
           </section>
@@ -822,6 +835,7 @@ export default function Home() {
           <section className="mt-10" id="presentes">
             <GiftSuggestions />
           </section>
+          </div>
 
           <section className="mt-10 grid gap-4 sm:grid-cols-3">
             {siteConfig.highlights.map((item) => (
@@ -835,28 +849,15 @@ export default function Home() {
             ))}
           </section>
 
-          <footer className="mt-10 flex flex-col items-start justify-between gap-4 rounded-[1.75rem] border border-white/70 bg-stone-950 px-6 py-5 text-stone-100 shadow-[0_20px_70px_rgba(62,51,39,0.14)] sm:flex-row sm:items-center">
-            <div>
-              <p className="text-sm font-semibold">Carinho e presença</p>
-              <p className="mt-1 text-sm text-stone-300">
-                O melhor presente é ter você no bosque encantado.
+          <footer className="closing-garden mt-10">
+            <div className="closing-garden-copy">
+              <p className="font-script text-5xl leading-tight text-[#8d6bb0] sm:text-7xl">
+                Esperamos você para celebrar conosco!
               </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#presentes"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-stone-950 transition hover:bg-stone-100"
-              >
-                <Gift className="h-4 w-4" />
-                Sugestões de presente
-              </a>
-              <a
-                href="#confirmar"
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                <ChevronRight className="h-4 w-4" />
-                Confirmar presença
-              </a>
+              <p className="mt-3 font-script text-6xl leading-none text-[#e83f7e] sm:text-8xl">Pérola</p>
+              <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-stone-600 sm:text-base">
+                O melhor presente é ter você no nosso Jardim das Borboletas.
+              </p>
             </div>
           </footer>
 
@@ -871,19 +872,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-rose-700"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-4 w-4"
-                >
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                </svg>
+                <AtSign className="h-4 w-4" />
                 @conv.idei
               </a>
               <span className="text-stone-300">|</span>
@@ -891,7 +880,7 @@ export default function Home() {
                 href="https://wa.me/5586981696937"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-emerald-700"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-rose-700"
               >
                 <MessageCircle className="h-4 w-4" />
                 (86) 98169-6937

@@ -33,7 +33,7 @@ export function CopyButton({ value, label = "Copiar", className = "" }: CopyButt
       className={[
         "inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition",
         copied
-          ? "bg-emerald-700 text-white shadow-[0_10px_30px_rgba(14,99,58,0.28)]"
+          ? "bg-rose-700 text-white shadow-[0_10px_30px_rgba(190,24,93,0.22)]"
           : "bg-stone-900 text-stone-50 hover:bg-stone-800",
         className,
       ].join(" ")}
