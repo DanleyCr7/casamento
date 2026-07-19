@@ -682,7 +682,7 @@ export default function Home() {
               <div className="rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-[0_20px_70px_rgba(62,51,39,0.1)] backdrop-blur">
                 <SectionTitle
                   eyebrow="A festa"
-                  title="Tudo o que faz essa tarde ser inesquecível."
+                  title="Tudo o que faz essa noite ser inesquecível."
                   description="Uma composição leve, feita para guardar a data, o lugar e a magia do primeiro ano da Pérola."
                 />
 
