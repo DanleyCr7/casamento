@@ -145,13 +145,13 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
           <span className="sr-only">Abrir convite</span>
           <span className="hero-garden-photo">
             <Image
-              src={publicAsset("/images/melinda-ensaio-01.png")}
+              src={publicAsset("/images/melinda-ensaio-03.png")}
               alt="Pérola celebrando seu primeiro aniversário"
               fill
               priority
               loading="eager"
               sizes="(max-width: 640px) 72vw, 38vw"
-              className="object-cover object-[50%_38%]"
+              className="object-cover object-[50%_42%]"
             />
           </span>
           <span className="hero-garden-copy">
@@ -449,7 +449,7 @@ function CelebrationMessage() {
           id="celebration-message-title"
           className="mt-4 font-script text-6xl leading-none text-rose-800 sm:text-7xl"
         >
-          Pérolaaaa
+          Pérola
         </h2>
 
         <div className="mx-auto mt-7 max-w-2xl space-y-5 text-base leading-8 text-stone-700 sm:text-lg">
