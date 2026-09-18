@@ -958,7 +958,7 @@ body:has(.invite-toggle:checked) .parallax {
 .hero-garden-stage {
   aspect-ratio: 1440 / 1024;
   border: 1px solid rgba(222, 154, 178, 0.28);
-  background: #fff8f3 url("/images/jardim-borboletas/hero-envelope-garden.png") center / cover no-repeat;
+  background: #fff8f3 var(--garden-hero) center / cover no-repeat;
   isolation: isolate;
 }
 
@@ -1057,7 +1057,7 @@ body:has(.invite-toggle:checked) .parallax {
   overflow: hidden;
   border: 1px solid rgba(217, 186, 154, 0.28);
   border-radius: 2.5rem;
-  background: #fffaf1 url("/images/jardim-borboletas/background-event-garden.png") center / cover no-repeat;
+  background: #fffaf1 var(--garden-event) center / cover no-repeat;
   padding: clamp(1rem, 4vw, 3rem);
   box-shadow: 0 26px 80px rgba(105, 81, 62, 0.09);
 }
@@ -1068,7 +1068,7 @@ body:has(.invite-toggle:checked) .parallax {
 }
 
 .memory-film {
-  background: #fff1f3 url("/images/jardim-borboletas/background-memories.png") center / cover no-repeat;
+  background: #fff1f3 var(--garden-memories) center / cover no-repeat;
 }
 
 .garden-divider {
@@ -1082,13 +1082,13 @@ body:has(.invite-toggle:checked) .parallax {
 
 .garden-divider-meadow {
   aspect-ratio: 1881 / 836;
-  background-image: url("/images/jardim-borboletas/divider-flowers-butterfly.png");
+  background-image: var(--garden-divider-flowers);
 }
 
 .garden-divider-garland {
   aspect-ratio: 1774 / 887;
   margin-top: 1rem;
-  background-image: url("/images/jardim-borboletas/divider-garland-bird.png");
+  background-image: var(--garden-divider-garland);
 }
 
 .rsvp-gift-surface {
@@ -1097,7 +1097,7 @@ body:has(.invite-toggle:checked) .parallax {
   margin-top: -3rem;
   border: 1px solid rgba(223, 182, 201, 0.3);
   border-radius: 2.5rem;
-  background: #fffaf4 url("/images/jardim-borboletas/background-rsvp-gift.png") center / cover no-repeat;
+  background: #fffaf4 var(--garden-rsvp) center / cover no-repeat;
   padding: clamp(1rem, 4vw, 3rem);
   box-shadow: 0 26px 80px rgba(105, 81, 83, 0.09);
 }
@@ -1114,7 +1114,7 @@ body:has(.invite-toggle:checked) .parallax {
   overflow: hidden;
   border: 1px solid rgba(218, 174, 197, 0.35);
   border-radius: 2.5rem;
-  background: #f4eafb url("/images/jardim-borboletas/closing-garden.png") center / cover no-repeat;
+  background: #f4eafb var(--garden-closing) center / cover no-repeat;
   box-shadow: 0 26px 90px rgba(100, 72, 99, 0.12);
 }
 
@@ -1132,7 +1132,7 @@ body:has(.invite-toggle:checked) .parallax {
 @media (max-width: 760px) {
   .hero-garden-stage {
     aspect-ratio: 4 / 5;
-    background-image: url("/images/jardim-borboletas/hero-envelope-garden-mobile.png");
+    background-image: var(--garden-hero-mobile);
     background-position: center;
   }
 
