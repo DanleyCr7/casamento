@@ -21,9 +21,44 @@ const ui = Poppins({
   variable: "--font-ui",
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const sharingTitle = "Melinda | 1 aninho no Bosque Encantado";
+const sharingDescription = "Um convite encantado para o aniversário de 1 aninho da Melinda.";
+const sharingImage = `${basePath}/images/whatsapp-preview-melinda-v1.png`;
+const sharingImageAlt =
+  "Convite de 1 aninho da Melinda com sua foto em um envelope rosa no Bosque Encantado.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : "https://festas.convidei.digital"),
+  ),
   title: "Aniversário da Melinda",
   description: "Um convite encantado para o aniversário de 1 aninho da Melinda.",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: `${basePath}/`,
+    title: sharingTitle,
+    description: sharingDescription,
+    images: [
+      {
+        url: sharingImage,
+        width: 1154,
+        height: 797,
+        type: "image/png",
+        alt: sharingImageAlt,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: sharingTitle,
+    description: sharingDescription,
+    images: [{ url: sharingImage, alt: sharingImageAlt }],
+  },
 };
 
 export default function RootLayout({
