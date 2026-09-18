@@ -18,7 +18,7 @@ const script = Parisienne({
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const sharingTitle = "Jessé & Flávia | Convite de casamento";
 const sharingDescription = "Um convite de casamento delicado para Jessé e Flávia.";
-const sharingImage = `${basePath}/images/whatsapp-preview-casamento-v1.png`;
+const sharingImage = `${basePath}/images/whatsapp-preview-casamento-v2.jpg`;
 const sharingImageAlt =
   "Convite de casamento de Jessé e Flávia com a foto do casal em um envelope azul.";
 
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         url: sharingImage,
         width: 1154,
         height: 850,
-        type: "image/png",
+        type: "image/jpeg",
         alt: sharingImageAlt,
       },
     ],
