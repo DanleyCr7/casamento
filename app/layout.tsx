@@ -24,7 +24,7 @@ const ui = Poppins({
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const sharingTitle = "Melinda | 1 aninho no Bosque Encantado";
 const sharingDescription = "Um convite encantado para o aniversário de 1 aninho da Melinda.";
-const sharingImage = `${basePath}/images/whatsapp-preview-melinda-v1.png`;
+const sharingImage = `${basePath}/images/whatsapp-preview-melinda-v2.jpg`;
 const sharingImageAlt =
   "Convite de 1 aninho da Melinda com sua foto em um envelope rosa no Bosque Encantado.";
 
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         url: sharingImage,
         width: 1154,
         height: 797,
-        type: "image/png",
+        type: "image/jpeg",
         alt: sharingImageAlt,
       },
     ],
