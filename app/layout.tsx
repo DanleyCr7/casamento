@@ -54,10 +54,10 @@ export const metadata: Metadata = {
       "Esperamos você para celebrar conosco o primeiro ano da Pérola no Jardim das Borboletas.",
     images: [
       {
-        url: `${basePath}/images/whatsapp-preview-perola-v2.jpg`,
-        width: 1200,
-        height: 680,
-        type: "image/jpeg",
+        url: `${basePath}/images/whatsapp-preview-perola-v3.png`,
+        width: 1144,
+        height: 744,
+        type: "image/png",
         alt: "Esperamos você para celebrar conosco o primeiro ano da Pérola",
       },
     ],
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: "Jardim das Borboletas | 1 ano da Pérola",
     description:
       "Esperamos você para celebrar conosco o primeiro ano da Pérola no Jardim das Borboletas.",
-    images: [`${basePath}/images/whatsapp-preview-perola-v2.jpg`],
+    images: [`${basePath}/images/whatsapp-preview-perola-v3.png`],
   },
 };
 
