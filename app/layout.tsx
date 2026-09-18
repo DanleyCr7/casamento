@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Parisienne, Poppins } from "next/font/google";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import "./globals.css";
 
 const serif = Cormorant_Garamond({
@@ -21,6 +21,21 @@ const ui = Poppins({
   variable: "--font-ui",
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const gardenImage = (filename: string) =>
+  `url("${basePath}/images/jardim-borboletas/${filename}")`;
+
+const gardenBackgrounds = {
+  "--garden-hero": gardenImage("hero-envelope-garden.png"),
+  "--garden-hero-mobile": gardenImage("hero-envelope-garden-mobile.png"),
+  "--garden-event": gardenImage("background-event-garden.png"),
+  "--garden-memories": gardenImage("background-memories.png"),
+  "--garden-divider-flowers": gardenImage("divider-flowers-butterfly.png"),
+  "--garden-divider-garland": gardenImage("divider-garland-bird.png"),
+  "--garden-rsvp": gardenImage("background-rsvp-gift.png"),
+  "--garden-closing": gardenImage("closing-garden.png"),
+} as CSSProperties;
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -33,13 +48,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "/",
+    url: `${basePath}/`,
     title: "Jardim das Borboletas | 1 ano da Pérola",
     description:
       "Esperamos você para celebrar conosco o primeiro ano da Pérola no Jardim das Borboletas.",
     images: [
       {
-        url: "/images/whatsapp-preview-perola-v2.jpg",
+        url: `${basePath}/images/whatsapp-preview-perola-v2.jpg`,
         width: 1200,
         height: 680,
         type: "image/jpeg",
@@ -52,7 +67,7 @@ export const metadata: Metadata = {
     title: "Jardim das Borboletas | 1 ano da Pérola",
     description:
       "Esperamos você para celebrar conosco o primeiro ano da Pérola no Jardim das Borboletas.",
-    images: ["/images/whatsapp-preview-perola-v2.jpg"],
+    images: [`${basePath}/images/whatsapp-preview-perola-v2.jpg`],
   },
 };
 
@@ -63,7 +78,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${serif.variable} ${script.variable} ${ui.variable} antialiased`}>
+      <body
+        className={`${serif.variable} ${script.variable} ${ui.variable} antialiased`}
+        style={gardenBackgrounds}
+      >
         {children}
       </body>
     </html>
