@@ -36,18 +36,21 @@ jobs:
             const basePath = process.env.PAGES_BASE_PATH;
             const origin = process.env.PAGES_ORIGIN.replace(/^http:/, 'https:');
             core.setOutput('origin', origin);
-            const include = [{ branch: 'main', sha: context.sha, basePath }];
+            const include = [
+              { site: 'main', branch: 'main', sha: context.sha, basePath },
+              { site: 'isaac', branch: 'main', sha: context.sha, basePath: `${basePath}/isaac` },
+            ];
             for (const branch of ['casamento', 'melinda', 'perola']) {
               const { data } = await github.rest.git.getRef({
                 ...context.repo,
                 ref: `heads/${branch}`,
               });
-              include.push({ branch, sha: data.object.sha, basePath: `${basePath}/${branch}` });
+              include.push({ site: branch, branch, sha: data.object.sha, basePath: `${basePath}/${branch}` });
             }
             await core.summary
               .addHeading('Convites desta publicação')
               .addTable([
-                [{ data: 'Branch', header: true }, { data: 'Commit', header: true }, { data: 'Endereço', header: true }],
+                [{ data: 'Fonte', header: true }, { data: 'Commit', header: true }, { data: 'Endereço', header: true }],
                 ...include.map(({ branch, sha, basePath }) => [branch, sha, `${origin}${basePath}/`]),
               ])
               .write();
@@ -82,7 +85,7 @@ jobs:
       - name: Save invitation
         uses: actions/upload-artifact@v4
         with:
-          name: site-${{ matrix.branch }}
+          name: site-${{ matrix.site }}
           path: out/
           if-no-files-found: error
           include-hidden-files: true
@@ -110,7 +113,7 @@ jobs:
           set -euo pipefail
           mkdir -p _site
           cp -a artifacts/site-main/. _site/
-          for invitation in casamento melinda perola; do
+          for invitation in casamento melinda perola isaac; do
             mkdir -p "_site/$invitation"
             cp -a "artifacts/site-$invitation/." "_site/$invitation/"
           done

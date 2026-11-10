@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff7fa;
+  --background: #eef6fc;
   --foreground: #2c2620;
 }
 
@@ -13,10 +13,10 @@
   body {
     min-height: 100vh;
     background:
-      radial-gradient(circle at 12% 18%, rgba(249, 205, 221, 0.5), transparent 24%),
+      radial-gradient(circle at 12% 18%, rgba(207, 226, 247, 0.5), transparent 24%),
       radial-gradient(circle at 88% 24%, rgba(224, 207, 246, 0.55), transparent 26%),
       radial-gradient(circle at 50% 76%, rgba(248, 226, 164, 0.3), transparent 30%),
-      linear-gradient(180deg, #fffafc 0%, #faedf4 52%, #eee8f8 100%);
+      linear-gradient(180deg, #fbfcfe 0%, #edf3fa 52%, #eee8f8 100%);
     color: var(--foreground);
     font-family: var(--font-serif), Georgia, serif;
   }
@@ -39,7 +39,7 @@
   .sec {
     position: relative;
     padding: clamp(4rem, 10vw, 6rem) clamp(1.25rem, 5vw, 6rem);
-    background-color: #1f4b3f;
+    background-color: #17416c;
     color: #ffffff;
     font-family: var(--font-ui), "Poppins", sans-serif;
   }
@@ -67,7 +67,7 @@
     inset: auto 9% -7% 9%;
     height: 16%;
     border-radius: 999px;
-    background: rgba(175, 104, 132, 0.18);
+    background: rgba(104, 138, 175, 0.18);
     filter: blur(30px);
     transform: rotate(-2deg);
   }
@@ -99,11 +99,11 @@
     border-radius: 1.35rem;
     background:
       linear-gradient(130deg, rgba(255, 255, 255, 0.5), transparent 34%),
-      linear-gradient(180deg, rgba(255, 233, 240, 0.98), rgba(253, 244, 227, 0.96));
+      linear-gradient(180deg, rgba(236, 244, 252, 0.98), rgba(253, 244, 227, 0.96));
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.7),
-      inset 0 -22px 48px rgba(198, 127, 155, 0.14),
-      0 30px 90px rgba(79, 46, 52, 0.22);
+      inset 0 -22px 48px rgba(127, 161, 198, 0.14),
+      0 30px 90px rgba(46, 62, 79, 0.22);
     backdrop-filter: blur(3px);
   }
 
@@ -117,7 +117,7 @@
 
   .envelope-back::before {
     background:
-      linear-gradient(33deg, transparent 49.65%, rgba(234, 170, 190, 0.42) 50%, transparent 50.35%),
+      linear-gradient(33deg, transparent 49.65%, rgba(170, 201, 234, 0.42) 50%, transparent 50.35%),
       linear-gradient(147deg, transparent 49.65%, rgba(255, 255, 255, 0.58) 50%, transparent 50.35%),
       linear-gradient(90deg, transparent 49.7%, rgba(255, 255, 255, 0.34) 50%, transparent 50.3%);
   }
@@ -133,7 +133,7 @@
     position: absolute;
     inset: 0;
     display: block;
-    background: rgba(246, 205, 219, 0.92);
+    background: rgba(205, 225, 246, 0.92);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
   }
 
@@ -147,14 +147,14 @@
 
   .envelope-flap-bottom {
     clip-path: polygon(0 100%, 50% 52%, 100% 100%);
-    background: rgba(236, 179, 198, 0.92);
+    background: rgba(179, 207, 236, 0.92);
   }
 
   .envelope-flap-top {
     z-index: 6;
     clip-path: polygon(0 0, 50% 58%, 100% 0);
     background:
-      linear-gradient(180deg, rgba(255, 247, 251, 0.98), rgba(241, 207, 221, 0.95));
+      linear-gradient(180deg, rgba(248, 251, 254, 0.98), rgba(207, 223, 241, 0.95));
     transform-origin: top center;
     transition: transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 700ms ease;
   }
@@ -195,16 +195,16 @@
     width: clamp(5rem, 10vw, 7rem);
     place-items: center;
     border-radius: 999px;
-    border: 1px solid rgba(195, 112, 145, 0.42);
+    border: 1px solid rgba(112, 152, 195, 0.42);
     background:
-      radial-gradient(circle at 34% 28%, rgba(255, 250, 255, 0.96), transparent 22%),
+      radial-gradient(circle at 34% 28%, rgba(251, 252, 254, 0.96), transparent 22%),
       radial-gradient(circle at 62% 72%, rgba(255, 255, 255, 0.32), transparent 28%),
-      linear-gradient(135deg, #f7a9c5, #f28bb1 54%, #ffd8e5);
+      linear-gradient(135deg, #aecff2, #90bded 54%, #ddebfa);
     transform: translate(-50%, -50%);
     box-shadow:
       inset 0 7px 11px rgba(255, 255, 255, 0.5),
-      inset 0 -9px 14px rgba(161, 78, 114, 0.22),
-      0 12px 24px rgba(100, 58, 71, 0.2);
+      inset 0 -9px 14px rgba(78, 118, 161, 0.22),
+      0 12px 24px rgba(58, 78, 100, 0.2);
     transition: transform 650ms ease, opacity 450ms ease;
   }
 
@@ -214,7 +214,7 @@
     inset: 16%;
     border-radius: inherit;
     border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: inset 0 0 0 1px rgba(159, 90, 122, 0.22);
+    box-shadow: inset 0 0 0 1px rgba(90, 123, 159, 0.22);
   }
 
   .wax-seal-butterfly {
@@ -222,7 +222,7 @@
     z-index: 2;
     display: block;
     font-size: clamp(2.25rem, 5vw, 3.75rem);
-    filter: drop-shadow(0 6px 8px rgba(103, 49, 87, 0.24));
+    filter: drop-shadow(0 6px 8px rgba(49, 75, 103, 0.24));
     transform: rotate(-8deg);
   }
 
@@ -243,11 +243,11 @@
     gap: 0.15rem;
     width: max-content;
     transform: translateX(-50%);
-    border: 1px solid rgba(240, 213, 224, 0.9);
+    border: 1px solid rgba(213, 226, 240, 0.9);
     border-radius: 1rem;
-    background: rgba(255, 250, 252, 0.9);
+    background: rgba(251, 252, 254, 0.9);
     padding: 0.55rem 0.9rem;
-    box-shadow: 0 10px 24px rgba(117, 79, 92, 0.12);
+    box-shadow: 0 10px 24px rgba(79, 97, 117, 0.12);
     backdrop-filter: blur(8px);
   }
 
@@ -259,8 +259,8 @@
     border-radius: 999px;
     background:
       radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.95), transparent 38%),
-      linear-gradient(135deg, #f8b4c8, #f28fb2);
-    box-shadow: 0 0 0 7px rgba(255, 230, 238, 0.32);
+      linear-gradient(135deg, #b8d5f4, #93bfee);
+    box-shadow: 0 0 0 7px rgba(234, 242, 251, 0.32);
     transform: rotate(12deg);
   }
 
@@ -365,7 +365,7 @@
   .birthday-photo-card::before {
     top: -1.1rem;
     left: 38%;
-    background: #f2c8d3;
+    background: #c8dcf2;
     box-shadow: 2.4rem 0.8rem 0 #dce9cf;
   }
 
@@ -373,20 +373,20 @@
     right: -1rem;
     bottom: 12%;
     background: #f6e7b7;
-    box-shadow: -1.9rem 2rem 0 #e5d9ef;
+    box-shadow: -1.9rem 2rem 0 #d9e4ef;
   }
 
   .memory-film {
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(221, 164, 181, 0.48);
+    border: 1px solid rgba(164, 192, 221, 0.48);
     border-radius: 2.5rem;
     padding: clamp(1.5rem, 5vw, 3.5rem);
     background:
-      radial-gradient(circle at 8% 12%, rgba(246, 198, 211, 0.65), transparent 22%),
+      radial-gradient(circle at 8% 12%, rgba(198, 221, 246, 0.65), transparent 22%),
       radial-gradient(circle at 90% 8%, rgba(220, 235, 207, 0.74), transparent 24%),
-      linear-gradient(145deg, rgba(255, 250, 242, 0.96), rgba(252, 238, 242, 0.92) 52%, rgba(238, 245, 232, 0.94));
-    box-shadow: 0 30px 100px rgba(103, 76, 69, 0.12);
+      linear-gradient(145deg, rgba(255, 250, 242, 0.96), rgba(238, 245, 252, 0.92) 52%, rgba(238, 245, 232, 0.94));
+    box-shadow: 0 30px 100px rgba(69, 85, 103, 0.12);
   }
 
   .memory-stage {
@@ -398,7 +398,7 @@
     background: #e9dfd7;
     box-shadow:
       0 28px 70px rgba(78, 58, 51, 0.2),
-      inset 0 0 0 1px rgba(133, 96, 88, 0.12);
+      inset 0 0 0 1px rgba(88, 110, 133, 0.12);
   }
 
   .memory-stage-glow {
@@ -429,7 +429,7 @@
     position: absolute;
     z-index: 3;
     inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(35, 25, 24, 0.48));
+    background: linear-gradient(180deg, transparent 50%, rgba(24, 29, 35, 0.48));
     pointer-events: none;
   }
 
@@ -441,8 +441,8 @@
     border: 1px solid rgba(255, 255, 255, 0.58);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.82);
-    color: #6b4d55;
-    box-shadow: 0 10px 28px rgba(55, 39, 38, 0.2);
+    color: #4d5b6b;
+    box-shadow: 0 10px 28px rgba(38, 46, 55, 0.2);
     backdrop-filter: blur(8px);
     transition:
       transform 180ms ease,
@@ -457,7 +457,7 @@
   .memory-control:focus-visible,
   .memory-thumbnail:focus-visible,
   .memory-dot:focus-visible {
-    outline: 3px solid rgba(169, 92, 116, 0.42);
+    outline: 3px solid rgba(92, 129, 169, 0.42);
     outline-offset: 3px;
   }
 
@@ -473,12 +473,12 @@
 
   .memory-dot.is-active {
     width: 2rem;
-    background: #b66c82;
+    background: #6c90b6;
   }
 
   .memory-thumbnails {
     display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: 0.65rem;
   }
 
@@ -489,7 +489,7 @@
     border: 3px solid rgba(255, 255, 255, 0.82);
     border-radius: 1rem;
     opacity: 0.62;
-    box-shadow: 0 8px 22px rgba(81, 60, 55, 0.11);
+    box-shadow: 0 8px 22px rgba(55, 68, 81, 0.11);
     transform: rotate(var(--thumbnail-rotation, -1deg));
     transition:
       opacity 220ms ease,
@@ -504,7 +504,7 @@
   .memory-thumbnail:hover,
   .memory-thumbnail.is-active {
     opacity: 1;
-    border-color: #efb8c7;
+    border-color: #b8d3ef;
     transform: translateY(-4px) rotate(0deg);
   }
 
@@ -543,15 +543,15 @@
   .memory-balloon-pink {
     top: 5%;
     left: 3%;
-    color: #d998aa;
-    background: linear-gradient(135deg, #f6d2dc, #d98ca4);
+    color: #98b7d9;
+    background: linear-gradient(135deg, #d2e3f6, #8cb1d9);
   }
 
   .memory-balloon-lilac {
     top: 9%;
     right: 3%;
-    color: #a58bc4;
-    background: linear-gradient(135deg, #eee3fa, #bda2d8);
+    color: #c49a4b;
+    background: linear-gradient(135deg, #faedc9, #d8b264);
     animation-delay: -2.1s;
   }
 
@@ -571,7 +571,7 @@
     top: 0;
     width: 0.85rem;
     height: 1rem;
-    background: rgba(202, 145, 170, 0.76);
+    background: rgba(145, 173, 202, 0.76);
   }
 
   .memory-butterfly::before {
@@ -607,15 +607,15 @@
   .celebration-message {
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(224, 170, 190, 0.5);
+    border: 1px solid rgba(170, 196, 224, 0.5);
     border-radius: 2.5rem;
     padding: clamp(2.25rem, 7vw, 4.5rem) clamp(1.25rem, 6vw, 4rem);
     background:
-      radial-gradient(circle at 8% 12%, rgba(249, 199, 217, 0.55), transparent 22%),
+      radial-gradient(circle at 8% 12%, rgba(202, 223, 246, 0.55), transparent 22%),
       radial-gradient(circle at 92% 14%, rgba(222, 207, 244, 0.62), transparent 24%),
       radial-gradient(circle at 50% 105%, rgba(245, 224, 163, 0.3), transparent 34%),
-      linear-gradient(145deg, rgba(255, 252, 248, 0.96), rgba(255, 242, 248, 0.94) 54%, rgba(246, 241, 252, 0.96));
-    box-shadow: 0 30px 100px rgba(103, 76, 90, 0.12);
+      linear-gradient(145deg, rgba(255, 252, 248, 0.96), rgba(244, 248, 253, 0.94) 54%, rgba(246, 241, 252, 0.96));
+    box-shadow: 0 30px 100px rgba(76, 89, 103, 0.12);
   }
 
   .celebration-message::before,
@@ -632,12 +632,12 @@
 
   .celebration-message::before {
     left: -2.5rem;
-    background: radial-gradient(circle, #efabc3 0 14%, #f7d6a4 15% 28%, transparent 29%);
+    background: radial-gradient(circle, #abccef 0 14%, #f7d6a4 15% 28%, transparent 29%);
   }
 
   .celebration-message::after {
     right: -2.5rem;
-    background: radial-gradient(circle, #d4bce9 0 14%, #f7c9d8 15% 28%, transparent 29%);
+    background: radial-gradient(circle, #bcd2e9 0 14%, #cadff6 15% 28%, transparent 29%);
   }
 
   .celebration-detail {
@@ -645,11 +645,11 @@
     min-height: 5.5rem;
     align-items: flex-start;
     gap: 0.75rem;
-    border: 1px solid rgba(231, 211, 217, 0.9);
+    border: 1px solid rgba(211, 221, 231, 0.9);
     border-radius: 1.25rem;
     background: rgba(255, 255, 255, 0.68);
     padding: 1rem;
-    box-shadow: 0 10px 30px rgba(91, 61, 75, 0.07);
+    box-shadow: 0 10px 30px rgba(61, 75, 91, 0.07);
   }
 
   .celebration-detail-label {
@@ -657,7 +657,7 @@
     font-weight: 600;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: #9b7280;
+    color: #72869b;
   }
 
   .celebration-detail-value {
@@ -683,7 +683,7 @@
     top: 0;
     width: 1.7rem;
     height: 1.9rem;
-    background: linear-gradient(145deg, #efa3bd, #bd83b4);
+    background: linear-gradient(145deg, #a3c8ef, #839fbd);
   }
 
   .celebration-butterfly::before {
@@ -721,23 +721,23 @@
   .confirmation-hearts span {
     position: absolute;
     bottom: 14%;
-    color: #b64d6a;
+    color: #4d80b6;
     font-family: Georgia, serif;
     font-size: clamp(1.5rem, 4vw, 3.75rem);
     line-height: 1;
     opacity: 0;
-    text-shadow: 0 8px 22px rgba(96, 42, 54, 0.18);
+    text-shadow: 0 8px 22px rgba(42, 68, 96, 0.18);
     transform: translate(-50%, 0) scale(0.72) rotate(-8deg);
     animation: romantic-heart-rise 2200ms cubic-bezier(0.18, 0.82, 0.24, 1) var(--heart-delay) both;
   }
 
   .confirmation-hearts span:nth-child(3n) {
-    color: #d79a9d;
+    color: #9ab7d7;
     font-size: clamp(1.1rem, 3vw, 2.8rem);
   }
 
   .confirmation-hearts span:nth-child(4n) {
-    color: #8d2f4c;
+    color: #2f5c8d;
   }
 
   .confirmation-hearts span:nth-child(5n) {
@@ -933,9 +933,9 @@
   pointer-events: none;
   background:
     radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.86) 0 16%, transparent 40%),
-    radial-gradient(circle at 15% 28%, rgba(255, 211, 229, 0.48), transparent 24%),
+    radial-gradient(circle at 15% 28%, rgba(217, 232, 249, 0.48), transparent 24%),
     radial-gradient(circle at 86% 32%, rgba(225, 210, 248, 0.52), transparent 22%),
-    linear-gradient(180deg, #fceefa 0%, #e8dcf5 34%, #d7e9d0 72%, #b9d6a9 100%);
+    linear-gradient(180deg, #eef5fc 0%, #e8dcf5 34%, #d7e9d0 72%, #b9d6a9 100%);
 }
 
 @supports (height: 100dvh) {
@@ -948,7 +948,7 @@ body:has(.invite-toggle:checked) .parallax {
   display: block;
 }
 
-/* Jardim das Borboletas — visual aprovado */
+/* Mesmo layout dos convites, com a paleta do novo tema. */
 .butterfly-garden-site {
   min-height: 100vh;
   background: #fff9f4;
@@ -957,7 +957,7 @@ body:has(.invite-toggle:checked) .parallax {
 
 .hero-garden-stage {
   aspect-ratio: 1440 / 1024;
-  border: 1px solid rgba(222, 154, 178, 0.28);
+  border: 1px solid rgba(154, 187, 222, 0.28);
   background: #fff8f3 var(--garden-hero) center / cover no-repeat;
   isolation: isolate;
 }
@@ -982,7 +982,7 @@ body:has(.invite-toggle:checked) .parallax {
   overflow: hidden;
   border: clamp(0.3rem, 0.7vw, 0.65rem) solid rgba(255, 255, 255, 0.96);
   border-radius: 0.85rem;
-  box-shadow: 0 18px 45px rgba(111, 73, 77, 0.2);
+  box-shadow: 0 18px 45px rgba(73, 91, 111, 0.2);
   transform: rotate(-3.5deg);
   transition: transform 350ms ease;
 }
@@ -1004,11 +1004,11 @@ body:has(.invite-toggle:checked) .parallax {
 
 .hero-guest {
   margin-bottom: 1rem;
-  border: 1px solid rgba(231, 151, 181, 0.45);
+  border: 1px solid rgba(151, 190, 231, 0.45);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.78);
   padding: 0.4rem 0.9rem;
-  color: #9d5e74;
+  color: #5e7c9d;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -1018,7 +1018,7 @@ body:has(.invite-toggle:checked) .parallax {
 .hero-age {
   margin: 0.75rem 0 0.9rem;
   border-radius: 0.25rem;
-  background: #e95b8c;
+  background: #285e9f;
   padding: 0.18rem 1.2rem 0.28rem;
   color: white;
   font-size: clamp(1rem, 2vw, 1.65rem);
@@ -1033,22 +1033,22 @@ body:has(.invite-toggle:checked) .parallax {
   justify-content: center;
   margin-top: 1.5rem;
   border-radius: 999px;
-  background: #e83f7e;
+  background: #814421;
   padding: 0.75rem 2rem;
   color: white;
   font-size: 0.9rem;
   font-weight: 700;
-  box-shadow: 0 12px 28px rgba(213, 55, 113, 0.25);
+  box-shadow: 0 12px 28px rgba(55, 131, 213, 0.25);
   transition: transform 180ms ease, background-color 180ms ease;
 }
 
 .hero-garden-stage:hover .hero-open-button {
-  background: #d72f6d;
+  background: #1d477b;
   transform: translateY(-2px);
 }
 
 .invite-toggle:focus-visible + .hero-garden-stage {
-  outline: 4px solid rgba(232, 63, 126, 0.32);
+  outline: 4px solid rgba(70, 145, 225, 0.32);
   outline-offset: 4px;
 }
 
@@ -1068,7 +1068,7 @@ body:has(.invite-toggle:checked) .parallax {
 }
 
 .memory-film {
-  background: #fff1f3 var(--garden-memories) center / cover no-repeat;
+  background: #f3f8fd var(--garden-memories) center / cover no-repeat;
 }
 
 .garden-divider {
@@ -1095,11 +1095,11 @@ body:has(.invite-toggle:checked) .parallax {
   position: relative;
   overflow: hidden;
   margin-top: -3rem;
-  border: 1px solid rgba(223, 182, 201, 0.3);
+  border: 1px solid rgba(182, 202, 223, 0.3);
   border-radius: 2.5rem;
   background: #fffaf4 var(--garden-rsvp) center / cover no-repeat;
   padding: clamp(1rem, 4vw, 3rem);
-  box-shadow: 0 26px 80px rgba(105, 81, 83, 0.09);
+  box-shadow: 0 26px 80px rgba(81, 93, 105, 0.09);
 }
 
 .rsvp-gift-surface > section:first-child {
@@ -1112,10 +1112,10 @@ body:has(.invite-toggle:checked) .parallax {
   min-height: clamp(28rem, 57vw, 48rem);
   place-items: center;
   overflow: hidden;
-  border: 1px solid rgba(218, 174, 197, 0.35);
+  border: 1px solid rgba(174, 195, 218, 0.35);
   border-radius: 2.5rem;
-  background: #f4eafb var(--garden-closing) center / cover no-repeat;
-  box-shadow: 0 26px 90px rgba(100, 72, 99, 0.12);
+  background: #eaf2fb var(--garden-closing) center / cover no-repeat;
+  box-shadow: 0 26px 90px rgba(72, 86, 100, 0.12);
 }
 
 .closing-garden-copy {
@@ -1205,7 +1205,8 @@ body:has(.invite-toggle:checked) .parallax {
 
   .closing-garden {
     min-height: 34rem;
-    background-position: 58% center;
+    background-image: var(--garden-closing-mobile);
+    background-position: center bottom;
   }
 
   .closing-garden-copy {
@@ -1238,7 +1239,7 @@ body:has(.invite-toggle:checked) .parallax {
     radial-gradient(ellipse at 22% 12%, rgba(255, 255, 255, 0.48), transparent 28%),
     linear-gradient(155deg, #d9e9c8 0%, #bcd8ab 48%, #91bd83 100%);
   box-shadow:
-    0 -3rem 7rem rgba(255, 225, 239, 0.34),
+    0 -3rem 7rem rgba(229, 240, 251, 0.34),
     inset 0 3rem 5rem rgba(255, 255, 255, 0.2);
 }
 
@@ -1273,18 +1274,18 @@ body:has(.invite-toggle:checked) .parallax {
   height: 34%;
   opacity: 0.94;
   background:
-    radial-gradient(circle at 4% 72%, #f7adc8 0 1.7rem, transparent 1.8rem),
+    radial-gradient(circle at 4% 72%, #b2d1f2 0 1.7rem, transparent 1.8rem),
     radial-gradient(circle at 9% 86%, #fff1a8 0 1.35rem, transparent 1.45rem),
     radial-gradient(circle at 16% 68%, #cdb6e8 0 1.8rem, transparent 1.9rem),
-    radial-gradient(circle at 25% 88%, #f9c0d1 0 1.4rem, transparent 1.5rem),
+    radial-gradient(circle at 25% 88%, #c4dcf5 0 1.4rem, transparent 1.5rem),
     radial-gradient(circle at 38% 76%, #fff0ab 0 1.8rem, transparent 1.9rem),
-    radial-gradient(circle at 52% 90%, #d8c2ed 0 1.55rem, transparent 1.65rem),
-    radial-gradient(circle at 65% 70%, #f4a8c4 0 1.7rem, transparent 1.8rem),
+    radial-gradient(circle at 52% 90%, #c2d7ed 0 1.55rem, transparent 1.65rem),
+    radial-gradient(circle at 65% 70%, #abcdf1 0 1.7rem, transparent 1.8rem),
     radial-gradient(circle at 77% 88%, #ffe99b 0 1.5rem, transparent 1.6rem),
     radial-gradient(circle at 88% 68%, #c9b0e5 0 1.85rem, transparent 1.95rem),
-    radial-gradient(circle at 97% 84%, #f8bad0 0 1.65rem, transparent 1.75rem),
+    radial-gradient(circle at 97% 84%, #bed8f4 0 1.65rem, transparent 1.75rem),
     linear-gradient(180deg, transparent 30%, rgba(113, 158, 91, 0.18) 31%, rgba(91, 137, 74, 0.72) 100%);
-  filter: drop-shadow(0 -8px 24px rgba(103, 72, 102, 0.12));
+  filter: drop-shadow(0 -8px 24px rgba(72, 87, 103, 0.12));
 }
 
 .garden-butterflies {
@@ -1298,14 +1299,14 @@ body:has(.invite-toggle:checked) .parallax {
   display: block;
   font-size: var(--butterfly-size, 2.4rem);
   line-height: 1;
-  filter: var(--butterfly-filter, drop-shadow(0 5px 7px rgba(92, 53, 91, 0.2)));
+  filter: var(--butterfly-filter, drop-shadow(0 5px 7px rgba(53, 72, 92, 0.2)));
   transform-origin: 50% 58%;
   animation: garden-butterfly-flight var(--butterfly-duration, 6s) ease-in-out infinite;
 }
 
 .garden-butterfly-1 {
   --butterfly-size: 2.65rem;
-  --butterfly-filter: hue-rotate(306deg) saturate(1.35) brightness(1.08) drop-shadow(0 7px 10px rgba(164, 80, 126, 0.22));
+  --butterfly-filter: hue-rotate(306deg) saturate(1.35) brightness(1.08) drop-shadow(0 7px 10px rgba(80, 121, 164, 0.22));
   --butterfly-duration: 6.8s;
   top: 16%;
   left: 8%;
@@ -1332,7 +1333,7 @@ body:has(.invite-toggle:checked) .parallax {
 
 .garden-butterfly-4 {
   --butterfly-size: 3rem;
-  --butterfly-filter: hue-rotate(330deg) saturate(1.28) brightness(1.12) drop-shadow(0 8px 11px rgba(151, 73, 109, 0.24));
+  --butterfly-filter: hue-rotate(330deg) saturate(1.28) brightness(1.12) drop-shadow(0 8px 11px rgba(73, 111, 151, 0.24));
   --butterfly-duration: 7.8s;
   top: 42%;
   right: 8%;
@@ -1359,7 +1360,7 @@ body:has(.invite-toggle:checked) .parallax {
 
 .garden-butterfly-7 {
   --butterfly-size: 1.45rem;
-  --butterfly-filter: hue-rotate(285deg) saturate(1.26) brightness(1.1) drop-shadow(0 5px 7px rgba(127, 75, 145, 0.18));
+  --butterfly-filter: hue-rotate(285deg) saturate(1.26) brightness(1.1) drop-shadow(0 5px 7px rgba(75, 109, 145, 0.18));
   --butterfly-duration: 6.9s;
   top: 34%;
   left: 48%;
@@ -1391,6 +1392,202 @@ body:has(.invite-toggle:checked) .parallax {
 
 @media (prefers-reduced-motion: reduce) {
   .garden-butterfly {
+    animation: none;
+  }
+}
+
+/* Os ornamentos mantêm os movimentos originais com arte raster do novo tema. */
+.memory-butterfly,
+.celebration-butterfly {
+  background: var(--theme-ornament) center / contain no-repeat;
+}
+
+.memory-butterfly::before,
+.memory-butterfly::after,
+.celebration-butterfly::before,
+.celebration-butterfly::after {
+  content: none;
+}
+
+.envelope-floral {
+  background-image: var(--theme-ornament);
+}
+
+@media (max-width: 640px) {
+  .memory-stage > .absolute {
+    right: 0.5rem;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .memory-stage > .absolute > div:first-child {
+    min-width: 0;
+    max-width: calc(100% - 8.25rem);
+    padding: 0.5rem;
+  }
+
+  .memory-stage > .absolute > div:first-child > p:last-child {
+    font-size: 1.4rem;
+  }
+
+  .memory-control {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+/* A abertura conserva a capa e destaca a passagem para os detalhes. */
+.hero-garden {
+  transition: min-height 720ms ease, padding 720ms ease;
+}
+
+.hero-garden-stage {
+  transform-origin: center 60%;
+  transition: transform 720ms ease, border-color 500ms ease, box-shadow 500ms ease;
+}
+
+.hero-guest {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.hero-guest svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.caption-open svg {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+.invite-is-open .hero-garden {
+  min-height: 0;
+  padding-block: 1rem;
+}
+
+.invite-is-open .hero-garden-stage {
+  transform: scale(0.985);
+  border-color: #cfab64;
+  box-shadow: 0 22px 65px rgba(39, 75, 110, 0.13);
+}
+
+.invite-is-open .hero-garden-stage .hero-garden-photo {
+  transform: rotate(0deg) translateY(-0.35rem);
+}
+
+.invite-is-open .hero-guest {
+  border-color: #b7d3e7;
+  background: #eef6fd;
+  color: #204e7c;
+}
+
+.invite-is-open .hero-open-button {
+  background: #fffaf3;
+  color: #285e9f;
+  box-shadow: inset 0 0 0 1px #b7ccdf;
+}
+
+.invite-is-open .hero-garden-stage:hover .hero-open-button {
+  background: #edf5fb;
+  transform: none;
+}
+
+.invite-is-opening .hero-garden-stage {
+  cursor: progress;
+  animation: invite-cover-open 720ms ease both;
+}
+
+.invite-is-opening .hero-garden-stage .hero-garden-photo {
+  animation: invite-photo-lift 720ms ease both;
+}
+
+.invite-is-open .site-after-open {
+  animation-delay: 260ms;
+}
+
+.opened-invite-header {
+  scroll-margin-top: 1rem;
+}
+
+.opened-invite-header:focus-visible {
+  outline: 3px solid #cfab64;
+  outline-offset: 4px;
+}
+
+.opened-invite-status {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.opened-invite-status > svg {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border: 1px solid #caddea;
+  border-radius: 50%;
+  background: #eef6fd;
+  padding: 0.3rem;
+  color: #285e9f;
+}
+
+.opened-invite-status p {
+  color: #214c78;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.opened-invite-status span {
+  display: block;
+  margin-top: 0.15rem;
+  color: #5e7185;
+  font-size: 0.65rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.opened-invite-header > a {
+  flex-shrink: 0;
+}
+
+@keyframes invite-cover-open {
+  0% { transform: scale(1); }
+  38% { transform: scale(0.965) rotate(-0.35deg); }
+  70% { transform: scale(1.005) rotate(0.15deg); }
+  100% { transform: scale(0.985); }
+}
+
+@keyframes invite-photo-lift {
+  0% { transform: rotate(-3.5deg); }
+  45% { transform: rotate(-1.5deg) translateY(-1.1rem); }
+  100% { transform: rotate(0deg) translateY(-0.35rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-garden,
+  .hero-garden-stage,
+  .hero-garden-photo,
+  .hero-open-button {
+    transition: none;
+  }
+
+  .invite-is-opening .hero-garden-stage,
+  .invite-is-opening .hero-garden-stage .hero-garden-photo,
+  .invite-is-open .site-after-open {
     animation: none;
   }
 }

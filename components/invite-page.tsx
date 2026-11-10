@@ -5,9 +5,11 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   CalendarDays,
+  BadgeCheck,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
-  Footprints,
+  BookOpen,
   Gift,
   Heart,
   AtSign,
@@ -16,7 +18,6 @@ import {
   MessageCircle,
   Pause,
   Play,
-  Shirt,
   Sparkles,
   Volume2,
   VolumeX,
@@ -38,44 +39,39 @@ type TimeLeft = {
 
 const memoryPhotos = [
   {
-    src: "/images/melinda-newborn-01.png",
-    position: "50% 48%",
-    alt: "Pérola recém-nascida dormindo em um cenário delicado",
+    src: "/images/momentos/bebe-sorriso.jpg",
+    position: "50% 0%",
+    alt: "Isaac sorrindo, de roupa azul, sentado em uma colcha florida",
   },
   {
-    src: "/images/melinda-newborn-02.png",
-    position: "50% 35%",
-    alt: "Retrato de Pérola recém-nascida dormindo",
+    src: "/images/momentos/isaac-em-pe.jpg",
+    position: "75% 38%",
+    alt: "Isaac de camisa bege, sorrindo em pé com apoio de um adulto",
   },
   {
-    src: "/images/melinda-natal-01.png",
-    position: "50% 45%",
-    alt: "Pérola em seu ensaio de Natal com vestido vermelho",
+    src: "/images/momentos/isaac-sorriso-02.jpg",
+    position: "50% 0%",
+    alt: "Isaac de roupa azul, dando uma gargalhada na colcha florida",
   },
   {
-    src: "/images/melinda-natal-02.png",
-    position: "50% 46%",
-    alt: "Pérola em frente à árvore de Natal",
+    src: "/images/momentos/bebe-cadeira-01.jpg",
+    position: "50% 22%",
+    alt: "Isaac de camisa clara sorrindo em uma cadeira de madeira",
   },
   {
-    src: "/images/melinda-ensaio-01.png",
-    position: "50% 38%",
-    alt: "Pérola em seu ensaio de um ano",
+    src: "/images/momentos/bebe-cadeira-02.jpg",
+    position: "50% 25%",
+    alt: "Isaac fazendo biquinho, de camisa clara, em uma cadeira de madeira",
   },
   {
-    src: "/images/melinda-ensaio-02.png",
-    position: "50% 38%",
-    alt: "Pérola em pé durante seu ensaio de um ano",
+    src: "/images/momentos/bebe-brinquedo-01.jpg",
+    position: "50% 50%",
+    alt: "Isaac de roupa laranja sentado em um brinquedo azul",
   },
   {
-    src: "/images/melinda-ensaio-03.png",
-    position: "50% 42%",
-    alt: "Pérola sentada durante seu ensaio de um ano",
-  },
-  {
-    src: "/images/melinda-familia-01.png",
-    position: "50% 35%",
-    alt: "Pérola com seus pais na comemoração de um ano",
+    src: "/images/momentos/bebe-brinquedo-02.jpg",
+    position: "50% 40%",
+    alt: "Isaac fazendo biquinho, de roupa laranja, em um brinquedo azul",
   },
 ] as const;
 
@@ -121,7 +117,7 @@ function SectionTitle({
 }) {
   return (
     <div className="max-w-2xl space-y-3">
-      <div className="inline-flex items-center gap-2 rounded-full border border-rose-900/10 bg-white/70 px-4 py-1 text-[11px] uppercase tracking-[0.35em] text-rose-800/70 backdrop-blur">
+      <div className="inline-flex items-center gap-2 rounded-full border border-sky-900/10 bg-white/70 px-4 py-1 text-[11px] uppercase tracking-[0.35em] text-sky-800/70 backdrop-blur">
         <Sparkles className="h-3.5 w-3.5" />
         {eyebrow}
       </div>
@@ -133,48 +129,79 @@ function SectionTitle({
   );
 }
 
-function EnvelopeCard({ guestName }: { guestName: string }) {
+type InvitationState = "closed" | "opening" | "open";
+
+function EnvelopeCard({
+  guestName,
+  state,
+  onOpenChange,
+}: {
+  guestName: string;
+  state: InvitationState;
+  onOpenChange: (open: boolean) => void;
+}) {
+  const isOpen = state !== "closed";
+
   return (
     <section className="hero-garden flex min-h-[calc(100vh-3rem)] items-center justify-center py-8">
       <div className="w-full max-w-6xl">
-        <input id="invite-open" type="checkbox" className="invite-toggle peer sr-only" />
+        <input
+          id="invite-open"
+          type="checkbox"
+          className="invite-toggle peer sr-only"
+          checked={isOpen}
+          disabled={state === "opening"}
+          onChange={(event) => onOpenChange(event.target.checked)}
+          aria-label={`${isOpen ? "Fechar" : "Abrir"} o convite do ${siteConfig.celebrantName}`}
+          aria-expanded={isOpen}
+          aria-controls="memorias"
+        />
         <label
           htmlFor="invite-open"
-          className="hero-garden-stage group relative mx-auto block w-full cursor-pointer overflow-hidden rounded-[2.5rem] text-left shadow-[0_30px_100px_rgba(126,74,91,0.16)]"
+          className="hero-garden-stage group relative mx-auto block w-full cursor-pointer overflow-hidden rounded-[2.5rem] text-left shadow-[0_30px_100px_rgba(39,75,110,0.16)]"
+          aria-busy={state === "opening"}
         >
-          <span className="sr-only">Abrir convite</span>
+          <span className="sr-only">{isOpen ? "Fechar convite" : "Abrir convite"}</span>
           <span className="hero-garden-photo">
             <Image
-              src={publicAsset("/images/melinda-ensaio-03.png")}
-              alt="Pérola celebrando seu primeiro aniversário"
+              src={publicAsset("/images/momentos/bebe-sorriso.jpg")}
+              alt="Isaac sorrindo, de roupa azul, sentado em uma colcha florida"
               fill
               priority
               loading="eager"
               sizes="(max-width: 640px) 72vw, 38vw"
-              className="object-cover object-[50%_42%]"
+              className="object-cover object-[50%_10%]"
             />
           </span>
           <span className="hero-garden-copy">
-            <span className="hero-guest">Para {guestName}</span>
-            <span className="font-script text-[clamp(4.8rem,10vw,8rem)] leading-[0.72] text-[#e83f7e]">
-              {siteConfig.coupleNames}
+            <span className="hero-guest">
+              {state === "open" ? <><BadgeCheck aria-hidden="true" />Convite aberto</> :
+                state === "opening" ? "Abrindo seu convite..." : <>Para {guestName}</>}
             </span>
-            <span className="hero-age">1 aninho</span>
-            <span className="font-script text-[clamp(2.7rem,6vw,5.25rem)] leading-[0.9] text-[#8d6bb0]">
-              Jardim das Borboletas
+            <span className="font-script text-[clamp(4.8rem,10vw,8rem)] leading-[0.72] text-[#89512b]">
+              {siteConfig.celebrantName}
             </span>
-            <span className="mt-4 grid gap-2 text-sm font-semibold text-[#c34270] sm:text-base">
+            <span className="hero-age">{siteConfig.eventAgeLabel}</span>
+            <span className="font-script text-[clamp(2.7rem,6vw,5.25rem)] leading-[0.9] text-[#315e91]">
+              {siteConfig.themeLabel}
+            </span>
+            <span className="mt-4 grid gap-2 text-sm font-semibold text-[#315e91] sm:text-base">
               <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4" />{siteConfig.eventDateLabel}</span>
               <span className="inline-flex items-center gap-2"><Clock3 className="h-4 w-4" />{siteConfig.eventTimeLabel}</span>
             </span>
-            <span className="hero-open-button">Abrir o convite</span>
+            <span className="hero-open-button">
+              {state === "opening" ? "Abrindo..." : isOpen ? "Fechar o convite" : "Abrir o convite"}
+            </span>
           </span>
         </label>
 
         <div className="envelope-caption mt-7 text-center">
-          <p className="mt-2 text-[11px] uppercase tracking-[0.35em] text-stone-500">
-            <span className="caption-closed">Toque no convite e abra o jardim</span>
-            <span className="caption-open">O jardim das borboletas ganhou vida</span>
+          <p className="mt-2 text-[11px] uppercase tracking-[0.35em] text-stone-500" aria-live="polite">
+            <span className="caption-closed">Toque no convite e descubra essa celebração</span>
+            <span className="caption-open">
+              {state === "opening" ? "Preparando os detalhes dessa celebração" :
+                <><ChevronDown aria-hidden="true" />Convite aberto! Confira os detalhes abaixo</>}
+            </span>
           </p>
           <p className="caption-closed mt-4 text-[10px] uppercase tracking-[0.25em] text-stone-400/80">
             Desenvolvido por
@@ -184,21 +211,9 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
               href="https://www.instagram.com/conv.idei?igsh=MXRhYTJta3lrd3h5dA=="
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 transition hover:text-rose-600"
+              className="inline-flex items-center gap-1 transition hover:text-sky-600"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-3 w-3"
-              >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-              </svg>
+              <AtSign className="h-3 w-3" />
               @conv.idei
             </a>
             <span className="text-stone-300">|</span>
@@ -206,7 +221,7 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
               href="https://wa.me/5586981696937"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 transition hover:text-rose-600"
+              className="inline-flex items-center gap-1 transition hover:text-sky-600"
             >
               <MessageCircle className="h-3 w-3" />
               (86) 98169-6937
@@ -221,10 +236,10 @@ function EnvelopeCard({ guestName }: { guestName: string }) {
 function GardenCover() {
   return (
     <section className="sec" id="convite">
-      <h2>1 ano no Jardim das Borboletas</h2>
+      <h2>1 ano de um presente de Deus</h2>
       <p>
-        Um aniversário cheio de flores, cores e delicadeza para celebrar a
-        Pérola. Role a página e deixe as borboletas contarem essa história.
+        Um aniversário cheio de amor, fé e alegria para celebrar o
+        Isaac. Role a página e conheça os detalhes dessa história.
       </p>
     </section>
   );
@@ -314,19 +329,19 @@ function MemoryFilm() {
       <div className="memory-butterfly memory-butterfly-right" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-[#e9bac8] bg-white/75 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#a75d73] backdrop-blur">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#d8bd83] bg-white/75 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#315e91] backdrop-blur">
           <Sparkles className="h-3.5 w-3.5" />
           1 ano
         </span>
         <h2
           id="memory-film-title"
-          className="mt-4 font-script text-5xl leading-none text-[#6e8061] sm:text-6xl"
+          className="mt-4 font-script text-5xl leading-none text-[#315e91] sm:text-6xl"
         >
-          Jardim das borboletas
+          Um ano de sorrisos
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-stone-600">
-          Um pedacinho de cada sorriso, guardado entre flores, cores suaves e o
-          delicado voo das borboletas.
+          Um pedacinho de cada descoberta e de cada sorriso, guardado com amor
+          para celebrar o primeiro ano do Isaac.
         </p>
       </div>
 
@@ -343,6 +358,7 @@ function MemoryFilm() {
               style={{ objectPosition: photo.position }}
               className={`memory-slide ${index === activeIndex ? "is-active" : ""}`}
               priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
             />
           ))}
           <div className="memory-stage-shade" aria-hidden="true" />
@@ -350,7 +366,7 @@ function MemoryFilm() {
           <div className="absolute inset-x-4 bottom-4 z-20 flex items-end justify-between gap-3 sm:inset-x-6 sm:bottom-6">
             <div className="rounded-2xl border border-white/40 bg-stone-950/30 px-4 py-2 text-white shadow-lg backdrop-blur-md">
               <p className="text-[10px] uppercase tracking-[0.3em] text-white/75">
-                A magia em cena
+                O amor em cena
               </p>
               <p className="mt-1 font-script text-3xl leading-none">
                 Memória {activeIndex + 1}
@@ -442,65 +458,63 @@ function CelebrationMessage() {
       <div className="celebration-butterfly celebration-butterfly-right" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.38em] text-rose-700/75">
-          Uma flor preciosa desabrochou
+        <p className="text-[11px] font-semibold uppercase tracking-[0.38em] text-sky-700/75">
+          Um pequeno presente de Deus
         </p>
         <h2
           id="celebration-message-title"
-          className="mt-4 font-script text-6xl leading-none text-rose-800 sm:text-7xl"
+          className="mt-4 font-script text-6xl leading-none text-sky-800 sm:text-7xl"
         >
-          Pérola
+          {siteConfig.celebrantName}
         </h2>
 
         <div className="mx-auto mt-7 max-w-2xl space-y-5 text-base leading-8 text-stone-700 sm:text-lg">
           <p>
-            Há um ano, Deus fez florescer em nossos corações a mais preciosa das dádivas: Pérola.
+            Há um ano, Deus nos presenteou com uma vida muito especial: Isaac.
           </p>
           <p>
-            Com delicadeza, amor e a beleza de uma flor em seu primeiro desabrochar, ela ilumina nossos dias e transforma cada instante em um jardim de felicidade.
+            Desde então, cada sorriso e cada descoberta renovam o nosso amor e a nossa gratidão a Deus.
           </p>
-          <p className="font-script text-4xl leading-tight text-[#a85f7b] sm:text-5xl">
-            Venha celebrar a vida da flor mais linda do nosso jardim.
+          <p className="font-script text-4xl leading-tight text-[#89512b] sm:text-5xl">
+            “{siteConfig.scripture.text}”
+            <span className="mt-3 block font-sans text-sm font-semibold tracking-wide">
+              {siteConfig.scripture.reference}
+            </span>
           </p>
           <p>
             Será uma alegria compartilhar esse momento tão especial ao lado de pessoas queridas, que fazem parte da nossa história.
           </p>
         </div>
 
-        <div className="mx-auto mt-8 h-px max-w-xs bg-gradient-to-r from-transparent via-rose-300 to-transparent" />
+        <div className="mx-auto mt-8 h-px max-w-xs bg-gradient-to-r from-transparent via-sky-300 to-transparent" />
         <p className="mt-6 text-sm font-semibold uppercase tracking-[0.32em] text-stone-700">
-          Pérola <span className="px-1 text-rose-400">•</span> 1 ano
+          {siteConfig.celebrantName} <span className="px-1 text-sky-400">•</span> {siteConfig.eventAgeLabel}
         </p>
 
         <div className="mt-7 grid gap-3 text-left sm:grid-cols-3">
           <div className="celebration-detail">
-            <CalendarDays className="h-5 w-5 text-rose-700" />
+            <CalendarDays className="h-5 w-5 text-sky-700" />
             <div>
               <p className="celebration-detail-label">Data</p>
-              <p className="celebration-detail-value">07/08/2026</p>
+              <p className="celebration-detail-value">{siteConfig.eventDateLabel}</p>
             </div>
           </div>
           <div className="celebration-detail">
-            <Clock3 className="h-5 w-5 text-violet-700" />
+            <Clock3 className="h-5 w-5 text-blue-700" />
             <div>
               <p className="celebration-detail-label">Horário</p>
-              <p className="celebration-detail-value">19 horas</p>
+              <p className="celebration-detail-value">{siteConfig.eventTimeLabel}</p>
             </div>
           </div>
-          <a
-            href={siteConfig.venueMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="celebration-detail transition hover:border-rose-300 hover:bg-white"
-          >
+          <div className="celebration-detail">
             <MapPinned className="h-5 w-5 text-amber-700" />
             <div>
               <p className="celebration-detail-label">Local</p>
               <p className="celebration-detail-value leading-5">
-                Rua Argentina, Quadra 18 e Casa 09. Conjunto Jardim América. Bairro Rodoviária.
+                {siteConfig.venueName}
               </p>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </section>
@@ -510,20 +524,20 @@ function CelebrationMessage() {
 function GiftSuggestions() {
   const suggestions = [
     {
-      icon: Shirt,
-      title: "Roupas",
-      subtitle: "12 a 24 meses",
-      desc: "Vestidinhos, bodies, macacões — tudo que vista a Pérola com charme e conforto.",
-      color: "text-pink-700",
-      bg: "bg-pink-50",
-      border: "border-pink-200/70",
-      iconBg: "bg-pink-600",
+      icon: Heart,
+      title: "Abraços e presença",
+      subtitle: "",
+      desc: "O carinho de quem faz parte da nossa história é o nosso maior presente.",
+      color: "text-sky-700",
+      bg: "bg-sky-50",
+      border: "border-sky-200/70",
+      iconBg: "bg-sky-600",
     },
     {
-      icon: Footprints,
-      title: "Sapatinhos",
-      subtitle: "Tamanhos 19 e 20",
-      desc: "Uns pezinhos delicados merecem calçados cheios de fofura para seus primeiros passos.",
+      icon: BookOpen,
+      title: "Livrinhos infantis",
+      subtitle: "",
+      desc: "Histórias para compartilhar descobertas e bons momentos com o Isaac.",
       color: "text-sky-700",
       bg: "bg-sky-50",
       border: "border-sky-200/70",
@@ -533,7 +547,7 @@ function GiftSuggestions() {
       icon: Gift,
       title: "Brinquedos",
       subtitle: "",
-      desc: "Ela ama neném! Bonecas, carrinhos de encaixe e tudo que estimule o faz de conta com muito amor.",
+      desc: "Brinquedos adequados à idade para acompanhar novas descobertas com carinho.",
       color: "text-amber-700",
       bg: "bg-amber-50",
       border: "border-amber-200/70",
@@ -542,15 +556,15 @@ function GiftSuggestions() {
   ];
 
   return (
-    <section className="relative overflow-hidden rounded-[2.25rem] border border-rose-900/10 bg-[#fbf7f0] p-6 shadow-[0_30px_100px_rgba(62,51,39,0.08)] sm:p-8">
-      <div className="absolute -right-8 -top-8 h-44 w-44 rounded-full bg-pink-200/30 blur-3xl" />
+    <section className="relative overflow-hidden rounded-[2.25rem] border border-sky-900/10 bg-[#fbf7f0] p-6 shadow-[0_30px_100px_rgba(62,51,39,0.08)] sm:p-8">
+      <div className="absolute -right-8 -top-8 h-44 w-44 rounded-full bg-sky-200/30 blur-3xl" />
       <div className="absolute -bottom-8 left-0 h-40 w-40 rounded-full bg-amber-200/25 blur-3xl" />
 
       <div className="space-y-6">
         <SectionTitle
           eyebrow="Sugestões de presentes"
-          title="Se quiser trazer um carinho para a Pérola"
-          description="Sua presença é o melhor presente. Mas se quiser mimá-la ainda mais, aqui vão algumas ideias escolhidas para o jardim das borboletas."
+          title="Se quiser trazer um carinho para o Isaac"
+          description="Sua presença é o melhor presente. Se desejar trazer um mimo, aqui vão algumas ideias para celebrar com carinho."
         />
 
         <div className="grid gap-4 sm:grid-cols-3">
@@ -579,8 +593,8 @@ function GiftSuggestions() {
         </div>
 
         <div className="flex items-center gap-2 rounded-2xl bg-white/80 px-5 py-4 text-sm leading-6 text-stone-600 shadow-sm">
-          <Sparkles className="h-4 w-4 shrink-0 text-rose-400" />
-          Qualquer gesto de carinho será recebido com o mesmo sorriso da Pérola.
+          <Sparkles className="h-4 w-4 shrink-0 text-sky-400" />
+          Qualquer gesto de carinho será recebido com o sorriso do Isaac.
         </div>
       </div>
     </section>
@@ -589,6 +603,8 @@ function GiftSuggestions() {
 
 export default function Home() {
   const searchParams = useSearchParams();
+  const [invitationState, setInvitationState] = useState<InvitationState>("closed");
+  const openedHeaderRef = useRef<HTMLElement | null>(null);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
     formatTimeLeft(siteConfig.eventDateTime, new Date(siteConfig.eventDateTime).getTime()),
   );
@@ -599,17 +615,29 @@ export default function Home() {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+
+  useEffect(() => {
+    if (invitationState !== "opening") return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const timer = window.setTimeout(() => {
+      setInvitationState("open");
+      const header = openedHeaderRef.current;
+      header?.focus({ preventScroll: true });
+      header?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    }, reducedMotion ? 0 : 760);
+
+    return () => window.clearTimeout(timer);
+  }, [invitationState]);
 
   const toggleMusic = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (audio.paused) {
-      audio.play().then(() => {
+      void audio.play().then(() => {
         setIsMusicPlaying(true);
-        setHasInteracted(true);
-      });
+      }).catch(() => setIsMusicPlaying(false));
     } else {
       audio.pause();
       setIsMusicPlaying(false);
@@ -642,20 +670,36 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="butterfly-garden-site relative overflow-x-hidden">
+    <main className={`butterfly-garden-site relative overflow-x-hidden${invitationState !== "closed" ? " invite-is-open" : ""}${invitationState === "opening" ? " invite-is-opening" : ""}`}>
       <div className="pointer-events-none absolute inset-0 opacity-80">
         <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-white/70 to-transparent" />
-        <div className="absolute bottom-0 left-0 h-56 w-full bg-gradient-to-t from-[#d5c5ac]/35 to-transparent" />
+        <div className="absolute bottom-0 left-0 h-56 w-full bg-gradient-to-t from-[#b7cde0]/35 to-transparent" />
       </div>
 
       <div className="relative mx-auto flex max-w-[1440px] flex-col px-4 py-6 sm:px-6 lg:px-8">
-        <EnvelopeCard guestName={guestName} />
+        <EnvelopeCard
+          guestName={guestName}
+          state={invitationState}
+          onOpenChange={(open) => setInvitationState(open ? "opening" : "closed")}
+        />
 
         <div className="site-after-open animate-site-reveal" id="memorias">
-          <header className="flex items-center justify-end rounded-full border border-white/70 bg-white/65 px-4 py-3 shadow-[0_12px_40px_rgba(62,51,39,0.08)] backdrop-blur">
+          <header
+            ref={openedHeaderRef}
+            tabIndex={-1}
+            aria-label="Convite aberto: detalhes da festa"
+            className="opened-invite-header flex items-center justify-between gap-3 rounded-[1.5rem] border border-white/70 bg-white/65 px-4 py-3 shadow-[0_12px_40px_rgba(62,51,39,0.08)] backdrop-blur sm:rounded-full"
+          >
+            <div className="opened-invite-status">
+              <BadgeCheck aria-hidden="true" />
+              <div>
+                <p>Convite aberto</p>
+                <span>Para {guestName}</span>
+              </div>
+            </div>
             <a
               href="#confirmar"
-              className="inline-flex items-center gap-2 rounded-full bg-rose-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-800"
+              className="inline-flex items-center gap-2 rounded-full bg-sky-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-800"
             >
               <Heart className="h-4 w-4" />
               Confirmar presença
@@ -683,39 +727,33 @@ export default function Home() {
                 <SectionTitle
                   eyebrow="A festa"
                   title="Tudo o que faz essa noite ser inesquecível."
-                  description="Uma composição leve, feita para guardar a data, o lugar e a magia do primeiro ano da Pérola."
+                  description="Uma celebração cheia de amor, fé e gratidão pelo primeiro ano do Isaac."
                 />
 
                 <div className="mt-8 grid gap-4">
                   <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
-                    <CalendarDays className="mt-0.5 h-5 w-5 text-rose-700" />
+                    <CalendarDays className="mt-0.5 h-5 w-5 text-sky-700" />
                     <div>
-                      <p className="text-sm font-semibold text-stone-900">Quando a magia começa</p>
+                      <p className="text-sm font-semibold text-stone-900">Quando a celebração começa</p>
                       <p className="mt-1 text-sm leading-6 text-stone-600">
                         {siteConfig.eventDateLabel} às {siteConfig.eventTimeLabel}
                       </p>
                     </div>
                   </div>
 
-                  <a
-                    href={siteConfig.venueMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4 transition hover:border-amber-300 hover:bg-amber-50/60"
-                  >
+                  <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                     <MapPinned className="mt-0.5 h-5 w-5 text-amber-800" />
                     <div>
                       <p className="text-sm font-semibold text-stone-900">Onde a festa acontece</p>
                       <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueName}</p>
                       <p className="text-sm leading-6 text-stone-500">{siteConfig.venueAddress}</p>
                     </div>
-                    <MapPinned className="ml-auto mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
-                  </a>
+                  </div>
 
                   <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
-                    <MessageCircle className="mt-0.5 h-5 w-5 text-rose-700" />
+                    <MessageCircle className="mt-0.5 h-5 w-5 text-sky-700" />
                     <div>
-                      <p className="text-sm font-semibold text-stone-900">Um recado do jardim</p>
+                      <p className="text-sm font-semibold text-stone-900">Um recado com carinho</p>
                       <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueHint}</p>
                     </div>
                   </div>
@@ -730,7 +768,7 @@ export default function Home() {
                     Confirmar presença
                   </a>
                   <a
-                    href="#pix"
+                    href="#presentes"
                     className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/85 px-4 py-2 text-sm font-semibold text-stone-800 transition hover:border-stone-400 hover:bg-white"
                   >
                     <Gift className="h-4 w-4" />
@@ -739,33 +777,33 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="birthday-photo-card overflow-hidden rounded-[2rem] border border-[#efcad3] bg-[#fffaf1]/90 shadow-[0_20px_70px_rgba(116,86,74,0.12)]">
+              <div className="birthday-photo-card overflow-hidden rounded-[2rem] border border-[#d8bd83] bg-[#fffaf1]/90 shadow-[0_20px_70px_rgba(116,86,74,0.12)]">
                 <div className="grid gap-4 p-4 sm:grid-cols-[0.9fr_1.1fr]">
                   <div className="relative min-h-80 overflow-hidden rounded-[1.5rem]">
                     <Image
-                      src={publicAsset("/images/melinda-familia-01.png")}
-                      alt="Pérola com seus pais na comemoração de seu primeiro aniversário"
+                      src={publicAsset("/images/momentos/isaac-em-pe.jpg")}
+                      alt="Isaac sorrindo em pé, de camisa bege, com apoio de um adulto"
                       fill
                       sizes="(max-width: 640px) 88vw, 34vw"
-                      className="object-cover object-[50%_35%]"
+                      className="object-cover object-[75%_38%]"
                     />
-                    <div className="absolute right-3 top-3 rounded-full border border-white/80 bg-[#f8e4ea]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#9f536c] shadow-sm backdrop-blur">
+                    <div className="absolute right-3 top-3 rounded-full border border-white/80 bg-[#e8f3fd]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#315e91] shadow-sm backdrop-blur">
                       1 ano
                     </div>
                   </div>
-                  <div className="relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] bg-gradient-to-b from-[#fff5f7] via-[#fffaf0] to-[#edf3e8] p-5">
+                  <div className="relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] bg-gradient-to-b from-[#edf6ff] via-[#fffaf0] to-[#e8f0fa] p-5">
                     <div className="memory-butterfly memory-butterfly-card" aria-hidden="true" />
                     <div className="space-y-4">
-                      <p className="font-script text-4xl leading-none text-rose-800">
-                        {siteConfig.coupleNames}
+                      <p className="font-script text-4xl leading-none text-sky-800">
+                        {siteConfig.celebrantName}
                       </p>
                       <p className="text-sm leading-7 text-stone-700">
-                        Com delicadeza, amor e a beleza de uma flor em seu primeiro desabrochar, Pérola ilumina nossos dias e transforma cada instante em um jardim de felicidade.
+                        Isaac é um presente de Deus que ilumina nossos dias. Vamos comemorar seu primeiro aninho com muito amor, gratidão e pessoas queridas por perto.
                       </p>
                     </div>
                     <div className="mt-6 flex items-center gap-2 text-sm text-stone-600">
                       <Sparkles className="h-4 w-4 text-amber-700" />
-                      Abra com carinho e deixe-se envolver por este jardim.
+                      Um dia cheio de amor espera por você.
                     </div>
                   </div>
                 </div>
@@ -803,12 +841,12 @@ export default function Home() {
 
           <footer className="closing-garden mt-10">
             <div className="closing-garden-copy">
-              <p className="font-script text-5xl leading-tight text-[#8d6bb0] sm:text-7xl">
+              <p className="font-script text-5xl leading-tight text-[#315e91] sm:text-7xl">
                 Esperamos você para celebrar conosco!
               </p>
-              <p className="mt-3 font-script text-6xl leading-none text-[#e83f7e] sm:text-8xl">Pérola</p>
+              <p className="mt-3 font-script text-6xl leading-none text-[#89512b] sm:text-8xl">{siteConfig.celebrantName}</p>
               <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-stone-600 sm:text-base">
-                O melhor presente é ter você no nosso Jardim das Borboletas.
+                O melhor presente é ter você celebrando o primeiro aninho do Isaac.
               </p>
             </div>
           </footer>
@@ -822,7 +860,7 @@ export default function Home() {
                 href="https://www.instagram.com/conv.idei?igsh=MXRhYTJta3lrd3h5dA=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-rose-700"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-sky-700"
               >
                 <AtSign className="h-4 w-4" />
                 @conv.idei
@@ -832,7 +870,7 @@ export default function Home() {
                 href="https://wa.me/5586981696937"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-rose-700"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-800 transition hover:text-sky-700"
               >
                 <MessageCircle className="h-4 w-4" />
                 (86) 98169-6937
@@ -854,23 +892,6 @@ export default function Home() {
           <VolumeX className="h-5 w-5" />
         )}
       </button>
-      <a
-        href={siteConfig.venueMapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="location-badge-fixed fixed bottom-6 left-6 z-50 flex items-center gap-2.5 rounded-full border border-amber-900/15 bg-gradient-to-r from-amber-50 to-amber-100/80 px-4 py-2.5 shadow-[0_8px_30px_rgba(217,157,50,0.15)] backdrop-blur transition hover:from-amber-100 hover:to-amber-200/80 hover:shadow-[0_8px_35px_rgba(217,157,50,0.25)]"
-        aria-label="Abrir localização no Google Maps"
-      >
-        <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-amber-800 text-white shadow-inner">
-          <MapPinned className="h-3.5 w-3.5" />
-          <span className="location-badge-ping absolute inset-0 rounded-full bg-amber-800/40" />
-        </span>
-        <span className="text-left leading-tight">
-          <span className="block text-[9px] uppercase tracking-[0.3em] text-amber-800/70">Onde vai ser</span>
-          <span className="block text-xs font-semibold text-stone-800">{siteConfig.venueName}</span>
-        </span>
-        <MapPinned className="h-3 w-3 shrink-0 text-amber-600/50" />
-      </a>
     </main>
   );
 }

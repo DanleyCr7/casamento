@@ -1,25 +1,31 @@
 # Convites
 
-Cada convite tem sua própria branch e seu próprio caminho no GitHub Pages:
+O convite do Isaac usa a `main` como fonte e é publicado na raiz e em `/isaac`.
+Os demais convites mantêm suas próprias branches e caminhos no GitHub Pages:
 
-| Branch | Endereço |
-| --- | --- |
-| `main` | https://festas.convidei.digital/ |
-| `casamento` | https://festas.convidei.digital/casamento/ |
-| `melinda` | https://festas.convidei.digital/melinda/ |
-| `perola` | https://festas.convidei.digital/perola/ |
+| Convite | Branch fonte | Endereço |
+| --- | --- | --- |
+| Isaac | `main` | https://festas.convidei.digital/ |
+| Isaac | `main` | https://festas.convidei.digital/isaac/ |
+| Casamento | `casamento` | https://festas.convidei.digital/casamento/ |
+| Melinda | `melinda` | https://festas.convidei.digital/melinda/ |
+| Pérola | `perola` | https://festas.convidei.digital/perola/ |
 
 ## Publicação
 
 Edite e envie as alterações na branch do convite correspondente. O workflow
 `Publish updated invitation` solicita uma publicação completa pela `main`.
-Alterações na `main` também iniciam a publicação. A branch `feat/melinda`
+Alterações na `main` também iniciam a publicação dos dois endereços do Isaac.
+Não é necessária uma branch `isaac`. A branch `feat/melinda`
 permanece como referência histórica e não publica o site.
 
-O workflow `.github/workflows/nextjs.yml`, mantido na `main`, fixa os commits das
-três branches, exporta cada convite separadamente e reúne os resultados em um
-único site. A raiz continua usando a versão da `main`, preservando os links
-existentes. A publicação só acontece se todas as exportações forem concluídas.
+O workflow `.github/workflows/nextjs.yml`, mantido na `main`, fixa quatro fontes:
+o commit da `main` que iniciou a execução e os commits atuais de `casamento`,
+`melinda` e `perola`. Ele gera cinco exportações: duas do mesmo commit da `main`,
+com os prefixos da raiz e de `/isaac`, e uma de cada convite restante. Os
+artefatos têm nomes separados por destino e são reunidos em um único site,
+preservando os caminhos existentes. A publicação só acontece se todas as cinco
+exportações forem concluídas.
 
 Para publicar novamente sem novos commits, execute `Deploy invitations to Pages`
 na aba Actions, selecionando a branch `main`. Não execute o workflow antigo
