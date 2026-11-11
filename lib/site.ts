@@ -7,8 +7,8 @@ export const siteConfig = {
   eventDayLabel: "Sábado",
   eventTimeLabel: "19h",
   venueName: "Casa da vovó",
-  venueAddress: "",
-  venueMapsUrl: "",
+  venueAddress: "Quadra G4, casa 17",
+  venueMapsUrl: "https://maps.app.goo.gl/UcHxdKm4gekfDmsC9",
   venueHint:
     "Será uma alegria ter você pertinho para celebrar esse primeiro ano de amor, fé e muitos sorrisos.",
   invitationMessage:

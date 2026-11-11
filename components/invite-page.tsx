@@ -506,15 +506,22 @@ function CelebrationMessage() {
               <p className="celebration-detail-value">{siteConfig.eventTimeLabel}</p>
             </div>
           </div>
-          <div className="celebration-detail">
+          <a
+            href={siteConfig.venueMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="celebration-detail transition hover:border-sky-300 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-700"
+          >
             <MapPinned className="h-5 w-5 text-amber-700" />
             <div>
               <p className="celebration-detail-label">Local</p>
               <p className="celebration-detail-value leading-5">
                 {siteConfig.venueName}
               </p>
+              <p className="mt-1 text-sm leading-5 text-stone-600">{siteConfig.venueAddress}</p>
+              <span className="mt-2 inline-block text-xs font-semibold text-sky-700 underline underline-offset-4">Abrir no mapa</span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -741,14 +748,20 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
+                  <a
+                    href={siteConfig.venueMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4 transition hover:border-sky-300 hover:bg-sky-50/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-700"
+                  >
                     <MapPinned className="mt-0.5 h-5 w-5 text-amber-800" />
                     <div>
                       <p className="text-sm font-semibold text-stone-900">Onde a festa acontece</p>
                       <p className="mt-1 text-sm leading-6 text-stone-600">{siteConfig.venueName}</p>
                       <p className="text-sm leading-6 text-stone-500">{siteConfig.venueAddress}</p>
+                      <span className="mt-2 inline-block text-sm font-semibold text-sky-700 underline underline-offset-4">Como chegar</span>
                     </div>
-                  </div>
+                  </a>
 
                   <div className="flex items-start gap-4 rounded-3xl border border-stone-200 bg-stone-50 p-4">
                     <MessageCircle className="mt-0.5 h-5 w-5 text-sky-700" />
