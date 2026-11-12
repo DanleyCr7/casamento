@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   CalendarDays,
@@ -20,6 +21,7 @@ import {
   VolumeX,
 } from "lucide-react";
 import { ConfirmationSection } from "@/components/confirmation-form";
+import { getGuestNameFromSearchParams } from "@/lib/guest-name";
 import { siteConfig } from "@/lib/site";
 
 function publicAsset(path: string) {
@@ -128,9 +130,11 @@ function SectionTitle({
 type InvitationState = "closed" | "opening" | "open";
 
 function EnvelopeCard({
+  guestName,
   state,
   onOpenChange,
 }: {
+  guestName: string;
   state: InvitationState;
   onOpenChange: (open: boolean) => void;
 }) {
@@ -170,7 +174,7 @@ function EnvelopeCard({
           <span className="hero-garden-copy">
             <span className="hero-guest">
               {state === "open" ? <><BadgeCheck aria-hidden="true" />Convite aberto</> :
-                state === "opening" ? "Abrindo seu convite..." : "Um convite especial"}
+                state === "opening" ? "Abrindo seu convite..." : <>Para {guestName}</>}
             </span>
             <span className="font-script text-[clamp(4.8rem,10vw,8rem)] leading-[0.72] text-[#89512b]">
               {siteConfig.celebrantName}
@@ -523,6 +527,8 @@ function CelebrationMessage() {
 }
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const guestName = getGuestNameFromSearchParams(searchParams);
   const [invitationState, setInvitationState] = useState<InvitationState>("closed");
   const openedHeaderRef = useRef<HTMLElement | null>(null);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
@@ -594,6 +600,7 @@ export default function Home() {
 
       <div className="relative mx-auto flex max-w-[1440px] flex-col px-4 py-6 sm:px-6 lg:px-8">
         <EnvelopeCard
+          guestName={guestName}
           state={invitationState}
           onOpenChange={(open) => setInvitationState(open ? "opening" : "closed")}
         />
@@ -609,7 +616,7 @@ export default function Home() {
               <BadgeCheck aria-hidden="true" />
               <div>
                 <p>Convite aberto</p>
-                <span>Confira os detalhes da festa</span>
+                <span>Para {guestName}</span>
               </div>
             </div>
             <a
@@ -733,7 +740,7 @@ export default function Home() {
           <div className="garden-divider garden-divider-garland" aria-hidden="true" />
           <div className="rsvp-surface">
             <section className="mt-10">
-              <ConfirmationSection />
+              <ConfirmationSection guestName={guestName} />
             </section>
           </div>
 

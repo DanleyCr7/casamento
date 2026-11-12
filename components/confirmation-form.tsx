@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site";
 
 type ConfirmationStatus = "idle" | "success" | "error";
 
-export function ConfirmationSection() {
+export function ConfirmationSection({ guestName }: { guestName: string }) {
   const [loading, setLoading] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState<ConfirmationStatus>("idle");
@@ -21,8 +21,8 @@ export function ConfirmationSection() {
 
     try {
       await addDoc(collection(db, "confirmacoes"), {
-        nome: "Convidado",
-        convitePara: "Convidado",
+        nome: guestName,
+        convitePara: guestName,
         origem: "convite",
         criadoEm: serverTimestamp(),
       });

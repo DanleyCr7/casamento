@@ -11,6 +11,18 @@ Os demais convites mantêm suas próprias branches e caminhos no GitHub Pages:
 | Melinda | `melinda` | https://festas.convidei.digital/melinda/ |
 | Pérola | `perola` | https://festas.convidei.digital/perola/ |
 
+## Nome do convidado
+
+O convite da `main` recebe o nome pelo parâmetro `nome`, por exemplo:
+`https://festas.convidei.digital/isaac/?nome=Nome%20do%20convidado`.
+O mesmo parâmetro funciona na raiz. O nome aparece no envelope, no cabeçalho
+após a abertura e no registro de confirmação de presença. Sem um nome informado,
+o convite usa “Você”. A seção e o botão de mimos permanecem removidos.
+
+O nome deve ficar após `?nome=`, e não como um novo caminho: a publicação
+estática não cria páginas individuais para convidados. Para nomes com espaços
+ou caracteres especiais, gere o parâmetro com `URLSearchParams`.
+
 ## Publicação
 
 Edite e envie as alterações na branch do convite correspondente. O workflow
