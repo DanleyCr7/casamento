@@ -1091,7 +1091,7 @@ body:has(.invite-toggle:checked) .parallax {
   background-image: var(--garden-divider-garland);
 }
 
-.rsvp-gift-surface {
+.rsvp-surface {
   position: relative;
   overflow: hidden;
   margin-top: -3rem;
@@ -1102,7 +1102,7 @@ body:has(.invite-toggle:checked) .parallax {
   box-shadow: 0 26px 80px rgba(81, 93, 105, 0.09);
 }
 
-.rsvp-gift-surface > section:first-child {
+.rsvp-surface > section:first-child {
   margin-top: 0;
 }
 
@@ -1188,7 +1188,7 @@ body:has(.invite-toggle:checked) .parallax {
   }
 
   .event-garden-section,
-  .rsvp-gift-surface,
+  .rsvp-surface,
   .closing-garden {
     border-radius: 1.75rem;
   }

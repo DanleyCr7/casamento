@@ -2,25 +2,17 @@
 
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { BadgeCheck, Loader2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { db } from "@/lib/firebase";
-import { DEFAULT_GUEST_NAME, formatGuestName } from "@/lib/guest-name";
 import { siteConfig } from "@/lib/site";
 
 type ConfirmationStatus = "idle" | "success" | "error";
 
-function normalizeGuestName(value: string | null) {
-  const normalized = formatGuestName(value ?? "");
-  return normalized.length > 0 ? normalized : DEFAULT_GUEST_NAME;
-}
-
-export function ConfirmationSection({ guestName }: { guestName: string }) {
+export function ConfirmationSection() {
   const [loading, setLoading] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState<ConfirmationStatus>("idle");
   const [errorText, setErrorText] = useState("");
-
-  const guestLabel = useMemo(() => normalizeGuestName(guestName), [guestName]);
 
   async function handleConfirm() {
     setLoading(true);
@@ -29,8 +21,8 @@ export function ConfirmationSection({ guestName }: { guestName: string }) {
 
     try {
       await addDoc(collection(db, "confirmacoes"), {
-        nome: guestLabel,
-        convitePara: guestLabel,
+        nome: "Convidado",
+        convitePara: "Convidado",
         origem: "convite",
         criadoEm: serverTimestamp(),
       });

@@ -1,16 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   CalendarDays,
   BadgeCheck,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  BookOpen,
-  Gift,
   Heart,
   AtSign,
   Clock3,
@@ -23,7 +20,6 @@ import {
   VolumeX,
 } from "lucide-react";
 import { ConfirmationSection } from "@/components/confirmation-form";
-import { getGuestNameFromSearchParams } from "@/lib/guest-name";
 import { siteConfig } from "@/lib/site";
 
 function publicAsset(path: string) {
@@ -132,11 +128,9 @@ function SectionTitle({
 type InvitationState = "closed" | "opening" | "open";
 
 function EnvelopeCard({
-  guestName,
   state,
   onOpenChange,
 }: {
-  guestName: string;
   state: InvitationState;
   onOpenChange: (open: boolean) => void;
 }) {
@@ -176,7 +170,7 @@ function EnvelopeCard({
           <span className="hero-garden-copy">
             <span className="hero-guest">
               {state === "open" ? <><BadgeCheck aria-hidden="true" />Convite aberto</> :
-                state === "opening" ? "Abrindo seu convite..." : <>Para {guestName}</>}
+                state === "opening" ? "Abrindo seu convite..." : "Um convite especial"}
             </span>
             <span className="font-script text-[clamp(4.8rem,10vw,8rem)] leading-[0.72] text-[#89512b]">
               {siteConfig.celebrantName}
@@ -528,96 +522,11 @@ function CelebrationMessage() {
   );
 }
 
-function GiftSuggestions() {
-  const suggestions = [
-    {
-      icon: Heart,
-      title: "Abraços e presença",
-      subtitle: "",
-      desc: "O carinho de quem faz parte da nossa história é o nosso maior presente.",
-      color: "text-sky-700",
-      bg: "bg-sky-50",
-      border: "border-sky-200/70",
-      iconBg: "bg-sky-600",
-    },
-    {
-      icon: BookOpen,
-      title: "Livrinhos infantis",
-      subtitle: "",
-      desc: "Histórias para compartilhar descobertas e bons momentos com o Isaac.",
-      color: "text-sky-700",
-      bg: "bg-sky-50",
-      border: "border-sky-200/70",
-      iconBg: "bg-sky-600",
-    },
-    {
-      icon: Gift,
-      title: "Brinquedos",
-      subtitle: "",
-      desc: "Brinquedos adequados à idade para acompanhar novas descobertas com carinho.",
-      color: "text-amber-700",
-      bg: "bg-amber-50",
-      border: "border-amber-200/70",
-      iconBg: "bg-amber-600",
-    },
-  ];
-
-  return (
-    <section className="relative overflow-hidden rounded-[2.25rem] border border-sky-900/10 bg-[#fbf7f0] p-6 shadow-[0_30px_100px_rgba(62,51,39,0.08)] sm:p-8">
-      <div className="absolute -right-8 -top-8 h-44 w-44 rounded-full bg-sky-200/30 blur-3xl" />
-      <div className="absolute -bottom-8 left-0 h-40 w-40 rounded-full bg-amber-200/25 blur-3xl" />
-
-      <div className="space-y-6">
-        <SectionTitle
-          eyebrow="Sugestões de presentes"
-          title="Se quiser trazer um carinho para o Isaac"
-          description="Sua presença é o melhor presente. Se desejar trazer um mimo, aqui vão algumas ideias para celebrar com carinho."
-        />
-
-        <div className="grid gap-4 sm:grid-cols-3">
-          {suggestions.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.title}
-                className={`group rounded-2xl border ${item.border} ${item.bg} p-5 shadow-sm transition hover:shadow-md`}
-              >
-                <span
-                  className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${item.iconBg} text-white shadow-inner`}
-                >
-                  <Icon className="h-5 w-5" />
-                </span>
-                <p className={`text-sm font-semibold ${item.color}`}>{item.title}</p>
-                {item.subtitle && (
-                  <p className="mt-0.5 text-xs font-medium uppercase tracking-[0.2em] text-stone-500">
-                    {item.subtitle}
-                  </p>
-                )}
-                <p className="mt-2 text-sm leading-6 text-stone-600">{item.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="flex items-center gap-2 rounded-2xl bg-white/80 px-5 py-4 text-sm leading-6 text-stone-600 shadow-sm">
-          <Sparkles className="h-4 w-4 shrink-0 text-sky-400" />
-          Qualquer gesto de carinho será recebido com o sorriso do Isaac.
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function Home() {
-  const searchParams = useSearchParams();
   const [invitationState, setInvitationState] = useState<InvitationState>("closed");
   const openedHeaderRef = useRef<HTMLElement | null>(null);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
     formatTimeLeft(siteConfig.eventDateTime, new Date(siteConfig.eventDateTime).getTime()),
-  );
-  const guestName = useMemo(
-    () => getGuestNameFromSearchParams(searchParams),
-    [searchParams],
   );
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -685,7 +594,6 @@ export default function Home() {
 
       <div className="relative mx-auto flex max-w-[1440px] flex-col px-4 py-6 sm:px-6 lg:px-8">
         <EnvelopeCard
-          guestName={guestName}
           state={invitationState}
           onOpenChange={(open) => setInvitationState(open ? "opening" : "closed")}
         />
@@ -701,7 +609,7 @@ export default function Home() {
               <BadgeCheck aria-hidden="true" />
               <div>
                 <p>Convite aberto</p>
-                <span>Para {guestName}</span>
+                <span>Confira os detalhes da festa</span>
               </div>
             </div>
             <a
@@ -780,13 +688,6 @@ export default function Home() {
                     <MessageCircle className="h-4 w-4" />
                     Confirmar presença
                   </a>
-                  <a
-                    href="#presentes"
-                    className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white/85 px-4 py-2 text-sm font-semibold text-stone-800 transition hover:border-stone-400 hover:bg-white"
-                  >
-                    <Gift className="h-4 w-4" />
-                    Ver mimo
-                  </a>
                 </div>
               </div>
 
@@ -830,14 +731,10 @@ export default function Home() {
           <CelebrationMessage />
 
           <div className="garden-divider garden-divider-garland" aria-hidden="true" />
-          <div className="rsvp-gift-surface">
-          <section className="mt-10">
-            <ConfirmationSection guestName={guestName} />
-          </section>
-
-          <section className="mt-10" id="presentes">
-            <GiftSuggestions />
-          </section>
+          <div className="rsvp-surface">
+            <section className="mt-10">
+              <ConfirmationSection />
+            </section>
           </div>
 
           <section className="mt-10 grid gap-4 sm:grid-cols-3">
